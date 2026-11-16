@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<title>Sơ đồ lớp Thuê Máy Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root {
+    --sans: 'Be Vietnam Pro', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', 'Cascadia Mono', Consolas, ui-monospace, monospace;
+
+    --bg: #f1f4f8;
+    --surface: #ffffff;
+    --surface-2: #f7f9fc;
+    --border: #e3e8ef;
+    --border-strong: #cdd5e1;
+    --text: #0f1726;
+    --text-2: #4b5568;
+    --text-3: #6f7a8e;
+    --accent: #3358f4;
+    --accent-text: #2745cf;
+
+    --uml-line: #3b4557;
+    --uml-edge: #3b4557;
+    --uml-ghost: #8a93a6;
+    --uml-memd: #5b6475;
+    --note-bg: #fdf4e3;
+    --note-line: #d9b979;
+    --note-text: #3d3423;
+
+    --pkg-a: #7350cf;
+    --pkg-b: #0d8f66;
+    --pkg-c: #c0621a;
+    --pkg-d: #3358f4;
+    --pkg-e: #0a8ba4;
+    --pkg-f: #6b7487;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #090b11;
+      --surface: #12161f;
+      --surface-2: #171c27;
+      --border: #242b3a;
+      --border-strong: #36415a;
+      --text: #e8ebf3;
+      --text-2: #a8b1c4;
+      --text-3: #828ba0;
+      --accent: #6486ff;
+      --accent-text: #9db1ff;
+      --uml-line: #7d879b;
+      --uml-edge: #a3acbf;
+      --uml-ghost: #5e6779;
+      --uml-memd: #9aa3b5;
+      --note-bg: #241d10;
+      --note-line: #6b5426;
+      --note-text: #eadfc4;
+      --pkg-a: #a98cf5;
+      --pkg-b: #3dd39c;
+      --pkg-c: #f0975c;
+      --pkg-d: #7e9aff;
+      --pkg-e: #3fbcd6;
+      --pkg-f: #97a0b2;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #090b11;
+    --surface: #12161f;
+    --surface-2: #171c27;
+    --border: #242b3a;
+    --border-strong: #36415a;
+    --text: #e8ebf3;
+    --text-2: #a8b1c4;
+    --text-3: #828ba0;
+    --accent: #6486ff;
+    --accent-text: #9db1ff;
+    --uml-line: #7d879b;
+    --uml-edge: #a3acbf;
+    --uml-ghost: #5e6779;
+    --uml-memd: #9aa3b5;
+    --note-bg: #241d10;
+    --note-line: #6b5426;
+    --note-text: #eadfc4;
+    --pkg-a: #a98cf5;
+    --pkg-b: #3dd39c;
+    --pkg-c: #f0975c;
+    --pkg-d: #7e9aff;
+    --pkg-e: #3fbcd6;
+    --pkg-f: #97a0b2;
+  }
+
+  .p-a { --pkg: var(--pkg-a); }
+  .p-b { --pkg: var(--pkg-b); }
+  .p-c { --pkg: var(--pkg-c); }
+  .p-d { --pkg: var(--pkg-d); }
+  .p-e { --pkg: var(--pkg-e); }
+  .p-f { --pkg: var(--pkg-f); }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding-inline: 20px;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 15px/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-block: 44px 80px;
+    display: grid;
+    gap: 64px;
+  }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  code, .mono { font-family: var(--mono); font-size: .9em; }
+  a { color: var(--accent-text); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* ---- Mở đầu ---- */
+  .masthead { display: grid; gap: 18px; max-width: 76ch; }
+  .eyebrow {
+    font: 600 12px/1 var(--sans);
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .masthead h1 { font-size: clamp(32px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -.022em; font-weight: 700; }
+  .lede { font-size: 17px; color: var(--text-2); max-width: 66ch; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 4px 0 0; padding: 0; }
+  .facts div { display: flex; align-items: baseline; gap: 8px; }
+  .facts dt { font: 600 22px/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--text); }
+  .facts dd { margin: 0; color: var(--text-2); font-size: 14px; }
+
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; }
+  .toc a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px 6px 8px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 13.5px;
+    text-decoration: none;
+  }
+  .toc a:hover { border-color: var(--pkg, var(--accent)); }
+  .toc .sw { width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; font: 600 11px/1 var(--mono); color: var(--pkg); background: color-mix(in srgb, var(--pkg) 16%, transparent); }
+  .toc .plain { color: var(--text-2); }
+
+  /* ---- Khối chung ---- */
+  section { display: grid; gap: 22px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 16px); }
+  .sec-head { display: grid; gap: 8px; max-width: 72ch; }
+  .sec-head h2 { font-size: 26px; line-height: 1.2; letter-spacing: -.012em; font-weight: 700; }
+  .sec-head p { color: var(--text-2); }
+  h3 { font-size: 13px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+
+  /* ---- Thứ tự thuyết trình ---- */
+  .steps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border-strong); }
+  .steps li {
+    display: grid;
+    grid-template-columns: 2.4rem minmax(0, 1fr) 11rem 4.2rem;
+    gap: 16px;
+    align-items: baseline;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .steps .n { font: 600 13px var(--mono); color: var(--pkg, var(--text-3)); font-variant-numeric: tabular-nums; }
+  .steps .what strong { font-weight: 600; }
+  .steps .what span { display: block; color: var(--text-2); font-size: 14px; }
+  .steps .who { font-size: 14px; color: var(--text); }
+  .steps .time { font: 400 13px var(--mono); color: var(--text-2); text-align: right; font-variant-numeric: tabular-nums; }
+  .steps .total { grid-template-columns: 2.4rem minmax(0, 1fr) auto; border-bottom: 0; }
+  .steps .total .time { color: var(--text); font-weight: 600; }
+
+  /* ---- Bản vẽ ---- */
+  figure.sheet { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .scroll { overflow-x: auto; padding: 10px; }
+  .scroll svg { display: block; width: 100%; min-width: 760px; height: auto; margin: 0 auto; }
+  figure.sheet figcaption { padding: 12px 18px 14px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 13.5px; }
+  figure.sheet figcaption b { color: var(--text); font-weight: 600; }
+
+  .uml text { font-kerning: none; }
+  .u-box { fill: var(--surface); stroke: var(--uml-line); stroke-width: 1; }
+  .u-hdr { fill: var(--pkg); fill-opacity: .14; }
+  .u-ghost { fill: var(--surface-2); stroke: var(--uml-ghost); stroke-width: 1; stroke-dasharray: 4 3; }
+  .u-div { stroke: var(--uml-line); stroke-width: 1; }
+  .u-name { fill: var(--text); font: 600 13px var(--mono); }
+  .u-italic { font-style: italic; }
+  .u-gloss { fill: var(--text-2); font: 400 11px var(--sans); }
+  .u-stereo { fill: var(--text-2); font: italic 400 10.5px var(--mono); }
+  .u-mem { fill: var(--text); font: 400 11.5px var(--mono); }
+  .u-memd { fill: var(--uml-memd); font-style: italic; }
+  .u-edge { fill: none; stroke: var(--uml-edge); stroke-width: 1.25; }
+  .u-dash { stroke-dasharray: 5 4; }
+  .u-notelink { fill: none; stroke: var(--note-line); stroke-width: 1; stroke-dasharray: 3 3; }
+  .u-dia { fill: var(--uml-edge); stroke: var(--uml-edge); stroke-width: 1; }
+  .u-tri { fill: var(--surface); stroke: var(--uml-edge); stroke-width: 1.25; }
+  .u-label, .u-mult {
+    paint-order: stroke;
+    stroke: var(--surface);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+  .u-label { fill: var(--text-2); font: 400 11px var(--sans); }
+  .u-mult { fill: var(--text); font: 400 11px var(--mono); }
+  .u-note { fill: var(--note-bg); stroke: var(--note-line); stroke-width: 1; }
+  .u-notetext { fill: var(--note-text); font: 400 11px var(--sans); }
+  .u-frame { fill: var(--pkg); fill-opacity: .06; stroke: var(--pkg); stroke-opacity: .6; stroke-width: 1.25; }
+  .u-framelabel { fill: var(--pkg); font: 700 12.5px var(--sans); }
+  .u-chip { fill: var(--surface); stroke: var(--pkg); stroke-opacity: .55; stroke-width: 1; }
+  .u-chipname { fill: var(--text); font: 600 12px var(--mono); }
+  .u-chipgloss { fill: var(--text-2); font: 400 10.5px var(--sans); }
+
+  /* ---- Cách đọc ---- */
+  .legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .legend > div { background: var(--surface); padding: 16px 18px; display: grid; gap: 10px; align-content: start; }
+  .legend svg { width: 100%; max-width: 220px; height: auto; display: block; }
+  .legend p { font-size: 14px; color: var(--text-2); }
+  .legend p b { color: var(--text); font-weight: 600; }
+  .tokens { display: grid; gap: 6px; font-size: 14px; color: var(--text-2); }
+  .tokens code { color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; padding: 0 5px; }
+
+  /* ---- Từng nhóm ---- */
+  .pkg-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: center; }
+  .pkg-tag {
+    grid-row: span 2;
+    width: 44px; height: 44px; border-radius: 10px;
+    display: grid; place-items: center;
+    font: 600 20px/1 var(--mono);
+    color: var(--pkg);
+    background: color-mix(in srgb, var(--pkg) 14%, transparent);
+    border: 1.5px solid color-mix(in srgb, var(--pkg) 55%, transparent);
+  }
+  .pkg-head h2 { font-size: 26px; line-height: 1.2; letter-spacing: -.012em; font-weight: 700; }
+  .pkg-meta { color: var(--text-2); font-size: 14px; }
+  .pkg-meta b { color: var(--text); font-weight: 600; }
+
+  .pkg-body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+  .talk { display: grid; gap: 10px; }
+  .talk ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-width: 64ch; }
+  .talk li { position: relative; padding-left: 20px; }
+  .talk li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 2px; background: var(--pkg, var(--accent)); }
+
+  .map { display: grid; gap: 10px; min-width: 0; }
+  .tbl { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th { text-align: left; font-weight: 600; color: var(--text-2); font-size: 12.5px; padding: 0 12px 8px 0; border-bottom: 1px solid var(--border-strong); }
+  td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+  td:first-child { font: 600 13px var(--mono); white-space: nowrap; }
+  td .mono { color: var(--text-2); font-size: 12.5px; }
+  td.code { font-size: 12.5px; color: var(--text-2); }
+  td.code code { color: var(--text); }
+
+  /* ---- Kiểu liệt kê ---- */
+  .enums { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+  .enum { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 4px; overflow: hidden; }
+  .enum-head { display: grid; justify-items: center; gap: 1px; padding: 9px 10px 8px; background: color-mix(in srgb, var(--pkg) 14%, var(--surface)); border-bottom: 1px solid var(--border-strong); }
+  .enum-st { font: italic 400 10.5px var(--mono); color: var(--text-2); }
+  .enum-name { font: 600 13px var(--mono); }
+  .enum-vi { font-size: 11.5px; color: var(--text-2); }
+  .enum ul { list-style: none; margin: 0; padding: 8px 12px 10px; font: 400 12px/1.7 var(--mono); }
+
+  /* ---- Hỏi đáp ---- */
+  .qa { display: grid; gap: 26px; max-width: 76ch; }
+  .qa article { display: grid; gap: 8px; }
+  .qa h4 { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; text-wrap: balance; }
+  .qa p { color: var(--text-2); }
+  .qa .tbl { margin-top: 6px; }
+
+  .files { display: grid; gap: 14px; max-width: 80ch; }
+  .files ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 6px 24px; }
+  .files li { font: 400 13px var(--mono); color: var(--text); }
+  .files li span { font-family: var(--sans); color: var(--text-2); font-size: 13px; }
+  .files p { color: var(--text-2); }
+
+  footer { color: var(--text-3); font-size: 13px; border-top: 1px solid var(--border); padding-top: 18px; }
+
+  @media (max-width: 860px) {
+    .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pkg-body { grid-template-columns: 1fr; gap: 26px; }
+    .steps li { grid-template-columns: 2rem minmax(0, 1fr) auto; }
+    .steps .who { grid-column: 2; font-size: 13px; color: var(--text-2); }
+    .steps .time { grid-column: 3; grid-row: 1; }
+  }
+  @media (max-width: 560px) {
+    .legend { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    body { padding-inline: 16px; }
+    .wrap { padding-block: 28px 56px; gap: 48px; }
+    .scroll svg { min-width: 680px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Nhóm 11 · SEP · Architecture Design — góc nhìn tĩnh</p>
+    <h1>Sơ đồ lớp Thuê Máy Hub</h1>
+    <p class="lede">Hai mươi mốt lớp thực thể của hệ thống cho thuê máy tính và boxphone, chia sáu nhóm theo nghiệp vụ. Mỗi lớp ứng với một bảng SQLite trong <code>server/database.ts</code>, mỗi phương thức ứng với một endpoint đang chạy. Trang đi đúng thứ tự thuyết trình: tổng quan, cách đọc ký hiệu, rồi lần lượt từng nhóm.</p>
+    <dl class="facts">
+      <div><dt>21</dt><dd>lớp thực thể</dd></div>
+      <div><dt>6</dt><dd>nhóm nghiệp vụ</dd></div>
+      <div><dt>29</dt><dd>quan hệ</dd></div>
+      <div><dt>12</dt><dd>kiểu liệt kê</dd></div>
+    </dl>
+  </header>
+
+  <nav class="toc" aria-label="Các phần">
+    <a href="#tong-quan"><span class="sw" style="--pkg: var(--text-2)">0</span>Tổng quan</a>
+    <a class="p-a" href="#nhom-a"><span class="sw">A</span>Tài khoản</a>
+    <a class="p-b" href="#nhom-b"><span class="sw">B</span>Khách hàng</a>
+    <a class="p-c" href="#nhom-c"><span class="sw">C</span>Thiết bị</a>
+    <a class="p-d" href="#nhom-d"><span class="sw">D</span>Đơn thuê</a>
+    <a class="p-e" href="#nhom-e"><span class="sw">E</span>Yêu cầu</a>
+    <a class="p-f" href="#nhom-f"><span class="sw">F</span>Hệ thống</a>
+    <a href="#liet-ke"><span class="plain">Kiểu liệt kê</span></a>
+    <a href="#hoi-dap"><span class="plain">Câu hỏi hay gặp</span></a>
+    <a href="#lay-hinh"><span class="plain">Lấy hình cho slide</span></a>
+  </nav>
+
+  <section id="thu-tu">
+    <div class="sec-head">
+      <h2>Thứ tự thuyết trình</h2>
+      <p>Đi theo đúng câu chuyện nghiệp vụ: ai dùng hệ thống, ai thuê, thuê cái gì, đơn thuê nối hai bên và ghi tiền ra sao, khách tự phục vụ thế nào, hệ thống tự vận hành ra sao. Người trình bày là gợi ý theo phần việc mỗi bạn đã làm.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="n">01</span><span class="what"><strong>Tổng quan sáu nhóm</strong><span>Hình 0, đọc từ trái sang phải theo chiều nghiệp vụ.</span></span><span class="who">Phạm Văn Đức Phú</span><span class="time">2′</span></li>
+      <li><span class="n">02</span><span class="what"><strong>Cách đọc ký hiệu</strong><span>Liên kết, hợp thành, kế thừa, thuộc tính dẫn xuất.</span></span><span class="who">Phạm Văn Đức Phú</span><span class="time">1′</span></li>
+      <li class="p-a"><span class="n">03</span><span class="what"><strong>A · Tài khoản &amp; phân quyền</strong><span>Lớp trừu tượng Account, phiên đăng nhập, OWNER và STAFF.</span></span><span class="who">Hồ Sỹ Vinh</span><span class="time">1,5′</span></li>
+      <li class="p-b"><span class="n">04</span><span class="what"><strong>B · Khách hàng</strong><span>Lớp trung tâm phía khách, số dư ví là thuộc tính dẫn xuất.</span></span><span class="who">Đào Việt Anh</span><span class="time">1,5′</span></li>
+      <li class="p-c"><span class="n">05</span><span class="what"><strong>C · Thiết bị &amp; sửa chữa</strong><span>Hai trạng thái của máy, kho linh kiện tính từ lịch sử.</span></span><span class="who">Nguyễn Minh Phát</span><span class="time">2′</span></li>
+      <li class="p-d"><span class="n">06</span><span class="what"><strong>D · Đơn thuê &amp; tài chính</strong><span>Lớp lõi Rental, sổ bút toán ba giá trị. Dành nhiều thời gian nhất.</span></span><span class="who">Đỗ Tuấn Thành</span><span class="time">3′</span></li>
+      <li class="p-e"><span class="n">07</span><span class="what"><strong>E · Yêu cầu &amp; hỗ trợ</strong><span>Yêu cầu thuê thành đơn khi được duyệt, ticket và tin nhắn.</span></span><span class="who">Phạm Văn Đức Phú</span><span class="time">2′</span></li>
+      <li class="p-f"><span class="n">08</span><span class="what"><strong>F · Vận hành hệ thống và kiểu liệt kê</strong><span>Nhật ký thao tác, nhật ký khoá mạng, cấu hình.</span></span><span class="who">Nguyễn Minh Phát</span><span class="time">1,5′</span></li>
+      <li><span class="n">09</span><span class="what"><strong>Hỏi đáp</strong><span>Năm câu cố vấn hay hỏi ở cuối trang.</span></span><span class="who">Cả nhóm</span><span class="time">3′</span></li>
+      <li class="total"><span class="n"></span><span class="what"><strong>Tổng thời gian</strong></span><span class="time">17,5′</span></li>
+    </ol>
+  </section>
+
+  <section id="tong-quan">
+    <div class="sec-head">
+      <h2>Tổng quan: sáu nhóm lớp</h2>
+      <p>Mỗi khung là một nhóm; bên trong là tên các lớp của nhóm đó. Mũi tên đứt đi từ nhóm dùng tới nhóm được dùng, nhãn là quan hệ cụ thể.</p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 1262 488" width="1262" height="488" role="img" aria-label="Sáu nhóm lớp của Thuê Máy Hub và quan hệ giữa các nhóm"><rect x="32" y="26" width="308" height="141" rx="8" class="u-frame p-a"/><text x="46" y="46" class="u-framelabel p-a">A · Tài khoản &amp; phân quyền</text><rect x="46" y="63" width="134" height="40" rx="3" class="u-chip p-a"/><text x="113" y="80" text-anchor="middle" class="u-chipname">Account</text><text x="113" y="95" text-anchor="middle" class="u-chipgloss">Tài khoản</text><rect x="192" y="63" width="134" height="40" rx="3" class="u-chip p-a"/><text x="259" y="80" text-anchor="middle" class="u-chipname">Admin</text><text x="259" y="95" text-anchor="middle" class="u-chipgloss">Tài khoản quản trị</text><rect x="46" y="113" width="134" height="40" rx="3" class="u-chip p-a"/><text x="113" y="130" text-anchor="middle" class="u-chipname">CustomerAccount</text><text x="113" y="145" text-anchor="middle" class="u-chipgloss">Tài khoản khách</text><rect x="192" y="113" width="134" height="40" rx="3" class="u-chip p-a"/><text x="259" y="130" text-anchor="middle" class="u-chipname">Session</text><text x="259" y="145" text-anchor="middle" class="u-chipgloss">Phiên đăng nhập</text><rect x="442" y="26" width="378" height="91" rx="8" class="u-frame p-b"/><text x="456" y="46" class="u-framelabel p-b">B · Khách hàng</text><rect x="456" y="63" width="169" height="40" rx="3" class="u-chip p-b"/><text x="540.5" y="80" text-anchor="middle" class="u-chipname">Customer</text><text x="540.5" y="95" text-anchor="middle" class="u-chipgloss">Khách hàng</text><rect x="637" y="63" width="169" height="40" rx="3" class="u-chip p-b"/><text x="721.5" y="80" text-anchor="middle" class="u-chipname">CustomerNotification</text><text x="721.5" y="95" text-anchor="middle" class="u-chipgloss">Thông báo</text><rect x="916" y="26" width="320" height="141" rx="8" class="u-frame p-e"/><text x="930" y="46" class="u-framelabel p-e">E · Yêu cầu &amp; hỗ trợ</text><rect x="930" y="63" width="140" height="40" rx="3" class="u-chip p-e"/><text x="1000" y="80" text-anchor="middle" class="u-chipname">BookingRequest</text><text x="1000" y="95" text-anchor="middle" class="u-chipgloss">Yêu cầu thuê</text><rect x="1082" y="63" width="140" height="40" rx="3" class="u-chip p-e"/><text x="1152" y="80" text-anchor="middle" class="u-chipname">ExtensionRequest</text><text x="1152" y="95" text-anchor="middle" class="u-chipgloss">Yêu cầu gia hạn</text><rect x="930" y="113" width="140" height="40" rx="3" class="u-chip p-e"/><text x="1000" y="130" text-anchor="middle" class="u-chipname">SupportTicket</text><text x="1000" y="145" text-anchor="middle" class="u-chipgloss">Ticket hỗ trợ</text><rect x="1082" y="113" width="140" height="40" rx="3" class="u-chip p-e"/><text x="1152" y="130" text-anchor="middle" class="u-chipname">TicketMessage</text><text x="1152" y="145" text-anchor="middle" class="u-chipgloss">Tin nhắn ticket</text><rect x="26" y="263" width="320" height="141" rx="8" class="u-frame p-f"/><text x="40" y="283" class="u-framelabel p-f">F · Vận hành hệ thống</text><rect x="40" y="300" width="140" height="40" rx="3" class="u-chip p-f"/><text x="110" y="317" text-anchor="middle" class="u-chipname">AuditLog</text><text x="110" y="332" text-anchor="middle" class="u-chipgloss">Nhật ký thao tác</text><rect x="192" y="300" width="140" height="40" rx="3" class="u-chip p-f"/><text x="262" y="317" text-anchor="middle" class="u-chipname">AppSetting</text><text x="262" y="332" text-anchor="middle" class="u-chipgloss">Cấu hình</text><rect x="40" y="350" width="140" height="40" rx="3" class="u-chip p-f"/><text x="110" y="367" text-anchor="middle" class="u-chipname">NetworkLockEvent</text><text x="110" y="382" text-anchor="middle" class="u-chipgloss">Nhật ký khoá mạng</text><rect x="442" y="263" width="378" height="141" rx="8" class="u-frame p-d"/><text x="456" y="283" class="u-framelabel p-d">D · Đơn thuê &amp; tài chính</text><rect x="456" y="300" width="169" height="40" rx="3" class="u-chip p-d"/><text x="540.5" y="317" text-anchor="middle" class="u-chipname">Rental</text><text x="540.5" y="332" text-anchor="middle" class="u-chipgloss">Đơn thuê</text><rect x="637" y="300" width="169" height="40" rx="3" class="u-chip p-d"/><text x="721.5" y="317" text-anchor="middle" class="u-chipname">RentalPeriod</text><text x="721.5" y="332" text-anchor="middle" class="u-chipgloss">Kỳ thuê (gia hạn)</text><rect x="456" y="350" width="169" height="40" rx="3" class="u-chip p-d"/><text x="540.5" y="367" text-anchor="middle" class="u-chipname">FinancialTransaction</text><text x="540.5" y="382" text-anchor="middle" class="u-chipgloss">Bút toán sổ tiền</text><rect x="637" y="350" width="169" height="40" rx="3" class="u-chip p-d"/><text x="721.5" y="367" text-anchor="middle" class="u-chipname">Expense</text><text x="721.5" y="382" text-anchor="middle" class="u-chipgloss">Khoản chi</text><rect x="946" y="263" width="260" height="141" rx="8" class="u-frame p-c"/><text x="960" y="283" class="u-framelabel p-c">C · Thiết bị &amp; sửa chữa</text><rect x="960" y="300" width="110" height="40" rx="3" class="u-chip p-c"/><text x="1015" y="317" text-anchor="middle" class="u-chipname">Device</text><text x="1015" y="332" text-anchor="middle" class="u-chipgloss">Thiết bị</text><rect x="1082" y="300" width="110" height="40" rx="3" class="u-chip p-c"/><text x="1137" y="317" text-anchor="middle" class="u-chipname">Repair</text><text x="1137" y="332" text-anchor="middle" class="u-chipgloss">Phiếu sửa chữa</text><rect x="960" y="350" width="110" height="40" rx="3" class="u-chip p-c"/><text x="1015" y="367" text-anchor="middle" class="u-chipname">Part</text><text x="1015" y="382" text-anchor="middle" class="u-chipgloss">Linh kiện</text><rect x="1082" y="350" width="110" height="40" rx="3" class="u-chip p-c"/><text x="1137" y="367" text-anchor="middle" class="u-chipname">PartMovement</text><text x="1137" y="382" text-anchor="middle" class="u-chipgloss">Xuất nhập kho</text><path d="M340 72 L442 72" class="u-edge u-dash"/><polyline points="432,67 442,72 432,77" class="u-edge"/><text x="391" y="88" text-anchor="middle" class="u-label">đăng nhập</text><path d="M916 72 L820 72" class="u-edge u-dash"/><polyline points="830,77 820,72 830,67" class="u-edge"/><text x="868" y="88" text-anchor="middle" class="u-label">khách gửi</text><path d="M631 263 L631 117" class="u-edge u-dash"/><polyline points="626,127 631,117 636,127" class="u-edge"/><text x="624" y="194" text-anchor="end" class="u-label">đơn của khách</text><path d="M980 167 L980 215 L759.5 215 L759.5 263" class="u-edge u-dash"/><polyline points="764.5,253 759.5,263 754.5,253" class="u-edge"/><text x="869.75" y="231" text-anchor="middle" class="u-label">duyệt thì sinh đơn thuê</text><path d="M1076 167 L1076 263" class="u-edge u-dash"/><polyline points="1081,253 1076,263 1071,253" class="u-edge"/><text x="1083" y="219" text-anchor="start" class="u-label">máy được yêu cầu</text><path d="M820 308.1 L946 308.1" class="u-edge u-dash"/><polyline points="936,303.1 946,308.1 936,313.1" class="u-edge"/><text x="883" y="324.1" text-anchor="middle" class="u-label">thuê máy</text><path d="M946 367.3 L820 367.3" class="u-edge u-dash"/><polyline points="830,372.3 820,367.3 830,362.3" class="u-edge"/><text x="883" y="383.3" text-anchor="middle" class="u-label">ghi khoản chi</text><path d="M186 263 L186 167" class="u-edge u-dash"/><polyline points="181,177 186,167 191,177" class="u-edge"/><text x="179" y="219" text-anchor="end" class="u-label">ai đã làm gì</text><path d="M186 404 L186 434 L1076 434 L1076 404" class="u-edge u-dash"/><polyline points="1071,414 1076,404 1081,414" class="u-edge"/><text x="631" y="450" text-anchor="middle" class="u-label">khoá / mở mạng từng máy</text></svg></div>
+      <figcaption><b>Hình 0.</b> Nhóm D (Đơn thuê &amp; tài chính) là lõi: nó nối khách hàng (B) với thiết bị (C), nhận đơn từ yêu cầu (E) và nhận khoản chi từ sửa chữa (C).</figcaption>
+    </figure>
+    <div class="talk">
+      <h3>Nói gì</h3>
+      <ul>
+        <li>Mỗi lớp ứng với đúng một bảng SQLite, nên sơ đồ lớp và tài liệu Database Design khớp nhau từng tên.</li>
+        <li>Đọc theo chiều nghiệp vụ: ai đăng nhập (A), ai thuê (B), thuê cái gì (C), đơn thuê nối hai bên và ghi tiền (D), khách tự gửi yêu cầu (E), hệ thống tự ghi nhật ký và tự khoá máy (F).</li>
+        <li>Mọi mũi tên quan trọng đều đi qua nhóm D, vì cho thuê là nghiệp vụ chính của tiệm.</li>
+        <li>Mọi lớp đều có <code>id</code>, <code>createdAt</code>, <code>updatedAt</code>; các hình chi tiết lược bỏ ba thuộc tính này cho gọn.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cach-doc">
+    <div class="sec-head">
+      <h2>Cách đọc ký hiệu</h2>
+      <p>Ký hiệu UML chuẩn, dùng giống nhau ở cả bảy hình.</p>
+    </div>
+    <div class="legend">
+      <div>
+        <svg class="uml" viewBox="0 0 220 44" role="img" aria-label="Liên kết với bội số 1 và 0..*">
+          <rect x="1" y="10" width="44" height="24" rx="3" class="u-box"/><rect x="175" y="10" width="44" height="24" rx="3" class="u-box"/>
+          <path d="M45 22 H175" class="u-edge"/>
+          <text x="51" y="16" class="u-mult">1</text><text x="169" y="16" text-anchor="end" class="u-mult">0..*</text>
+          <text x="110" y="38" text-anchor="middle" class="u-label">thuê</text>
+        </svg>
+        <p><b>Liên kết.</b> Số ở hai đầu là bội số: một khách có 0 đến nhiều đơn thuê, mỗi đơn thuộc đúng 1 khách.</p>
+      </div>
+      <div>
+        <svg class="uml" viewBox="0 0 220 44" role="img" aria-label="Hợp thành, hình thoi đặc ở phía toàn thể">
+          <rect x="1" y="10" width="44" height="24" rx="3" class="u-box"/><rect x="175" y="10" width="44" height="24" rx="3" class="u-box"/>
+          <path d="M45 22 H175" class="u-edge"/>
+          <polygon points="45,22 52,17 59,22 52,27" class="u-dia"/>
+          <text x="65" y="16" class="u-mult">1</text><text x="169" y="16" text-anchor="end" class="u-mult">0..*</text>
+        </svg>
+        <p><b>Hợp thành.</b> Hình thoi đặc ở phía toàn thể. Phần không tồn tại nếu thiếu toàn thể, ví dụ kỳ thuê không có nghĩa nếu không có đơn thuê.</p>
+      </div>
+      <div>
+        <svg class="uml" viewBox="0 0 220 60" role="img" aria-label="Kế thừa, tam giác rỗng chỉ vào lớp cha">
+          <rect x="88" y="1" width="44" height="22" rx="3" class="u-box"/>
+          <polygon points="110,23 102,35 118,35" class="u-tri"/>
+          <path d="M110 35 V44 M40 44 H180 M40 44 V50 M180 44 V50" class="u-edge"/>
+          <rect x="18" y="50" width="44" height="9" rx="2" class="u-box"/><rect x="158" y="50" width="44" height="9" rx="2" class="u-box"/>
+        </svg>
+        <p><b>Kế thừa.</b> Tam giác rỗng chỉ vào lớp cha: Admin và CustomerAccount đều là Account.</p>
+      </div>
+      <div>
+        <svg class="uml" viewBox="0 0 220 44" role="img" aria-label="Lớp thuộc nhóm khác vẽ bằng viền đứt">
+          <rect x="40" y="6" width="140" height="32" rx="3" class="u-ghost"/>
+          <text x="110" y="21" text-anchor="middle" class="u-name">Rental</text>
+          <text x="110" y="33" text-anchor="middle" class="u-gloss">Đơn thuê · nhóm Đơn thuê</text>
+        </svg>
+        <p><b>Viền đứt</b> là lớp thuộc nhóm khác, chỉ vẽ tên để thấy chỗ nối. Chi tiết nằm ở hình của nhóm đó.</p>
+      </div>
+      <div>
+        <svg class="uml" viewBox="0 0 220 44" role="img" aria-label="Mũi tên đứt là phụ thuộc giữa các nhóm">
+          <rect x="1" y="10" width="44" height="24" rx="6" class="u-frame p-d"/><rect x="175" y="10" width="44" height="24" rx="6" class="u-frame p-b"/>
+          <path d="M45 22 H175" class="u-edge u-dash"/>
+          <polyline points="165,17 175,22 165,27" class="u-edge"/>
+        </svg>
+        <p><b>Mũi tên đứt</b> chỉ có ở hình tổng quan: nhóm ở gốc dùng lớp của nhóm ở ngọn.</p>
+      </div>
+      <div class="tokens">
+        <span><code>-</code> thuộc tính riêng, <code>+</code> phương thức công khai</span>
+        <span><code>/walletBalance</code> thuộc tính dẫn xuất: tính ra, không lưu</span>
+        <span><code>{unique}</code> ràng buộc, <code>[0..1]</code> có thể để trống</span>
+        <span><code>«immutable»</code> chỉ ghi thêm, không sửa, không xoá</span>
+        <span><code>«abstract»</code> lớp trừu tượng, tên in nghiêng</span>
+        <span>Ghi chú nền vàng là quy tắc nghiệp vụ (mã BR trong tài liệu Business Rule)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="nhom-a" class="p-a">
+    <div class="pkg-head">
+      <span class="pkg-tag">A</span>
+      <h2>Tài khoản &amp; phân quyền</h2>
+      <p class="pkg-meta">4 lớp · trình bày: <b>Hồ Sỹ Vinh</b></p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 1013 546" width="1013" height="546" role="img" aria-label="Lớp trừu tượng Account với hai lớp con Admin và CustomerAccount, mỗi tài khoản có nhiều Session"><path d="M171 280 V250" class="u-edge"/><path d="M859.5 280 V250" class="u-edge"/><path d="M171 250 H859.5" class="u-edge"/><path d="M524 250 V216" class="u-edge"/><polygon points="524,204 516,216 532,216" class="u-tri"/><path d="M650 84 L741 84" class="u-edge"/><polygon points="650,84 657,89 664,84 657,79" class="u-dia"/><text x="670" y="78" text-anchor="start" class="u-mult">1</text><text x="735" y="78" text-anchor="end" class="u-mult">0..*</text><text x="695.5" y="100" text-anchor="middle" class="u-label">mở</text><path d="M860 399 L860 475" class="u-edge"/><text x="866" y="414" text-anchor="start" class="u-mult">0..1</text><text x="866" y="469" text-anchor="start" class="u-mult">1</text><text x="853" y="441" text-anchor="end" class="u-label">đăng nhập cho</text><path d="M406 326 L318 326" class="u-notelink"/><rect x="398" y="24" width="252" height="180" rx="3" class="u-box"/><path d="M398.5 84 V27 Q398.5 24.5 401 24.5 H647 Q649.5 24.5 649.5 27 V84 Z" class="u-hdr p-a"/><text x="524" y="43" text-anchor="middle" class="u-stereo">«abstract»</text><text x="524" y="59" text-anchor="middle" class="u-name u-italic">Account</text><text x="524" y="74" text-anchor="middle" class="u-gloss">Tài khoản</text><line x1="398" y1="84" x2="650" y2="84" class="u-div"/><line x1="398" y1="144" x2="650" y2="144" class="u-div"/><text x="410" y="102" class="u-mem">- email: string {unique}</text><text x="410" y="118" class="u-mem">- passwordHash: string</text><text x="410" y="134" class="u-mem">- status: AccountStatus</text><text x="410" y="162" class="u-mem">+ login(email, password): Session</text><text x="410" y="178" class="u-mem">+ logout(): void</text><text x="410" y="194" class="u-mem">+ changePassword(old, new): void</text><rect x="741" y="24" width="238" height="119" rx="3" class="u-box"/><path d="M741.5 71 V27 Q741.5 24.5 744 24.5 H976 Q978.5 24.5 978.5 27 V71 Z" class="u-hdr p-a"/><text x="860" y="46" text-anchor="middle" class="u-name">Session</text><text x="860" y="61" text-anchor="middle" class="u-gloss">Phiên đăng nhập</text><line x1="741" y1="71" x2="979" y2="71" class="u-div"/><line x1="741" y1="115" x2="979" y2="115" class="u-div"/><text x="753" y="89" class="u-mem">- id: string  «cookie HttpOnly»</text><text x="753" y="105" class="u-mem">- expiresAt: datetime</text><text x="753" y="133" class="u-mem">+ isExpired(): boolean</text><rect x="24" y="280" width="294" height="119" rx="3" class="u-box"/><path d="M24.5 327 V283 Q24.5 280.5 27 280.5 H315 Q317.5 280.5 317.5 283 V327 Z" class="u-hdr p-a"/><text x="171" y="302" text-anchor="middle" class="u-name">Admin</text><text x="171" y="317" text-anchor="middle" class="u-gloss">Tài khoản quản trị</text><line x1="24" y1="327" x2="318" y2="327" class="u-div"/><line x1="24" y1="371" x2="318" y2="371" class="u-div"/><text x="36" y="345" class="u-mem">- name: string</text><text x="36" y="361" class="u-mem">- role: AdminRole</text><text x="36" y="389" class="u-mem">+ hasPermission(p: Permission): boolean</text><path d="M406 280 H632 L642 290 V371 H406 Z" class="u-note"/><path d="M632 280 V290 H642" fill="none" class="u-notelink"/><text x="418" y="300" class="u-notetext">Luôn còn ít nhất một tài khoản</text><text x="418" y="315" class="u-notetext">OWNER đang ACTIVE (BR.13).</text><text x="418" y="330" class="u-notetext">STAFF không xem trang Tài chính,</text><text x="418" y="345" class="u-notetext">không nạp ví, không hoàn tiền</text><text x="418" y="360" class="u-notetext">(BR.14).</text><rect x="730" y="280" width="259" height="119" rx="3" class="u-box"/><path d="M730.5 327 V283 Q730.5 280.5 733 280.5 H986 Q988.5 280.5 988.5 283 V327 Z" class="u-hdr p-a"/><text x="859.5" y="302" text-anchor="middle" class="u-name">CustomerAccount</text><text x="859.5" y="317" text-anchor="middle" class="u-gloss">Tài khoản khách</text><line x1="730" y1="327" x2="989" y2="327" class="u-div"/><line x1="730" y1="371" x2="989" y2="371" class="u-div"/><text x="742" y="345" class="u-mem">- emailVerifiedAt: datetime [0..1]</text><text x="742" y="361" class="u-mem">- lastLoginAt: datetime [0..1]</text><text x="742" y="389" class="u-mem">+ register(email, password): void</text><rect x="755" y="475" width="209" height="47" rx="3" class="u-ghost"/><text x="859.5" y="497" text-anchor="middle" class="u-name">Customer</text><text x="859.5" y="512" text-anchor="middle" class="u-gloss">Khách hàng · nhóm Khách hàng</text></svg></div>
+      <figcaption><b>Hình 1.</b> Hai loại tài khoản kế thừa lớp trừu tượng Account; mỗi tài khoản mở nhiều phiên đăng nhập.</figcaption>
+    </figure>
+    <div class="pkg-body">
+      <div class="talk">
+        <h3>Nói gì</h3>
+        <ul>
+          <li>Quản trị và khách đều đăng nhập bằng email và mật khẩu băm scrypt, nên phần chung gom vào lớp trừu tượng Account. Mỗi lớp con lưu bảng riêng: <code>admins</code> và <code>customer_accounts</code>.</li>
+          <li>Session là hợp thành của Account: phiên không tồn tại nếu thiếu tài khoản. Xoá hoặc khoá tài khoản là cắt hết phiên, có hiệu lực ngay ở lần gọi API kế tiếp.</li>
+          <li><code>Admin.hasPermission()</code> liệt kê quyền của STAFF trong <code>server/permissions.ts</code>. Quên khai một quyền thì nhân viên mặc định không có quyền đó.</li>
+          <li>CustomerAccount gắn với đúng một hồ sơ Customer, nhờ vậy API cổng khách chỉ trả về dữ liệu của chính khách đang đăng nhập.</li>
+        </ul>
+      </div>
+      <div class="map">
+        <h3>Lớp ↔ bảng ↔ code</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Lớp</th><th>Bảng</th><th>Hiện thực ở</th></tr></thead>
+          <tbody>
+            <tr><td>Account</td><td><span class="mono">— (trừu tượng)</span></td><td class="code"><code>hashPassword()</code>, <code>verifyPassword()</code></td></tr>
+            <tr><td>Admin</td><td><span class="mono">admins</span></td><td class="code"><code>/api/auth/*</code>, <code>/api/admins</code></td></tr>
+            <tr><td>CustomerAccount</td><td><span class="mono">customer_accounts</span></td><td class="code"><code>/api/customer/auth/*</code></td></tr>
+            <tr><td>Session</td><td><span class="mono">sessions, customer_sessions</span></td><td class="code"><code>requireAuth</code>, <code>requireCustomer</code></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nhom-b" class="p-b">
+    <div class="pkg-head">
+      <span class="pkg-tag">B</span>
+      <h2>Khách hàng</h2>
+      <p class="pkg-meta">2 lớp · trình bày: <b>Đào Việt Anh</b></p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 1096 570" width="1096" height="570" role="img" aria-label="Lớp Customer là trung tâm, nối với tài khoản, bút toán, đơn thuê, yêu cầu, ticket và thông báo"><path d="M260 48 L364 48" class="u-edge"/><text x="266" y="42" text-anchor="start" class="u-mult">0..1</text><text x="358" y="42" text-anchor="end" class="u-mult">1</text><text x="312" y="64" text-anchor="middle" class="u-label">đăng nhập cho</text><path d="M364 113 L260 113" class="u-edge"/><text x="358" y="107" text-anchor="end" class="u-mult">0..1</text><text x="266" y="107" text-anchor="start" class="u-mult">0..*</text><text x="312" y="129" text-anchor="middle" class="u-label">biến động ví</text><path d="M364 178 L234 178" class="u-edge"/><text x="358" y="172" text-anchor="end" class="u-mult">1</text><text x="240" y="172" text-anchor="start" class="u-mult">0..*</text><text x="299" y="194" text-anchor="middle" class="u-label">thuê</text><path d="M713 48 L843 48" class="u-edge"/><text x="719" y="42" text-anchor="start" class="u-mult">1</text><text x="837" y="42" text-anchor="end" class="u-mult">0..*</text><text x="778" y="64" text-anchor="middle" class="u-label">gửi</text><path d="M713 113 L834 113" class="u-edge"/><text x="719" y="107" text-anchor="start" class="u-mult">1</text><text x="828" y="107" text-anchor="end" class="u-mult">0..*</text><text x="773.5" y="129" text-anchor="middle" class="u-label">gửi</text><path d="M713 178 L840 178" class="u-edge"/><text x="719" y="172" text-anchor="start" class="u-mult">1</text><text x="834" y="172" text-anchor="end" class="u-mult">0..*</text><text x="776.5" y="194" text-anchor="middle" class="u-label">mở</text><path d="M539 287 L539 363" class="u-edge"/><polygon points="539,287 534,294 539,301 544,294" class="u-dia"/><text x="545" y="316" text-anchor="start" class="u-mult">1</text><text x="545" y="357" text-anchor="start" class="u-mult">0..*</text><text x="532" y="329" text-anchor="end" class="u-label">nhận</text><path d="M944.5 363 L944.5 268.6 L713 268.6" class="u-notelink"/><rect x="24" y="24" width="236" height="47" rx="3" class="u-ghost"/><text x="142" y="46" text-anchor="middle" class="u-name">CustomerAccount</text><text x="142" y="61" text-anchor="middle" class="u-gloss">Tài khoản khách · nhóm Tài khoản</text><rect x="24" y="89" width="236" height="47" rx="3" class="u-ghost"/><text x="142" y="111" text-anchor="middle" class="u-name">FinancialTransaction</text><text x="142" y="126" text-anchor="middle" class="u-gloss">Bút toán sổ tiền · nhóm Đơn thuê</text><rect x="51" y="154" width="183" height="47" rx="3" class="u-ghost"/><text x="142.5" y="176" text-anchor="middle" class="u-name">Rental</text><text x="142.5" y="191" text-anchor="middle" class="u-gloss">Đơn thuê · nhóm Đơn thuê</text><rect x="364" y="24" width="349" height="263" rx="3" class="u-box"/><path d="M364.5 71 V27 Q364.5 24.5 367 24.5 H710 Q712.5 24.5 712.5 27 V71 Z" class="u-hdr p-b"/><text x="538.5" y="46" text-anchor="middle" class="u-name">Customer</text><text x="538.5" y="61" text-anchor="middle" class="u-gloss">Khách hàng</text><line x1="364" y1="71" x2="713" y2="71" class="u-div"/><line x1="364" y1="227" x2="713" y2="227" class="u-div"/><text x="376" y="89" class="u-mem">- code: string {unique}</text><text x="376" y="105" class="u-mem">- name: string</text><text x="376" y="121" class="u-mem">- phone: string</text><text x="376" y="137" class="u-mem">- email: string</text><text x="376" y="153" class="u-mem">- company: string</text><text x="376" y="169" class="u-mem">- creditLimit: int</text><text x="376" y="185" class="u-mem">- status: CustomerStatus</text><text x="376" y="201" class="u-mem">- notes: string</text><text x="376" y="217" class="u-mem u-memd">- /walletBalance: int {≥ 0}</text><text x="376" y="245" class="u-mem">+ deposit(amount, method): FinancialTransaction</text><text x="376" y="261" class="u-mem">+ changeStatus(s: CustomerStatus): void</text><text x="376" y="277" class="u-mem">+ notify(kind, title, body): void</text><rect x="843" y="24" width="203" height="47" rx="3" class="u-ghost"/><text x="944.5" y="46" text-anchor="middle" class="u-name">BookingRequest</text><text x="944.5" y="61" text-anchor="middle" class="u-gloss">Yêu cầu thuê · nhóm Yêu cầu</text><rect x="834" y="89" width="222" height="47" rx="3" class="u-ghost"/><text x="945" y="111" text-anchor="middle" class="u-name">ExtensionRequest</text><text x="945" y="126" text-anchor="middle" class="u-gloss">Yêu cầu gia hạn · nhóm Yêu cầu</text><rect x="840" y="154" width="209" height="47" rx="3" class="u-ghost"/><text x="944.5" y="176" text-anchor="middle" class="u-name">SupportTicket</text><text x="944.5" y="191" text-anchor="middle" class="u-gloss">Ticket hỗ trợ · nhóm Yêu cầu</text><rect x="406" y="363" width="266" height="183" rx="3" class="u-box"/><path d="M406.5 410 V366 Q406.5 363.5 409 363.5 H669 Q671.5 363.5 671.5 366 V410 Z" class="u-hdr p-b"/><text x="539" y="385" text-anchor="middle" class="u-name">CustomerNotification</text><text x="539" y="400" text-anchor="middle" class="u-gloss">Thông báo</text><line x1="406" y1="410" x2="672" y2="410" class="u-div"/><line x1="406" y1="518" x2="672" y2="518" class="u-div"/><text x="418" y="428" class="u-mem">- kind: string</text><text x="418" y="444" class="u-mem">- title: string</text><text x="418" y="460" class="u-mem">- body: string</text><text x="418" y="476" class="u-mem">- link: string</text><text x="418" y="492" class="u-mem">- dedupeKey: string [0..1] {unique}</text><text x="418" y="508" class="u-mem">- readAt: datetime [0..1]</text><text x="418" y="536" class="u-mem">+ markRead(): void</text><path d="M817 363 H1062 L1072 373 V454 H817 Z" class="u-note"/><path d="M1062 363 V373 H1072" fill="none" class="u-notelink"/><text x="829" y="383" class="u-notetext">/walletBalance = tổng walletChange</text><text x="829" y="398" class="u-notetext">của mọi bút toán của khách.</text><text x="829" y="413" class="u-notetext">Không lưu thành cột nên số dư không</text><text x="829" y="428" class="u-notetext">thể lệch sổ, và không bao giờ âm</text><text x="829" y="443" class="u-notetext">(BR.06).</text></svg></div>
+      <figcaption><b>Hình 2.</b> Customer là lớp trung tâm phía khách: sáu lớp ở bốn nhóm khác đều trỏ về đây.</figcaption>
+    </figure>
+    <div class="pkg-body">
+      <div class="talk">
+        <h3>Nói gì</h3>
+        <ul>
+          <li>Một hồ sơ khách có tối đa một tài khoản đăng nhập. Khách đến thuê tại quầy thì không cần tài khoản, nên bội số là 0..1.</li>
+          <li>Số dư ví có dấu <code>/</code> vì là thuộc tính dẫn xuất: tính bằng tổng <code>walletChange</code> trong sổ tiền, không lưu cột riêng.</li>
+          <li>Trạng thái BLOCKED chặn đăng nhập cổng khách và cắt các phiên đang mở (BR.07).</li>
+          <li>CustomerNotification là hợp thành của Customer. <code>dedupeKey</code> chặn cùng một sự kiện bị báo hai lần.</li>
+        </ul>
+      </div>
+      <div class="map">
+        <h3>Lớp ↔ bảng ↔ code</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Lớp</th><th>Bảng</th><th>Hiện thực ở</th></tr></thead>
+          <tbody>
+            <tr><td>Customer</td><td><span class="mono">customers</span></td><td class="code"><code>/api/customers</code>, <code>getWalletBalance()</code></td></tr>
+            <tr><td>CustomerNotification</td><td><span class="mono">customer_notifications</span></td><td class="code"><code>notifyCustomer()</code>, <code>/api/customer/notifications</code></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nhom-c" class="p-c">
+    <div class="pkg-head">
+      <span class="pkg-tag">C</span>
+      <h2>Thiết bị &amp; sửa chữa</h2>
+      <p class="pkg-meta">4 lớp · trình bày: <b>Nguyễn Minh Phát</b></p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 1103 865" width="1103" height="865" role="img" aria-label="Device có nhiều phiếu Repair; Part lưu lịch sử PartMovement; phiếu sửa và lần nhập kho sinh khoản chi"><path d="M304 164 L384 164" class="u-edge"/><text x="310" y="158" text-anchor="start" class="u-mult">1</text><text x="378" y="158" text-anchor="end" class="u-mult">0..*</text><text x="344" y="180" text-anchor="middle" class="u-label">được sửa</text><path d="M705 48 L838 48" class="u-edge"/><text x="711" y="42" text-anchor="start" class="u-mult">0..1</text><text x="832" y="42" text-anchor="end" class="u-mult">0..1</text><text x="771.5" y="64" text-anchor="middle" class="u-label">tiền công</text><path d="M545 303 L545 443" class="u-edge"/><text x="551" y="318" text-anchor="start" class="u-mult">0..1</text><text x="551" y="437" text-anchor="start" class="u-mult">0..*</text><text x="538" y="377" text-anchor="end" class="u-label">lắp / gỡ</text><path d="M785 510 L633 510" class="u-edge"/><polygon points="785,510 778,505 771,510 778,515" class="u-dia"/><text x="765" y="504" text-anchor="end" class="u-mult">1</text><text x="639" y="504" text-anchor="start" class="u-mult">0..*</text><text x="709" y="526" text-anchor="middle" class="u-label">lịch sử kho</text><path d="M606.6 443 L606.6 405 L932.5 405 L932.5 71" class="u-edge"/><text x="612.6" y="437" text-anchor="start" class="u-mult">0..1</text><text x="938.5" y="86" text-anchor="start" class="u-mult">0..1</text><text x="925.5" y="242" text-anchor="end" class="u-label">tiền mua</text><path d="M165 367 L165 443" class="u-edge"/><text x="171" y="382" text-anchor="start" class="u-mult">1</text><text x="171" y="437" text-anchor="start" class="u-mult">0..*</text><text x="158" y="409" text-anchor="end" class="u-label">được thuê</text><path d="M932 750 L932 674" class="u-notelink"/><rect x="24" y="24" width="280" height="343" rx="3" class="u-box"/><path d="M24.5 71 V27 Q24.5 24.5 27 24.5 H301 Q303.5 24.5 303.5 27 V71 Z" class="u-hdr p-c"/><text x="164" y="46" text-anchor="middle" class="u-name">Device</text><text x="164" y="61" text-anchor="middle" class="u-gloss">Thiết bị</text><line x1="24" y1="71" x2="304" y2="71" class="u-div"/><line x1="24" y1="307" x2="304" y2="307" class="u-div"/><text x="36" y="89" class="u-mem">- code: string {unique}</text><text x="36" y="105" class="u-mem">- name: string</text><text x="36" y="121" class="u-mem">- type: DeviceType</text><text x="36" y="137" class="u-mem">- specs: string</text><text x="36" y="153" class="u-mem">- ipAddress: string</text><text x="36" y="169" class="u-mem">- hourlyRate: int</text><text x="36" y="185" class="u-mem">- dailyRate: int</text><text x="36" y="201" class="u-mem">- weeklyRate: int</text><text x="36" y="217" class="u-mem">- monthlyRate: int</text><text x="36" y="233" class="u-mem">- purchasePrice: int</text><text x="36" y="249" class="u-mem">- status: DeviceStatus</text><text x="36" y="265" class="u-mem">- networkStatus: NetworkStatus</text><text x="36" y="281" class="u-mem u-memd">- /revenue: int</text><text x="36" y="297" class="u-mem u-memd">- /repairCost: int</text><text x="36" y="325" class="u-mem">+ changeStatus(s: DeviceStatus): void</text><text x="36" y="341" class="u-mem">+ lockNetwork(): NetworkLockEvent</text><text x="36" y="357" class="u-mem">+ unlockNetwork(): NetworkLockEvent</text><rect x="384" y="24" width="321" height="279" rx="3" class="u-box"/><path d="M384.5 71 V27 Q384.5 24.5 387 24.5 H702 Q704.5 24.5 704.5 27 V71 Z" class="u-hdr p-c"/><text x="544.5" y="46" text-anchor="middle" class="u-name">Repair</text><text x="544.5" y="61" text-anchor="middle" class="u-gloss">Phiếu sửa chữa</text><line x1="384" y1="71" x2="705" y2="71" class="u-div"/><line x1="384" y1="227" x2="705" y2="227" class="u-div"/><text x="396" y="89" class="u-mem">- code: string {unique}</text><text x="396" y="105" class="u-mem">- title: string</text><text x="396" y="121" class="u-mem">- symptom: string</text><text x="396" y="137" class="u-mem">- status: RepairStatus</text><text x="396" y="153" class="u-mem">- vendor: string</text><text x="396" y="169" class="u-mem">- serviceCost: int</text><text x="396" y="185" class="u-mem">- resolution: string</text><text x="396" y="201" class="u-mem">- reportedAt: datetime</text><text x="396" y="217" class="u-mem">- closedAt: datetime [0..1]</text><text x="396" y="245" class="u-mem">+ start(): void</text><text x="396" y="261" class="u-mem">+ close(result, serviceCost): Expense</text><text x="396" y="277" class="u-mem">+ installPart(p: Part, qty): PartMovement</text><text x="396" y="293" class="u-mem">+ removePart(m: PartMovement): PartMovement</text><rect x="838" y="24" width="189" height="47" rx="3" class="u-ghost"/><text x="932.5" y="46" text-anchor="middle" class="u-name">Expense</text><text x="932.5" y="61" text-anchor="middle" class="u-gloss">Khoản chi · nhóm Đơn thuê</text><rect x="73" y="443" width="183" height="47" rx="3" class="u-ghost"/><text x="164.5" y="465" text-anchor="middle" class="u-name">Rental</text><text x="164.5" y="480" text-anchor="middle" class="u-gloss">Đơn thuê · nhóm Đơn thuê</text><rect x="457" y="443" width="176" height="133" rx="3" class="u-box"/><path d="M457.5 490 V446 Q457.5 443.5 460 443.5 H630 Q632.5 443.5 632.5 446 V490 Z" class="u-hdr p-c"/><text x="545" y="465" text-anchor="middle" class="u-name">PartMovement</text><text x="545" y="480" text-anchor="middle" class="u-gloss">Xuất nhập kho</text><line x1="457" y1="490" x2="633" y2="490" class="u-div"/><line x1="457" y1="566" x2="633" y2="566" class="u-div"/><text x="469" y="508" class="u-mem">- kind: MovementKind</text><text x="469" y="524" class="u-mem">- quantity: int</text><text x="469" y="540" class="u-mem">- unitCost: int</text><text x="469" y="556" class="u-mem">- occurredAt: datetime</text><rect x="785" y="443" width="294" height="231" rx="3" class="u-box"/><path d="M785.5 490 V446 Q785.5 443.5 788 443.5 H1076 Q1078.5 443.5 1078.5 446 V490 Z" class="u-hdr p-c"/><text x="932" y="465" text-anchor="middle" class="u-name">Part</text><text x="932" y="480" text-anchor="middle" class="u-gloss">Linh kiện</text><line x1="785" y1="490" x2="1079" y2="490" class="u-div"/><line x1="785" y1="630" x2="1079" y2="630" class="u-div"/><text x="797" y="508" class="u-mem">- code: string {unique}</text><text x="797" y="524" class="u-mem">- name: string</text><text x="797" y="540" class="u-mem">- category: PartCategory</text><text x="797" y="556" class="u-mem">- unit: string</text><text x="797" y="572" class="u-mem">- minQuantity: int</text><text x="797" y="588" class="u-mem">- location: string</text><text x="797" y="604" class="u-mem u-memd">- /stock: int</text><text x="797" y="620" class="u-mem u-memd">- /averageCost: int</text><text x="797" y="648" class="u-mem">+ purchase(qty, unitCost): PartMovement</text><text x="797" y="664" class="u-mem">+ isLowStock(): boolean</text><path d="M801 750 H1053 L1063 760 V841 H801 Z" class="u-note"/><path d="M1053 750 V760 H1063" fill="none" class="u-notelink"/><text x="813" y="770" class="u-notetext">/stock = tổng quantity; giá vốn bình</text><text x="813" y="785" class="u-notetext">quân chỉ tính từ các lần PURCHASE.</text><text x="813" y="800" class="u-notetext">Không lắp vượt tồn kho (BR.10). Lắp</text><text x="813" y="815" class="u-notetext">linh kiện không sinh chi phí mới</text><text x="813" y="830" class="u-notetext">(BR.09).</text></svg></div>
+      <figcaption><b>Hình 3.</b> Thiết bị, phiếu sửa và kho linh kiện. Hai đường sinh chi phí (tiền công, tiền mua linh kiện) đều về Expense.</figcaption>
+    </figure>
+    <div class="pkg-body">
+      <div class="talk">
+        <h3>Nói gì</h3>
+        <ul>
+          <li>Device có hai trạng thái độc lập: <code>status</code> (sẵn sàng, đang thuê, bảo trì…) và <code>networkStatus</code> (mở hay đã khoá mạng). Gộp làm một sẽ che mất trường hợp máy sẵn sàng nhưng lệnh mở mạng chưa chạy được.</li>
+          <li>Mở phiếu sửa thì máy chuyển MAINTENANCE và không cho thuê (BR.08). Đóng phiếu ghi một Expense tiền công.</li>
+          <li>Tồn kho và giá vốn không lưu cột mà tính từ PartMovement, giống cách sổ tiền làm. Gỡ linh kiện ghi một dòng RETURN chứ không xoá dòng cũ.</li>
+          <li>Chi phí chỉ sinh ở hai chỗ: lúc mua linh kiện và lúc trả tiền công. Lắp linh kiện từ kho chỉ trừ tồn (BR.09).</li>
+        </ul>
+      </div>
+      <div class="map">
+        <h3>Lớp ↔ bảng ↔ code</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Lớp</th><th>Bảng</th><th>Hiện thực ở</th></tr></thead>
+          <tbody>
+            <tr><td>Device</td><td><span class="mono">devices</span></td><td class="code"><code>/api/devices</code>, <code>syncDeviceStatus()</code></td></tr>
+            <tr><td>Repair</td><td><span class="mono">repairs</span></td><td class="code"><code>/api/repairs</code></td></tr>
+            <tr><td>Part</td><td><span class="mono">parts</span></td><td class="code"><code>/api/parts</code>, <code>partStock()</code></td></tr>
+            <tr><td>PartMovement</td><td><span class="mono">part_movements</span></td><td class="code"><code>/api/parts/:id/movements</code>, <code>/api/repairs/:id/parts</code></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nhom-d" class="p-d">
+    <div class="pkg-head">
+      <span class="pkg-tag">D</span>
+      <h2>Đơn thuê &amp; tài chính</h2>
+      <p class="pkg-meta">4 lớp · trình bày: <b>Đỗ Tuấn Thành</b> · phần lõi, dành nhiều thời gian nhất</p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 1142 874" width="1142" height="874" role="img" aria-label="Rental nối Customer với Device, gồm các RentalPeriod; tiền đi qua FinancialTransaction; chi phí ghi ở Expense"><path d="M273 48 L392 48" class="u-edge"/><text x="279" y="42" text-anchor="start" class="u-mult">1</text><text x="386" y="42" text-anchor="end" class="u-mult">0..*</text><text x="332.5" y="64" text-anchor="middle" class="u-label">thuê</text><path d="M902 48 L789 48" class="u-edge"/><text x="896" y="42" text-anchor="end" class="u-mult">1</text><text x="795" y="42" text-anchor="start" class="u-mult">0..*</text><text x="845.5" y="64" text-anchor="middle" class="u-label">được thuê trong</text><path d="M994 89 L994 71" class="u-notelink"/><path d="M591 367 L591 443" class="u-edge"/><polygon points="591,367 586,374 591,381 596,374" class="u-dia"/><text x="597" y="396" text-anchor="start" class="u-mult">1</text><text x="597" y="437" text-anchor="start" class="u-mult">0..*</text><text x="584" y="409" text-anchor="end" class="u-label">gia hạn</text><path d="M447.6 367 L447.6 405 L237.8 405 L237.8 443" class="u-edge"/><text x="453.6" y="382" text-anchor="start" class="u-mult">0..1</text><text x="243.8" y="437" text-anchor="start" class="u-mult">0..*</text><text x="342.70000000000005" y="421" text-anchor="middle" class="u-label">thanh toán</text><path d="M169 71 L169 443" class="u-edge"/><text x="175" y="86" text-anchor="start" class="u-mult">0..1</text><text x="175" y="437" text-anchor="start" class="u-mult">0..*</text><text x="162" y="261" text-anchor="end" class="u-label">biến động ví</text><path d="M169 729 L169 653" class="u-notelink"/><path d="M994 729 L994 608" class="u-notelink"/><rect x="64" y="24" width="209" height="47" rx="3" class="u-ghost"/><text x="168.5" y="46" text-anchor="middle" class="u-name">Customer</text><text x="168.5" y="61" text-anchor="middle" class="u-gloss">Khách hàng · nhóm Khách hàng</text><rect x="392" y="24" width="397" height="343" rx="3" class="u-box"/><path d="M392.5 71 V27 Q392.5 24.5 395 24.5 H786 Q788.5 24.5 788.5 27 V71 Z" class="u-hdr p-d"/><text x="590.5" y="46" text-anchor="middle" class="u-name">Rental</text><text x="590.5" y="61" text-anchor="middle" class="u-gloss">Đơn thuê</text><line x1="392" y1="71" x2="789" y2="71" class="u-div"/><line x1="392" y1="259" x2="789" y2="259" class="u-div"/><text x="404" y="89" class="u-mem">- code: string {unique}</text><text x="404" y="105" class="u-mem">- startAt: datetime</text><text x="404" y="121" class="u-mem">- endAt: datetime</text><text x="404" y="137" class="u-mem">- baseAmount: int</text><text x="404" y="153" class="u-mem">- surcharge: int</text><text x="404" y="169" class="u-mem">- discount: int</text><text x="404" y="185" class="u-mem">- totalAmount: int</text><text x="404" y="201" class="u-mem">- status: RentalStatus</text><text x="404" y="217" class="u-mem">- accessNote: string</text><text x="404" y="233" class="u-mem u-memd">- /paidAmount: int {≤ totalAmount}</text><text x="404" y="249" class="u-mem u-memd">- /remaining: int</text><text x="404" y="277" class="u-mem">+ activate(): void</text><text x="404" y="293" class="u-mem">+ complete(): void</text><text x="404" y="309" class="u-mem">+ cancel(): void</text><text x="404" y="325" class="u-mem">+ collectPayment(amount, method): FinancialTransaction</text><text x="404" y="341" class="u-mem">+ refund(amount, method): FinancialTransaction</text><text x="404" y="357" class="u-mem">+ renew(unit, quantity): RentalPeriod</text><rect x="902" y="24" width="183" height="47" rx="3" class="u-ghost"/><text x="993.5" y="46" text-anchor="middle" class="u-name">Device</text><text x="993.5" y="61" text-anchor="middle" class="u-gloss">Thiết bị · nhóm Thiết bị</text><path d="M886 89 H1092 L1102 99 V150 H886 Z" class="u-note"/><path d="M1092 89 V99 H1102" fill="none" class="u-notelink"/><text x="898" y="109" class="u-notetext">Mỗi máy chỉ có tối đa một đơn</text><text x="898" y="124" class="u-notetext">RESERVED hoặc ACTIVE cùng lúc</text><text x="898" y="139" class="u-notetext">(BR.01).</text><rect x="53" y="443" width="231" height="210" rx="3" class="u-box"/><path d="M53.5 503 V446 Q53.5 443.5 56 443.5 H281 Q283.5 443.5 283.5 446 V503 Z" class="u-hdr p-d"/><text x="168.5" y="462" text-anchor="middle" class="u-stereo">«immutable»</text><text x="168.5" y="478" text-anchor="middle" class="u-name">FinancialTransaction</text><text x="168.5" y="493" text-anchor="middle" class="u-gloss">Bút toán sổ tiền</text><line x1="53" y1="503" x2="284" y2="503" class="u-div"/><line x1="53" y1="643" x2="284" y2="643" class="u-div"/><text x="65" y="521" class="u-mem">- code: string {unique}</text><text x="65" y="537" class="u-mem">- kind: TransactionKind</text><text x="65" y="553" class="u-mem">- paymentMethod: PaymentMethod</text><text x="65" y="569" class="u-mem">- cashChange: int</text><text x="65" y="585" class="u-mem">- walletChange: int</text><text x="65" y="601" class="u-mem">- revenueChange: int</text><text x="65" y="617" class="u-mem">- reference: string</text><text x="65" y="633" class="u-mem">- occurredAt: datetime</text><rect x="513" y="443" width="156" height="149" rx="3" class="u-box"/><path d="M513.5 490 V446 Q513.5 443.5 516 443.5 H666 Q668.5 443.5 668.5 446 V490 Z" class="u-hdr p-d"/><text x="591" y="465" text-anchor="middle" class="u-name">RentalPeriod</text><text x="591" y="480" text-anchor="middle" class="u-gloss">Kỳ thuê (gia hạn)</text><line x1="513" y1="490" x2="669" y2="490" class="u-div"/><line x1="513" y1="582" x2="669" y2="582" class="u-div"/><text x="525" y="508" class="u-mem">- unit: PeriodUnit</text><text x="525" y="524" class="u-mem">- quantity: int</text><text x="525" y="540" class="u-mem">- startAt: datetime</text><text x="525" y="556" class="u-mem">- endAt: datetime</text><text x="525" y="572" class="u-mem">- amount: int</text><rect x="878" y="443" width="231" height="165" rx="3" class="u-box"/><path d="M878.5 490 V446 Q878.5 443.5 881 443.5 H1106 Q1108.5 443.5 1108.5 446 V490 Z" class="u-hdr p-d"/><text x="993.5" y="465" text-anchor="middle" class="u-name">Expense</text><text x="993.5" y="480" text-anchor="middle" class="u-gloss">Khoản chi</text><line x1="878" y1="490" x2="1109" y2="490" class="u-div"/><line x1="878" y1="598" x2="1109" y2="598" class="u-div"/><text x="890" y="508" class="u-mem">- code: string {unique}</text><text x="890" y="524" class="u-mem">- category: ExpenseCategory</text><text x="890" y="540" class="u-mem">- amount: int</text><text x="890" y="556" class="u-mem">- paymentMethod: PaymentMethod</text><text x="890" y="572" class="u-mem">- vendor: string</text><text x="890" y="588" class="u-mem">- occurredAt: datetime</text><path d="M24 729 H302 L312 739 V850 H24 Z" class="u-note"/><path d="M302 729 V739 H312" fill="none" class="u-notelink"/><text x="36" y="749" class="u-notetext">Mỗi biến động tiền ghi đủ 3 giá trị.</text><text x="36" y="764" class="u-notetext">Khách nạp 1.000.000 đ: cash +1.000.000 ·</text><text x="36" y="779" class="u-notetext">wallet +1.000.000 · revenue 0.</text><text x="36" y="794" class="u-notetext">Trả đơn 300.000 đ bằng ví: cash 0 ·</text><text x="36" y="809" class="u-notetext">wallet −300.000 · revenue +300.000.</text><text x="36" y="824" class="u-notetext">Không sửa, không xoá; sai thì ghi bút</text><text x="36" y="839" class="u-notetext">toán đối ứng.</text><path d="M869 729 H1108 L1118 739 V820 H869 Z" class="u-note"/><path d="M1108 729 V739 H1118" fill="none" class="u-notelink"/><text x="881" y="749" class="u-notetext">Khoản chi sinh từ 3 nguồn: nhập</text><text x="881" y="764" class="u-notetext">tay (điện, mạng, mặt bằng…), đóng</text><text x="881" y="779" class="u-notetext">phiếu sửa (tiền công), nhập mua</text><text x="881" y="794" class="u-notetext">linh kiện.</text><text x="881" y="809" class="u-notetext">Lợi nhuận = doanh thu − khoản chi.</text></svg></div>
+      <figcaption><b>Hình 4.</b> Đơn thuê nối một khách với một máy; mọi đồng tiền đi qua sổ bút toán ba giá trị.</figcaption>
+    </figure>
+    <div class="pkg-body">
+      <div class="talk">
+        <h3>Nói gì</h3>
+        <ul>
+          <li>Rental là lớp lõi: 1 khách, 1 máy. Vòng đời RESERVED → ACTIVE → COMPLETED, hoặc EXPIRED, CANCELLED. Đổi trạng thái đơn kéo theo trạng thái máy.</li>
+          <li>Mỗi lần gia hạn là một RentalPeriod riêng, nên sau nhiều tháng vẫn biết <code>totalAmount</code> gồm những kỳ nào, giá nào.</li>
+          <li>FinancialTransaction ghi ba giá trị cash, wallet, revenue và chỉ được thêm. Ghi chú dưới hình là ví dụ để nói: nạp ví rồi trả đơn bằng ví.</li>
+          <li><code>paidAmount</code> không được vượt <code>totalAmount</code> (BR.03); hoàn tiền không quá số đã thu (BR.04). Hai người bấm thu tiền cùng lúc cũng không thu vượt: nhóm đã thử 8 yêu cầu song song bằng <code>npm run test:race</code>.</li>
+          <li>Expense tách khỏi bút toán: bút toán là tiền giữa tiệm và khách, khoản chi là chi phí vận hành của tiệm.</li>
+        </ul>
+      </div>
+      <div class="map">
+        <h3>Lớp ↔ bảng ↔ code</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Lớp</th><th>Bảng</th><th>Hiện thực ở</th></tr></thead>
+          <tbody>
+            <tr><td>Rental</td><td><span class="mono">rentals</span></td><td class="code"><code>/api/rentals</code>, <code>getRentalPaid()</code></td></tr>
+            <tr><td>RentalPeriod</td><td><span class="mono">rental_periods</span></td><td class="code"><code>/api/rentals/:id/renew</code></td></tr>
+            <tr><td>FinancialTransaction</td><td><span class="mono">financial_transactions</span></td><td class="code"><code>/api/finance/transactions</code></td></tr>
+            <tr><td>Expense</td><td><span class="mono">expenses</span></td><td class="code"><code>/api/finance/expenses</code>, <code>recordExpense()</code></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nhom-e" class="p-e">
+    <div class="pkg-head">
+      <span class="pkg-tag">E</span>
+      <h2>Yêu cầu &amp; hỗ trợ</h2>
+      <p class="pkg-meta">4 lớp · trình bày: <b>Phạm Văn Đức Phú</b></p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 995 861" width="995" height="861" role="img" aria-label="BookingRequest khi được duyệt sinh ra Rental; ExtensionRequest xin gia hạn Rental; SupportTicket gồm các TicketMessage"><path d="M269 48 L391 48" class="u-edge"/><text x="275" y="42" text-anchor="start" class="u-mult">1</text><text x="385" y="42" text-anchor="end" class="u-mult">0..*</text><text x="330" y="64" text-anchor="middle" class="u-label">gửi</text><path d="M752 48 L629 48" class="u-edge"/><text x="746" y="42" text-anchor="end" class="u-mult">1</text><text x="635" y="42" text-anchor="start" class="u-mult">0..*</text><text x="690.5" y="64" text-anchor="middle" class="u-label">được yêu cầu</text><path d="M511 287 L511 363" class="u-edge"/><text x="517" y="302" text-anchor="start" class="u-mult">0..1</text><text x="517" y="357" text-anchor="start" class="u-mult">0..1</text><text x="504" y="329" text-anchor="end" class="u-label">duyệt thì sinh ra</text><path d="M510 410 L510 638" class="u-edge"/><text x="516" y="425" text-anchor="start" class="u-mult">1</text><text x="516" y="632" text-anchor="start" class="u-mult">0..*</text><text x="503" y="528" text-anchor="end" class="u-label">xin gia hạn</text><path d="M165 71 L165 363" class="u-edge"/><text x="171" y="86" text-anchor="start" class="u-mult">1</text><text x="171" y="357" text-anchor="start" class="u-mult">0..*</text><text x="158" y="221" text-anchor="end" class="u-label">mở</text><path d="M164 562 L164 638" class="u-edge"/><polygon points="164,562 159,569 164,576 169,569" class="u-dia"/><text x="170" y="591" text-anchor="start" class="u-mult">1</text><text x="170" y="632" text-anchor="start" class="u-mult">1..*</text><text x="157" y="604" text-anchor="end" class="u-label">hội thoại</text><path d="M304 387 L419 387" class="u-edge"/><text x="310" y="381" text-anchor="start" class="u-mult">0..*</text><text x="413" y="381" text-anchor="end" class="u-mult">0..1</text><text x="361.5" y="403" text-anchor="middle" class="u-label">liên quan</text><path d="M843.5 363 L843.5 250.2 L629 250.2" class="u-edge"/><text x="849.5" y="357" text-anchor="start" class="u-mult">0..1</text><text x="635" y="244.2" text-anchor="start" class="u-mult">0..*</text><text x="736.25" y="266.2" text-anchor="middle" class="u-label">duyệt</text><path d="M843.5 410 L843.5 697.7 L636 697.7" class="u-edge"/><text x="849.5" y="425" text-anchor="start" class="u-mult">0..1</text><text x="642" y="691.7" text-anchor="start" class="u-mult">0..*</text><text x="850.5" y="557.85" text-anchor="start" class="u-label">duyệt</text><rect x="60" y="24" width="209" height="47" rx="3" class="u-ghost"/><text x="164.5" y="46" text-anchor="middle" class="u-name">Customer</text><text x="164.5" y="61" text-anchor="middle" class="u-gloss">Khách hàng · nhóm Khách hàng</text><rect x="391" y="24" width="238" height="263" rx="3" class="u-box"/><path d="M391.5 71 V27 Q391.5 24.5 394 24.5 H626 Q628.5 24.5 628.5 27 V71 Z" class="u-hdr p-e"/><text x="510" y="46" text-anchor="middle" class="u-name">BookingRequest</text><text x="510" y="61" text-anchor="middle" class="u-gloss">Yêu cầu thuê</text><line x1="391" y1="71" x2="629" y2="71" class="u-div"/><line x1="391" y1="227" x2="629" y2="227" class="u-div"/><text x="403" y="89" class="u-mem">- code: string {unique}</text><text x="403" y="105" class="u-mem">- billingMode: BillingMode</text><text x="403" y="121" class="u-mem">- requestedStartAt: datetime</text><text x="403" y="137" class="u-mem">- requestedEndAt: datetime</text><text x="403" y="153" class="u-mem">- estimatedAmount: int</text><text x="403" y="169" class="u-mem">- quotedAmount: int [0..1]</text><text x="403" y="185" class="u-mem">- status: RequestStatus</text><text x="403" y="201" class="u-mem">- customerNote: string</text><text x="403" y="217" class="u-mem">- adminNote: string</text><text x="403" y="245" class="u-mem">+ approve(quotedAmount): Rental</text><text x="403" y="261" class="u-mem">+ reject(adminNote): void</text><text x="403" y="277" class="u-mem">+ cancel(): void</text><rect x="752" y="24" width="183" height="47" rx="3" class="u-ghost"/><text x="843.5" y="46" text-anchor="middle" class="u-name">Device</text><text x="843.5" y="61" text-anchor="middle" class="u-gloss">Thiết bị · nhóm Thiết bị</text><rect x="24" y="363" width="280" height="199" rx="3" class="u-box"/><path d="M24.5 410 V366 Q24.5 363.5 27 363.5 H301 Q303.5 363.5 303.5 366 V410 Z" class="u-hdr p-e"/><text x="164" y="385" text-anchor="middle" class="u-name">SupportTicket</text><text x="164" y="400" text-anchor="middle" class="u-gloss">Ticket hỗ trợ</text><line x1="24" y1="410" x2="304" y2="410" class="u-div"/><line x1="24" y1="518" x2="304" y2="518" class="u-div"/><text x="36" y="428" class="u-mem">- code: string {unique}</text><text x="36" y="444" class="u-mem">- subject: string</text><text x="36" y="460" class="u-mem">- category: TicketCategory</text><text x="36" y="476" class="u-mem">- priority: TicketPriority</text><text x="36" y="492" class="u-mem">- status: TicketStatus</text><text x="36" y="508" class="u-mem">- lastMessageAt: datetime</text><text x="36" y="536" class="u-mem">+ reply(author, body): TicketMessage</text><text x="36" y="552" class="u-mem">+ changeStatus(s: TicketStatus): void</text><rect x="419" y="363" width="183" height="47" rx="3" class="u-ghost"/><text x="510.5" y="385" text-anchor="middle" class="u-name">Rental</text><text x="510.5" y="400" text-anchor="middle" class="u-gloss">Đơn thuê · nhóm Đơn thuê</text><rect x="716" y="363" width="255" height="47" rx="3" class="u-ghost"/><text x="843.5" y="385" text-anchor="middle" class="u-name">Admin</text><text x="843.5" y="400" text-anchor="middle" class="u-gloss">Tài khoản quản trị · nhóm Tài khoản</text><rect x="69" y="638" width="190" height="133" rx="3" class="u-box"/><path d="M69.5 685 V641 Q69.5 638.5 72 638.5 H256 Q258.5 638.5 258.5 641 V685 Z" class="u-hdr p-e"/><text x="164" y="660" text-anchor="middle" class="u-name">TicketMessage</text><text x="164" y="675" text-anchor="middle" class="u-gloss">Tin nhắn ticket</text><line x1="69" y1="685" x2="259" y2="685" class="u-div"/><line x1="69" y1="761" x2="259" y2="761" class="u-div"/><text x="81" y="703" class="u-mem">- authorType: AuthorType</text><text x="81" y="719" class="u-mem">- authorId: string</text><text x="81" y="735" class="u-mem">- body: string</text><text x="81" y="751" class="u-mem">- createdAt: datetime</text><rect x="384" y="638" width="252" height="199" rx="3" class="u-box"/><path d="M384.5 685 V641 Q384.5 638.5 387 638.5 H633 Q635.5 638.5 635.5 641 V685 Z" class="u-hdr p-e"/><text x="510" y="660" text-anchor="middle" class="u-name">ExtensionRequest</text><text x="510" y="675" text-anchor="middle" class="u-gloss">Yêu cầu gia hạn</text><line x1="384" y1="685" x2="636" y2="685" class="u-div"/><line x1="384" y1="793" x2="636" y2="793" class="u-div"/><text x="396" y="703" class="u-mem">- code: string {unique}</text><text x="396" y="719" class="u-mem">- currentEndAt: datetime</text><text x="396" y="735" class="u-mem">- requestedEndAt: datetime</text><text x="396" y="751" class="u-mem">- additionalAmount: int</text><text x="396" y="767" class="u-mem">- status: RequestStatus</text><text x="396" y="783" class="u-mem">- adminNote: string</text><text x="396" y="811" class="u-mem">+ approve(additionalAmount): void</text><text x="396" y="827" class="u-mem">+ reject(adminNote): void</text></svg></div>
+      <figcaption><b>Hình 5.</b> Khách tự gửi yêu cầu từ cổng khách; chỉ khi quản trị duyệt, yêu cầu mới thành đơn thuê.</figcaption>
+    </figure>
+    <div class="pkg-body">
+      <div class="talk">
+        <h3>Nói gì</h3>
+        <ul>
+          <li>BookingRequest và Rental là 0..1 với 0..1: yêu cầu bị từ chối không sinh đơn, còn đơn tạo tại quầy không có yêu cầu nào.</li>
+          <li>Duyệt yêu cầu tạo một Rental ở trạng thái RESERVED và chuyển máy sang RESERVED, nên máy biến khỏi danh mục của khách khác.</li>
+          <li>Gia hạn từ cổng khách đi qua ExtensionRequest: quản trị nhập phí bổ sung, duyệt thì hạn đơn và tổng tiền được cập nhật.</li>
+          <li>Ticket luôn có ít nhất một tin nhắn (1..*) vì được tạo cùng tin đầu tiên. TicketMessage ghi <code>authorType</code> để biết khách hay tiệm trả lời.</li>
+        </ul>
+      </div>
+      <div class="map">
+        <h3>Lớp ↔ bảng ↔ code</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Lớp</th><th>Bảng</th><th>Hiện thực ở</th></tr></thead>
+          <tbody>
+            <tr><td>BookingRequest</td><td><span class="mono">booking_requests</span></td><td class="code"><code>/api/customer/bookings</code>, <code>/api/service-desk/bookings/:id/approve</code></td></tr>
+            <tr><td>ExtensionRequest</td><td><span class="mono">extension_requests</span></td><td class="code"><code>/api/customer/rentals/:id/extensions</code>, <code>/api/service-desk/extensions/:id/approve</code></td></tr>
+            <tr><td>SupportTicket</td><td><span class="mono">support_tickets</span></td><td class="code"><code>/api/customer/tickets</code>, <code>/api/service-desk/tickets</code></td></tr>
+            <tr><td>TicketMessage</td><td><span class="mono">ticket_messages</span></td><td class="code"><code>…/tickets/:id/messages</code></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nhom-f" class="p-f">
+    <div class="pkg-head">
+      <span class="pkg-tag">F</span>
+      <h2>Vận hành hệ thống</h2>
+      <p class="pkg-meta">3 lớp · trình bày: <b>Nguyễn Minh Phát</b></p>
+    </div>
+    <figure class="sheet">
+      <div class="scroll"><svg class="uml" viewBox="0 0 929 714" width="929" height="714" role="img" aria-label="AuditLog ghi thao tác của Admin; NetworkLockEvent ghi mỗi lần khoá hoặc mở mạng một Device; AppSetting lưu cấu hình"><path d="M311 48 L200 48" class="u-edge"/><text x="305" y="42" text-anchor="end" class="u-mult">0..1</text><text x="206" y="42" text-anchor="start" class="u-mult">0..*</text><text x="255.5" y="64" text-anchor="middle" class="u-label">thực hiện</text><path d="M439 71 L439 345" class="u-edge"/><text x="445" y="86" text-anchor="start" class="u-mult">0..1</text><text x="445" y="339" text-anchor="start" class="u-mult">0..*</text><text x="432" y="212" text-anchor="end" class="u-label">khoá tay</text><path d="M207 369 L354 369" class="u-edge"/><text x="213" y="363" text-anchor="start" class="u-mult">1</text><text x="348" y="363" text-anchor="end" class="u-mult">0..*</text><text x="280.5" y="385" text-anchor="middle" class="u-label">bị khoá / mở</text><path d="M696 369 L523 369" class="u-edge"/><text x="690" y="363" text-anchor="end" class="u-mult">0..1</text><text x="529" y="363" text-anchor="start" class="u-mult">0..*</text><text x="609.5" y="385" text-anchor="middle" class="u-label">do hết hạn</text><path d="M788 193 L788 175" class="u-notelink"/><path d="M439 599 L439 523" class="u-notelink"/><rect x="31" y="24" width="169" height="162" rx="3" class="u-box"/><path d="M31.5 84 V27 Q31.5 24.5 34 24.5 H197 Q199.5 24.5 199.5 27 V84 Z" class="u-hdr p-f"/><text x="115.5" y="43" text-anchor="middle" class="u-stereo">«immutable»</text><text x="115.5" y="59" text-anchor="middle" class="u-name">AuditLog</text><text x="115.5" y="74" text-anchor="middle" class="u-gloss">Nhật ký thao tác</text><line x1="31" y1="84" x2="200" y2="84" class="u-div"/><line x1="31" y1="176" x2="200" y2="176" class="u-div"/><text x="43" y="102" class="u-mem">- action: string</text><text x="43" y="118" class="u-mem">- entityType: string</text><text x="43" y="134" class="u-mem">- entityId: string</text><text x="43" y="150" class="u-mem">- detail: string</text><text x="43" y="166" class="u-mem">- createdAt: datetime</text><rect x="311" y="24" width="255" height="47" rx="3" class="u-ghost"/><text x="438.5" y="46" text-anchor="middle" class="u-name">Admin</text><text x="438.5" y="61" text-anchor="middle" class="u-gloss">Tài khoản quản trị · nhóm Tài khoản</text><rect x="675" y="24" width="225" height="151" rx="3" class="u-box"/><path d="M675.5 71 V27 Q675.5 24.5 678 24.5 H897 Q899.5 24.5 899.5 27 V71 Z" class="u-hdr p-f"/><text x="787.5" y="46" text-anchor="middle" class="u-name">AppSetting</text><text x="787.5" y="61" text-anchor="middle" class="u-gloss">Cấu hình</text><line x1="675" y1="71" x2="900" y2="71" class="u-div"/><line x1="675" y1="131" x2="900" y2="131" class="u-div"/><text x="687" y="89" class="u-mem">- key: string {id}</text><text x="687" y="105" class="u-mem">- value: string</text><text x="687" y="121" class="u-mem">- updatedAt: datetime</text><text x="687" y="149" class="u-mem">+ read(): Map&lt;string, string&gt;</text><text x="687" y="165" class="u-mem">+ write(values): void</text><path d="M669 193 H895 L905 203 V269 H669 Z" class="u-note"/><path d="M895 193 V203 H905" fill="none" class="u-notelink"/><text x="681" y="213" class="u-notetext">Lưu dạng khoá–giá trị: lệnh</text><text x="681" y="228" class="u-notetext">khoá/mở mạng, phút ân hạn,</text><text x="681" y="243" class="u-notetext">Telegram, lịch sao lưu. Thêm cấu</text><text x="681" y="258" class="u-notetext">hình mới không phải sửa bảng.</text><rect x="24" y="345" width="183" height="47" rx="3" class="u-ghost"/><text x="115.5" y="367" text-anchor="middle" class="u-name">Device</text><text x="115.5" y="382" text-anchor="middle" class="u-gloss">Thiết bị · nhóm Thiết bị</text><rect x="354" y="345" width="169" height="178" rx="3" class="u-box"/><path d="M354.5 405 V348 Q354.5 345.5 357 345.5 H520 Q522.5 345.5 522.5 348 V405 Z" class="u-hdr p-f"/><text x="438.5" y="364" text-anchor="middle" class="u-stereo">«immutable»</text><text x="438.5" y="380" text-anchor="middle" class="u-name">NetworkLockEvent</text><text x="438.5" y="395" text-anchor="middle" class="u-gloss">Nhật ký khoá mạng</text><line x1="354" y1="405" x2="523" y2="405" class="u-div"/><line x1="354" y1="513" x2="523" y2="513" class="u-div"/><text x="366" y="423" class="u-mem">- action: LockAction</text><text x="366" y="439" class="u-mem">- source: LockSource</text><text x="366" y="455" class="u-mem">- status: LockResult</text><text x="366" y="471" class="u-mem">- command: string</text><text x="366" y="487" class="u-mem">- output: string</text><text x="366" y="503" class="u-mem">- createdAt: datetime</text><rect x="696" y="345" width="183" height="47" rx="3" class="u-ghost"/><text x="787.5" y="367" text-anchor="middle" class="u-name">Rental</text><text x="787.5" y="382" text-anchor="middle" class="u-gloss">Đơn thuê · nhóm Đơn thuê</text><path d="M287 599 H579 L589 609 V690 H287 Z" class="u-note"/><path d="M579 599 V609 H589" fill="none" class="u-notelink"/><text x="299" y="619" class="u-notetext">Lệnh khoá/mở do chủ khai báo trong Cấu</text><text x="299" y="634" class="u-notetext">hình; hệ thống chỉ thay {ip} và {code},</text><text x="299" y="649" class="u-notetext">sai khuôn thì từ chối chạy (BR.15).</text><text x="299" y="664" class="u-notetext">Bộ quét chạy mỗi phút, khoá máy của đơn đã</text><text x="299" y="679" class="u-notetext">quá hạn quá thời gian ân hạn (BR.16).</text></svg></div>
+      <figcaption><b>Hình 6.</b> Các lớp giúp hệ thống tự vận hành và truy vết được: ai đã làm gì, lệnh khoá mạng nào đã chạy.</figcaption>
+    </figure>
+    <div class="pkg-body">
+      <div class="talk">
+        <h3>Nói gì</h3>
+        <ul>
+          <li>AuditLog và NetworkLockEvent đều là «immutable»: chỉ ghi thêm, dùng để trả lời ai đã làm gì và lệnh nào đã chạy.</li>
+          <li>NetworkLockEvent có nguồn AUTO khi bộ quét tự khoá máy quá hạn, MANUAL khi chủ bấm tay; ghi cả những lần thất bại.</li>
+          <li>AppSetting lưu cấu hình dạng khoá–giá trị, nên thêm cấu hình mới không phải sửa bảng.</li>
+        </ul>
+      </div>
+      <div class="map">
+        <h3>Lớp ↔ bảng ↔ code</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Lớp</th><th>Bảng</th><th>Hiện thực ở</th></tr></thead>
+          <tbody>
+            <tr><td>AuditLog</td><td><span class="mono">audit_logs</span></td><td class="code"><code>audit()</code>, <code>/api/audit-logs</code></td></tr>
+            <tr><td>AppSetting</td><td><span class="mono">app_settings</span></td><td class="code"><code>readSettings()</code>, <code>writeSettings()</code></td></tr>
+            <tr><td>NetworkLockEvent</td><td><span class="mono">network_lock_events</span></td><td class="code"><code>server/network-lock.ts</code>, <code>/api/network-lock</code></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="liet-ke">
+    <div class="sec-head">
+      <h2>Kiểu liệt kê</h2>
+      <p>Mười hai kiểu dùng cho các thuộc tính trạng thái, màu theo nhóm sở hữu. Nếu cố vấn yêu cầu thêm sơ đồ trạng thái cho đơn thuê hay phiếu sửa, đây là đầu vào.</p>
+    </div>
+    <div class="enums">
+<div class="enum p-d"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">RentalStatus</span><span class="enum-vi">Trạng thái đơn thuê</span></div><ul><li>RESERVED</li><li>ACTIVE</li><li>COMPLETED</li><li>EXPIRED</li><li>CANCELLED</li></ul></div>
+<div class="enum p-c"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">DeviceStatus</span><span class="enum-vi">Trạng thái máy</span></div><ul><li>AVAILABLE</li><li>RESERVED</li><li>RENTED</li><li>MAINTENANCE</li><li>OFFLINE</li><li>RETIRED</li></ul></div>
+<div class="enum p-d"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">TransactionKind</span><span class="enum-vi">Loại bút toán</span></div><ul><li>DEPOSIT</li><li>RENTAL_PAYMENT</li><li>REFUND</li><li>ADJUSTMENT</li></ul></div>
+<div class="enum p-d"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">PaymentMethod</span><span class="enum-vi">Phương thức trả</span></div><ul><li>WALLET</li><li>CASH</li><li>BANK</li><li>OTHER</li></ul></div>
+<div class="enum p-c"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">RepairStatus</span><span class="enum-vi">Trạng thái phiếu sửa</span></div><ul><li>REPORTED</li><li>IN_PROGRESS</li><li>DONE</li><li>UNREPAIRABLE</li><li>CANCELLED</li></ul></div>
+<div class="enum p-c"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">MovementKind</span><span class="enum-vi">Loại xuất nhập</span></div><ul><li>PURCHASE</li><li>CONSUME</li><li>RETURN</li><li>ADJUST</li></ul></div>
+<div class="enum p-e"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">RequestStatus</span><span class="enum-vi">Trạng thái yêu cầu</span></div><ul><li>PENDING</li><li>APPROVED</li><li>REJECTED</li><li>CANCELLED</li></ul></div>
+<div class="enum p-e"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">TicketStatus</span><span class="enum-vi">Trạng thái ticket</span></div><ul><li>OPEN</li><li>WAITING_CUSTOMER</li><li>RESOLVED</li><li>CLOSED</li></ul></div>
+<div class="enum p-a"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">AdminRole</span><span class="enum-vi">Vai trò quản trị</span></div><ul><li>OWNER</li><li>STAFF</li></ul></div>
+<div class="enum p-b"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">CustomerStatus</span><span class="enum-vi">Trạng thái khách</span></div><ul><li>ACTIVE</li><li>LIMITED</li><li>BLOCKED</li></ul></div>
+<div class="enum p-c"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">DeviceType</span><span class="enum-vi">Loại máy</span></div><ul><li>PC</li><li>BOXPHONE</li></ul></div>
+<div class="enum p-d"><div class="enum-head"><span class="enum-st">«enumeration»</span><span class="enum-name">PeriodUnit</span><span class="enum-vi">Đơn vị kỳ thuê</span></div><ul><li>HOUR</li><li>DAY</li><li>WEEK</li><li>MONTH</li></ul></div>
+    </div>
+  </section>
+
+  <section id="hoi-dap">
+    <div class="sec-head">
+      <h2>Câu hỏi hay gặp</h2>
+      <p>Năm câu cố vấn dễ hỏi khi xem sơ đồ lớp, kèm câu trả lời bám đúng code.</p>
+    </div>
+    <div class="qa">
+      <article>
+        <h4>Vì sao số dư ví, số đã thu và tồn kho có dấu / mà không lưu thành cột?</h4>
+        <p>Ba con số này đều tính lại từ lịch sử: sổ bút toán và lịch sử xuất nhập kho. Lưu thêm một cột thì sớm muộn sẽ lệch với lịch sử; tính lại thì luôn khớp, và vẫn trả lời được con số đó gồm những lần nào.</p>
+      </article>
+      <article>
+        <h4>Phương thức trên sơ đồ nằm ở đâu trong code?</h4>
+        <p>Server viết theo kiểu handler Express, không có class TypeScript cho từng lớp. Mỗi phương thức trên sơ đồ là một endpoint:</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Phương thức</th><th>Endpoint</th></tr></thead>
+          <tbody>
+            <tr><td>Account.login()</td><td class="code"><code>POST /api/auth/login</code> · <code>POST /api/customer/auth/login</code></td></tr>
+            <tr><td>Customer.deposit()</td><td class="code"><code>POST /api/customers/:id/deposit</code></td></tr>
+            <tr><td>Rental.activate() / complete() / cancel()</td><td class="code"><code>PATCH /api/rentals/:id/status</code></td></tr>
+            <tr><td>Rental.collectPayment()</td><td class="code"><code>POST /api/rentals/:id/payment</code></td></tr>
+            <tr><td>Rental.refund()</td><td class="code"><code>POST /api/rentals/:id/refund</code></td></tr>
+            <tr><td>Rental.renew()</td><td class="code"><code>POST /api/rentals/:id/renew</code></td></tr>
+            <tr><td>BookingRequest.approve()</td><td class="code"><code>POST /api/service-desk/bookings/:id/approve</code></td></tr>
+            <tr><td>Repair.installPart()</td><td class="code"><code>POST /api/repairs/:id/parts</code></td></tr>
+            <tr><td>Part.purchase()</td><td class="code"><code>POST /api/parts/:id/movements</code></td></tr>
+            <tr><td>Device.lockNetwork()</td><td class="code"><code>POST /api/network-lock/devices/:id/:action</code></td></tr>
+          </tbody>
+        </table></div>
+      </article>
+      <article>
+        <h4>Database không có bảng accounts, sao lại vẽ lớp Account?</h4>
+        <p>Account là lớp trừu tượng gom phần chung của hai loại tài khoản. Khi xuống database, mỗi lớp con có một bảng riêng (table per concrete class): <code>admins</code> và <code>customer_accounts</code> đều có <code>email</code>, <code>password_hash</code>, <code>status</code>.</p>
+      </article>
+      <article>
+        <h4>Khi nào dùng hợp thành, khi nào dùng liên kết thường?</h4>
+        <p>Hợp thành khi phần không có nghĩa nếu thiếu toàn thể và bị xoá theo: Session, CustomerNotification, RentalPeriod, TicketMessage, PartMovement. Còn lại là liên kết thường: xoá một khách hàng không được kéo theo xoá đơn thuê và sổ tiền của khách đó.</p>
+      </article>
+      <article>
+        <h4>Hai nhân viên cùng bấm thu tiền một đơn cùng lúc thì sao?</h4>
+        <p>Không thu vượt được. Bước đọc số đã thu, kiểm tra và ghi bút toán chạy liền một mạch vì <code>node:sqlite</code> là API đồng bộ, không có điểm chờ ở giữa. Nhóm kiểm chứng bằng cách bắn 8 yêu cầu song song vào cùng một đơn: chỉ một yêu cầu được nhận (<code>scripts/race-test.mjs</code>).</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="lay-hinh">
+    <div class="sec-head">
+      <h2>Lấy hình cho slide và Word</h2>
+    </div>
+    <div class="files">
+      <p>Cả bảy hình đã được xuất thành file SVG nền trắng trong thư mục <code>design/class-diagram/</code> của dự án. Trong Word hoặc PowerPoint chọn Chèn → Ảnh → chọn file <code>.svg</code>; phóng to không bị vỡ nét.</p>
+      <ul>
+        <li>0-tong-quan.svg <span>· Hình 0</span></li>
+        <li>1-tai-khoan-phan-quyen.svg <span>· Hình 1</span></li>
+        <li>2-khach-hang.svg <span>· Hình 2</span></li>
+        <li>3-thiet-bi-sua-chua.svg <span>· Hình 3</span></li>
+        <li>4-don-thue-tai-chinh.svg <span>· Hình 4</span></li>
+        <li>5-yeu-cau-ho-tro.svg <span>· Hình 5</span></li>
+        <li>6-van-hanh-he-thong.svg <span>· Hình 6</span></li>
+        <li>class-diagram.mmd <span>· toàn bộ, dạng Mermaid</span></li>
+      </ul>
+      <p>Muốn chỉnh sửa: mở <code>class-diagram.mmd</code>, dán vào mermaid.live để xuất PNG, hoặc vào draw.io chọn Arrange → Insert → Advanced → Mermaid để có bản vẽ kéo thả được.</p>
+    </div>
+  </section>
+
+  <footer>Dựng từ <code>server/database.ts</code>, <code>server/index.ts</code>, <code>server/customer.ts</code> và tài liệu Business Rule của nhóm · 08/10/2026</footer>
+</div>
+
+</body>
+</html>

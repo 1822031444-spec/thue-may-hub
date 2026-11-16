@@ -1,0 +1,335 @@
+classDiagram
+  direction LR
+
+  %% ---- A. Tài khoản & phân quyền ----
+  class Account {
+    <<abstract>>
+    -email: string «unique»
+    -passwordHash: string
+    -status: AccountStatus
+    +login(email, password) Session
+    +logout() void
+    +changePassword(old, new) void
+  }
+  class Admin {
+    -name: string
+    -role: AdminRole
+    +hasPermission(p: Permission) boolean
+  }
+  class CustomerAccount {
+    -emailVerifiedAt: datetime [0..1]
+    -lastLoginAt: datetime [0..1]
+    +register(email, password) void
+  }
+  class Session {
+    -id: string  «cookie HttpOnly»
+    -expiresAt: datetime
+    +isExpired() boolean
+  }
+
+  %% ---- B. Khách hàng ----
+  class Customer {
+    -code: string «unique»
+    -name: string
+    -phone: string
+    -email: string
+    -company: string
+    -creditLimit: int
+    -status: CustomerStatus
+    -notes: string
+    -/walletBalance: int «≥ 0»
+    +deposit(amount, method) FinancialTransaction
+    +changeStatus(s: CustomerStatus) void
+    +notify(kind, title, body) void
+  }
+  class CustomerNotification {
+    -kind: string
+    -title: string
+    -body: string
+    -link: string
+    -dedupeKey: string [0..1] «unique»
+    -readAt: datetime [0..1]
+    +markRead() void
+  }
+
+  %% ---- C. Thiết bị & sửa chữa ----
+  class Device {
+    -code: string «unique»
+    -name: string
+    -type: DeviceType
+    -specs: string
+    -ipAddress: string
+    -hourlyRate: int
+    -dailyRate: int
+    -weeklyRate: int
+    -monthlyRate: int
+    -purchasePrice: int
+    -status: DeviceStatus
+    -networkStatus: NetworkStatus
+    -/revenue: int
+    -/repairCost: int
+    +changeStatus(s: DeviceStatus) void
+    +lockNetwork() NetworkLockEvent
+    +unlockNetwork() NetworkLockEvent
+  }
+  class Repair {
+    -code: string «unique»
+    -title: string
+    -symptom: string
+    -status: RepairStatus
+    -vendor: string
+    -serviceCost: int
+    -resolution: string
+    -reportedAt: datetime
+    -closedAt: datetime [0..1]
+    +start() void
+    +close(result, serviceCost) Expense
+    +installPart(p: Part, qty) PartMovement
+    +removePart(m: PartMovement) PartMovement
+  }
+  class Part {
+    -code: string «unique»
+    -name: string
+    -category: PartCategory
+    -unit: string
+    -minQuantity: int
+    -location: string
+    -/stock: int
+    -/averageCost: int
+    +purchase(qty, unitCost) PartMovement
+    +isLowStock() boolean
+  }
+  class PartMovement {
+    -kind: MovementKind
+    -quantity: int
+    -unitCost: int
+    -occurredAt: datetime
+  }
+
+  %% ---- D. Đơn thuê & tài chính ----
+  class Rental {
+    -code: string «unique»
+    -startAt: datetime
+    -endAt: datetime
+    -baseAmount: int
+    -surcharge: int
+    -discount: int
+    -totalAmount: int
+    -status: RentalStatus
+    -accessNote: string
+    -/paidAmount: int «≤ totalAmount»
+    -/remaining: int
+    +activate() void
+    +complete() void
+    +cancel() void
+    +collectPayment(amount, method) FinancialTransaction
+    +refund(amount, method) FinancialTransaction
+    +renew(unit, quantity) RentalPeriod
+  }
+  class RentalPeriod {
+    -unit: PeriodUnit
+    -quantity: int
+    -startAt: datetime
+    -endAt: datetime
+    -amount: int
+  }
+  class FinancialTransaction {
+    -code: string «unique»
+    -kind: TransactionKind
+    -paymentMethod: PaymentMethod
+    -cashChange: int
+    -walletChange: int
+    -revenueChange: int
+    -reference: string
+    -occurredAt: datetime
+  }
+  class Expense {
+    -code: string «unique»
+    -category: ExpenseCategory
+    -amount: int
+    -paymentMethod: PaymentMethod
+    -vendor: string
+    -occurredAt: datetime
+  }
+
+  %% ---- E. Yêu cầu & hỗ trợ ----
+  class BookingRequest {
+    -code: string «unique»
+    -billingMode: BillingMode
+    -requestedStartAt: datetime
+    -requestedEndAt: datetime
+    -estimatedAmount: int
+    -quotedAmount: int [0..1]
+    -status: RequestStatus
+    -customerNote: string
+    -adminNote: string
+    +approve(quotedAmount) Rental
+    +reject(adminNote) void
+    +cancel() void
+  }
+  class ExtensionRequest {
+    -code: string «unique»
+    -currentEndAt: datetime
+    -requestedEndAt: datetime
+    -additionalAmount: int
+    -status: RequestStatus
+    -adminNote: string
+    +approve(additionalAmount) void
+    +reject(adminNote) void
+  }
+  class SupportTicket {
+    -code: string «unique»
+    -subject: string
+    -category: TicketCategory
+    -priority: TicketPriority
+    -status: TicketStatus
+    -lastMessageAt: datetime
+    +reply(author, body) TicketMessage
+    +changeStatus(s: TicketStatus) void
+  }
+  class TicketMessage {
+    -authorType: AuthorType
+    -authorId: string
+    -body: string
+    -createdAt: datetime
+  }
+
+  %% ---- F. Vận hành hệ thống ----
+  class AuditLog {
+    -action: string
+    -entityType: string
+    -entityId: string
+    -detail: string
+    -createdAt: datetime
+  }
+  class AppSetting {
+    -key: string «id»
+    -value: string
+    -updatedAt: datetime
+    +read() Map~string, string~
+    +write(values) void
+  }
+  class NetworkLockEvent {
+    -action: LockAction
+    -source: LockSource
+    -status: LockResult
+    -command: string
+    -output: string
+    -createdAt: datetime
+  }
+
+  %% ---- Kiểu liệt kê ----
+  class RentalStatus {
+    <<enumeration>>
+    RESERVED
+    ACTIVE
+    COMPLETED
+    EXPIRED
+    CANCELLED
+  }
+  class DeviceStatus {
+    <<enumeration>>
+    AVAILABLE
+    RESERVED
+    RENTED
+    MAINTENANCE
+    OFFLINE
+    RETIRED
+  }
+  class TransactionKind {
+    <<enumeration>>
+    DEPOSIT
+    RENTAL_PAYMENT
+    REFUND
+    ADJUSTMENT
+  }
+  class PaymentMethod {
+    <<enumeration>>
+    WALLET
+    CASH
+    BANK
+    OTHER
+  }
+  class RepairStatus {
+    <<enumeration>>
+    REPORTED
+    IN_PROGRESS
+    DONE
+    UNREPAIRABLE
+    CANCELLED
+  }
+  class MovementKind {
+    <<enumeration>>
+    PURCHASE
+    CONSUME
+    RETURN
+    ADJUST
+  }
+  class RequestStatus {
+    <<enumeration>>
+    PENDING
+    APPROVED
+    REJECTED
+    CANCELLED
+  }
+  class TicketStatus {
+    <<enumeration>>
+    OPEN
+    WAITING_CUSTOMER
+    RESOLVED
+    CLOSED
+  }
+  class AdminRole {
+    <<enumeration>>
+    OWNER
+    STAFF
+  }
+  class CustomerStatus {
+    <<enumeration>>
+    ACTIVE
+    LIMITED
+    BLOCKED
+  }
+  class DeviceType {
+    <<enumeration>>
+    PC
+    BOXPHONE
+  }
+  class PeriodUnit {
+    <<enumeration>>
+    HOUR
+    DAY
+    WEEK
+    MONTH
+  }
+
+  %% ---- Quan hệ ----
+  Account <|-- Admin
+  Account <|-- CustomerAccount
+  Account "1" *-- "0..*" Session : mở
+  CustomerAccount "0..1" -- "1" Customer : đăng nhập cho
+  Customer "1" *-- "0..*" CustomerNotification : nhận
+  Customer "1" -- "0..*" Rental : thuê
+  Device "1" -- "0..*" Rental : được thuê trong
+  Rental "1" *-- "0..*" RentalPeriod : gia hạn
+  Rental "0..1" -- "0..*" FinancialTransaction : thanh toán
+  Customer "0..1" -- "0..*" FinancialTransaction : biến động ví
+  Device "1" -- "0..*" Repair : được sửa
+  Part "1" *-- "0..*" PartMovement : lịch sử kho
+  Repair "0..1" -- "0..*" PartMovement : lắp / gỡ
+  Repair "0..1" -- "0..1" Expense : tiền công
+  PartMovement "0..1" -- "0..1" Expense : tiền mua
+  Customer "1" -- "0..*" BookingRequest : gửi
+  Device "1" -- "0..*" BookingRequest : được yêu cầu
+  BookingRequest "0..1" -- "0..1" Rental : sinh ra
+  Rental "1" -- "0..*" ExtensionRequest : xin gia hạn
+  Customer "1" -- "0..*" ExtensionRequest : gửi
+  Admin "0..1" -- "0..*" ExtensionRequest : duyệt
+  Admin "0..1" -- "0..*" BookingRequest : duyệt
+  Customer "1" -- "0..*" SupportTicket : mở
+  SupportTicket "1" *-- "1..*" TicketMessage : hội thoại
+  Rental "0..1" -- "0..*" SupportTicket : liên quan
+  Admin "0..1" -- "0..*" AuditLog : thực hiện
+  Device "1" -- "0..*" NetworkLockEvent : bị khoá / mở
+  Rental "0..1" -- "0..*" NetworkLockEvent : do hết hạn
+  Admin "0..1" -- "0..*" NetworkLockEvent : khoá tay
