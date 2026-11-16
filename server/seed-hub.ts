@@ -15,13 +15,37 @@ import { resolve } from 'node:path';
 const DB_PATH = resolve(process.env.DATABASE_PATH || './data/hub-demo.db');
 process.env.DATABASE_PATH = DB_PATH;
 
+/**
+ * Làm mới khi app vẫn đang mở: Windows không cho xoá file database mà server đang giữ
+ * (EBUSY). Khi đó xoá sạch dữ liệu ngay trong database thay vì xoá file, để người dùng
+ * không phải đóng cửa sổ app trước — app đang chạy thấy dữ liệu mẫu mới ngay.
+ */
+let clearInPlace = false;
 if (process.argv.includes('--reset')) {
-  for (const suffix of ['', '-wal', '-shm']) rmSync(`${DB_PATH}${suffix}`, { force: true });
-  console.log(`[seed] Đã xoá ${DB_PATH}`);
+  try {
+    for (const suffix of ['', '-wal', '-shm']) rmSync(`${DB_PATH}${suffix}`, { force: true });
+    console.log(`[seed] Đã xoá ${DB_PATH}`);
+  } catch (error) {
+    const code = (error as NodeJS.ErrnoException).code ?? '';
+    if (code !== 'EBUSY' && code !== 'EPERM') throw error;
+    clearInPlace = true;
+  }
 }
 const fresh = !existsSync(DB_PATH);
 
 const { db, hashPassword, makeCode, makeId, runTransaction, syncDeviceStatus, writeSettings } = await import('./database.ts');
+
+if (clearInPlace) {
+  const tables = (db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%'").all() as Array<{ name: string }>)
+    .map((t) => t.name);
+  // Tắt khoá ngoại trong lúc xoá để không phải tính thứ tự bảng cha/con; bật lại ngay sau.
+  db.exec('PRAGMA foreign_keys = OFF');
+  runTransaction(() => {
+    for (const table of tables) db.exec(`DELETE FROM "${table}"`);
+  });
+  db.exec('PRAGMA foreign_keys = ON');
+  console.log(`[seed] Ứng dụng đang mở nên đã xoá sạch dữ liệu ngay trong ${DB_PATH}`);
+}
 
 const hasData = Number((db.prepare('SELECT COUNT(*) AS n FROM devices').get() as { n: number }).n) > 0
   || Number((db.prepare('SELECT COUNT(*) AS n FROM admins').get() as { n: number }).n) > 0;
@@ -255,3 +279,4 @@ runTransaction(() => {
 
 console.log(`[seed] Đã tạo dữ liệu mẫu trong ${DB_PATH}`);
 console.log('[seed] Đăng nhập: admin / phat / thanh / vinh / anh, hoặc khách 0902345678 — mật khẩu demo123');
+if (clearInPlace) console.log('[seed] Ứng dụng đang mở: tải lại trang trong trình duyệt (F5) rồi đăng nhập lại.');

@@ -127,8 +127,9 @@ Ghi vào file Defect Report nhóm gửi kèm, hoặc gửi thẳng cho nhóm.
 
 7. LÀM LẠI TỪ ĐẦU
 -----------------
-Muốn đưa dữ liệu về như lúc mới mở: đóng cửa sổ đen, chạy LAM-MOI-DU-LIEU.bat, bấm Y.
-Mọi thao tác đã làm sẽ mất.
+Muốn đưa dữ liệu về như lúc mới mở: chạy LAM-MOI-DU-LIEU.bat, bấm Y. Không cần đóng
+cửa sổ đen: thấy chữ "XONG" thì tải lại trang trong trình duyệt (F5) và đăng nhập lại.
+Mọi thao tác đã làm sẽ mất, kể cả tài khoản nhận chuyển khoản đã khai báo ở A16.
 
 
 8. LƯU Ý
