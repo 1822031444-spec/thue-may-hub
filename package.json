@@ -19,6 +19,7 @@
     "hub:seed": "tsx server/seed-hub.ts",
     "hub:reset": "tsx server/seed-hub.ts --reset",
     "hub:pack": "node scripts/pack-tester.mjs",
+    "supabase:push": "node --disable-warning=ExperimentalWarning scripts/supabase-push.mjs",
     "test:hub": "node scripts/hub-flow-test.mjs",
     "test:hub-ui": "node scripts/hub-ui-test.mjs",
     "test:smoke": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\smoke-test.ps1",
@@ -73,6 +74,7 @@
     "electron-builder": "^25.1.8",
     "esbuild": "^0.24.2",
     "exceljs": "^4.4.0",
+    "pg": "^8.23.1",
     "tsx": "^4.19.2",
     "typescript": "~5.7.2",
     "vite": "^6.0.5"

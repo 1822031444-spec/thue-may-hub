@@ -81,6 +81,7 @@ Các lệnh khác:
 | `npm run hub:start` | Build giao diện rồi chạy một cổng 8789 phục vụ cả API lẫn giao diện |
 | `npm run hub:reset` | Xoá dữ liệu, tạo lại dữ liệu mẫu |
 | `npm run hub:pack` | Tạo `release/tester/ThueMayHub-Demo-Tester.zip`: giải nén, bấm `CHAY-DEMO.bat` là chạy, không cần cài gì |
+| `npm run supabase:push` | Đưa cấu trúc database và dữ liệu mẫu lên Supabase (PostgreSQL) để trình bày, xem mục [Database trên Supabase](#database-trên-supabase) |
 | `npm run sep:baocao` | Sinh lại báo cáo tiến độ và báo cáo hoàn chỉnh (Word + PDF, cần Microsoft Word) |
 
 ## Kiểm thử
@@ -117,3 +118,21 @@ Mã QR được tạo ngay trên server theo chuẩn EMVCo/NAPAS, không gọi d
 
 Repo **không** chứa database nào. Thư mục `data/` bị loại khỏi git. App tự tạo database và dữ liệu mẫu khi chạy lần đầu.
 Mọi tên khách, số điện thoại trong dữ liệu mẫu đều là giả.
+
+## Database trên Supabase
+
+App chạy bằng SQLite. Để trình bày thiết kế database trên cloud, lệnh `npm run supabase:push` chép
+cấu trúc và dữ liệu mẫu sang một project Supabase (PostgreSQL):
+
+1. Chép `.env.example` thành `.env`, điền `DATABASE_URL` bằng chuỗi **Session pooler** lấy ở nút
+   **Connect** của project. File `.env` không lên git.
+2. Chạy `npm run supabase:push`. Script tạo dữ liệu mẫu mới, dịch sang PostgreSQL (tiền thành `BIGINT`,
+   thời điểm thành `TIMESTAMPTZ`, giữ khoá ngoại, `CHECK`, chỉ mục), đẩy lên rồi đếm lại từng bảng.
+3. Xem trong Supabase: **Table Editor** để xem bảng và dữ liệu, **Database → Schema Visualizer** để xem sơ đồ quan hệ.
+
+Không muốn đưa mật khẩu database vào máy thì chạy `npm run supabase:push -- --sql`, rồi dán file
+`release/supabase/thue-may-hub.sql` vào **SQL Editor** của Supabase và bấm Run.
+
+Chạy lại bao nhiêu lần cũng được: chỉ các bảng của app bị làm lại từ đầu, bảng khác giữ nguyên.
+Mọi bảng đều bật Row Level Security mà không có policy, nên API công khai của Supabase không đọc được
+dữ liệu. Script luôn dùng dữ liệu mẫu tạo mới, không bao giờ đọc database đang chạy.
