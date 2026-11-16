@@ -129,10 +129,13 @@ cấu trúc và dữ liệu mẫu sang một project Supabase (PostgreSQL):
 2. Chạy `npm run supabase:push`. Script tạo dữ liệu mẫu mới, dịch sang PostgreSQL (tiền thành `BIGINT`,
    thời điểm thành `TIMESTAMPTZ`, giữ khoá ngoại, `CHECK`, chỉ mục), đẩy lên rồi đếm lại từng bảng.
 3. Xem trong Supabase: **Table Editor** để xem bảng và dữ liệu, **Database → Schema Visualizer** để xem sơ đồ quan hệ.
+   Ở cả hai chỗ, đổi ô chọn schema từ `public` sang `thue_may_hub`.
 
 Không muốn đưa mật khẩu database vào máy thì chạy `npm run supabase:push -- --sql`, rồi dán file
 `release/supabase/thue-may-hub.sql` vào **SQL Editor** của Supabase và bấm Run.
 
-Chạy lại bao nhiêu lần cũng được: chỉ các bảng của app bị làm lại từ đầu, bảng khác giữ nguyên.
-Mọi bảng đều bật Row Level Security mà không có policy, nên API công khai của Supabase không đọc được
-dữ liệu. Script luôn dùng dữ liệu mẫu tạo mới, không bao giờ đọc database đang chạy.
+Mọi bảng nằm trong schema riêng `thue_may_hub`, không đụng tới `public`. Project Supabase dùng chung với
+nhóm có thể đã có sẵn bảng `customers`, `devices`… hoặc chỉ mục trùng tên trong `public`. Chạy lại bao nhiêu
+lần cũng được: mỗi lần chỉ schema `thue_may_hub` được làm lại. Gặp schema trùng tên mà không do script này tạo
+thì script dừng lại, không xoá. Schema riêng không mở ra API công khai của Supabase, và mọi bảng còn bật thêm
+Row Level Security mà không có policy. Script luôn dùng dữ liệu mẫu tạo mới, không bao giờ đọc database đang chạy.

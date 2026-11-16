@@ -3,8 +3,11 @@
 // Schema Visualizer, chạy thử câu truy vấn trong SQL Editor.
 //
 // App vẫn chạy bằng SQLite như cũ. Đây là bản chụp một lần: thao tác trong app sau đó
-// không tự lên Supabase. Chạy lại lệnh này thì các bảng của app trên Supabase được làm lại từ
-// dữ liệu mẫu ban đầu (chỉ đụng tới đúng các bảng của app, bảng khác giữ nguyên).
+// không tự lên Supabase. Chạy lại lệnh này thì các bảng được làm lại từ dữ liệu mẫu ban đầu.
+//
+// Mọi thứ nằm trong schema riêng thue_may_hub, không đụng tới schema public: project
+// Supabase của nhóm có thể đã có bảng khác trong public (kể cả bảng trùng tên customers,
+// devices… hay chỉ mục trùng tên), và xoá/tạo lại trong public thì sẽ phá dữ liệu của người khác.
 //
 //   npm run supabase:push            tạo dữ liệu mẫu mới, ghi file SQL, đẩy lên Supabase
 //   npm run supabase:push -- --sql   chỉ ghi file SQL (tự dán vào SQL Editor của Supabase)
@@ -26,6 +29,10 @@ import { DatabaseSync } from 'node:sqlite';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_FILE = join(root, 'release', 'supabase', 'thue-may-hub.sql');
 const sqlOnly = process.argv.includes('--sql');
+const SCHEMA = 'thue_may_hub';
+// Dấu nhận biết schema do script này tạo. Gặp schema thue_may_hub không có dấu này thì
+// dừng lại chứ không xoá, phòng trường hợp ai đó đã tự tạo schema trùng tên.
+const SCHEMA_MARK = 'scripts/supabase-push.mjs';
 
 // Chỉ lấy DATABASE_URL từ .env, không nạp cả file vào process.env: các biến khác trong đó
 // (ADMIN_INITIAL_PASSWORD, DATABASE_PATH…) sẽ lọt vào bước tạo dữ liệu mẫu bên dưới.
@@ -136,7 +143,10 @@ const tables = tableNames.map((name) => {
   const parents = lite.prepare(`PRAGMA foreign_key_list("${name}")`).all().map((fk) => fk.table).filter((t) => t !== name);
   const source = lite.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = ?").get(name).sql;
   const definitions = splitDefinitions(source.slice(source.indexOf('(') + 1, source.lastIndexOf(')'))).map((definition) => {
-    const out = definition.replace(/\bINTEGER\b/g, 'BIGINT');
+    // Ghi rõ schema cho khoá ngoại, để không bao giờ trỏ nhầm sang bảng cùng tên trong public.
+    const out = definition
+      .replace(/\bINTEGER\b/g, 'BIGINT')
+      .replace(/\bREFERENCES\s+"?(\w+)"?\s*\(/g, `REFERENCES ${SCHEMA}.$1(`);
     const column = columns.get(definition.split(/\s/)[0]);
     if (!column || !column.name.endsWith('_at') || column.type.toUpperCase() !== 'TEXT') return out;
     if (rows.every((row) => row[column.name] === null || ISO_TIME.test(row[column.name]))) {
@@ -145,7 +155,7 @@ const tables = tableNames.map((name) => {
     keptAsText.push(`${name}.${column.name}`);
     return out;
   });
-  const ddl = `CREATE TABLE public.${name} (\n  ${definitions.join(',\n  ')}\n)`;
+  const ddl = `CREATE TABLE ${SCHEMA}.${name} (\n  ${definitions.join(',\n  ')}\n)`;
   return { name, columns: [...columns.keys()], rows, parents, ddl };
 });
 
@@ -162,7 +172,7 @@ while (ordered.length < tables.length) {
 const indexes = lite
   .prepare("SELECT sql FROM sqlite_master WHERE type = 'index' AND sql IS NOT NULL ORDER BY rowid")
   .all()
-  .map((row) => `${row.sql.replace(/\bON\s+"?(\w+)"?/, 'ON public.$1')};`);
+  .map((row) => `${row.sql.replace(/\bON\s+"?(\w+)"?/, `ON ${SCHEMA}.$1`)};`);
 lite.close();
 
 function literal(value) {
@@ -175,27 +185,37 @@ function literal(value) {
 const parts = [
   '-- Thuê Máy Hub: cấu trúc database và dữ liệu mẫu cho PostgreSQL / Supabase.',
   `-- Sinh bởi scripts/supabase-push.mjs lúc ${new Date().toISOString()}.`,
-  `-- Chạy lại cả file thì ${tables.length} bảng của app được làm lại từ đầu; bảng khác không bị đụng tới.`,
+  `-- Mọi bảng nằm trong schema riêng ${SCHEMA}; schema public và bảng khác của project không bị đụng tới.`,
+  `-- Chạy lại cả file thì schema ${SCHEMA} được làm lại từ đầu. Trong Table Editor, chọn schema ${SCHEMA} để xem.`,
   '',
   'BEGIN;',
   '',
-  `DROP TABLE IF EXISTS ${tables.map((t) => `public.${t.name}`).join(', ')} CASCADE;`,
+  `DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_namespace n WHERE n.nspname = '${SCHEMA}'
+             AND coalesce(obj_description(n.oid, 'pg_namespace'), '') NOT LIKE '%${SCHEMA_MARK}%') THEN
+    RAISE EXCEPTION 'Schema ${SCHEMA} da co san nhung khong phai do ${SCHEMA_MARK} tao. Dung lai de khong xoa nham.';
+  END IF;
+END $$;`,
+  `DROP SCHEMA IF EXISTS ${SCHEMA} CASCADE;`,
+  `CREATE SCHEMA ${SCHEMA};`,
+  `COMMENT ON SCHEMA ${SCHEMA} IS ${literal(`Thuê Máy Hub (đồ án SEP Nhóm 11): cấu trúc và dữ liệu mẫu, sinh bởi ${SCHEMA_MARK}`)};`,
   '',
 ];
 for (const table of ordered) parts.push(`${table.ddl.trim()};`, '');
 parts.push(...indexes, '');
-for (const table of ordered) parts.push(`COMMENT ON TABLE public.${table.name} IS ${literal(TABLE_NOTES[table.name])};`);
+for (const table of ordered) parts.push(`COMMENT ON TABLE ${SCHEMA}.${table.name} IS ${literal(TABLE_NOTES[table.name])};`);
 parts.push('');
 for (const table of ordered) {
   if (!table.rows.length) continue;
   const values = table.rows.map((row) => `  (${table.columns.map((c) => literal(row[c])).join(', ')})`);
-  parts.push(`INSERT INTO public.${table.name} (${table.columns.join(', ')}) VALUES\n${values.join(',\n')};`, '');
+  parts.push(`INSERT INTO ${SCHEMA}.${table.name} (${table.columns.join(', ')}) VALUES\n${values.join(',\n')};`, '');
 }
-// Supabase mở schema public ra API công khai (ai có publishable key là gọi được).
-// Bật RLS mà không tạo policy nào thì API bị chặn hết, chỉ Dashboard và kết nối
-// bằng mật khẩu database mới xem được, nên mật khẩu đã băm trong admins không lộ ra.
+// Schema riêng mặc định không mở ra API công khai của Supabase. Bật thêm RLS mà không có
+// policy nào, để lỡ sau này có ai thêm schema vào "Exposed schemas" thì API vẫn bị chặn,
+// mật khẩu đã băm trong admins không lộ ra. Dashboard và kết nối bằng mật khẩu database vẫn xem được.
 parts.push('-- Chặn API công khai của Supabase đọc ghi các bảng này (không có policy nào = không ai qua API).');
-for (const table of ordered) parts.push(`ALTER TABLE public.${table.name} ENABLE ROW LEVEL SECURITY;`);
+for (const table of ordered) parts.push(`ALTER TABLE ${SCHEMA}.${table.name} ENABLE ROW LEVEL SECURITY;`);
 parts.push('', 'COMMIT;', '');
 
 const sqlText = parts.join('\n');
@@ -260,14 +280,14 @@ try {
 
   const counts = await client.query(
     `SELECT c.relname AS name, c.relrowsecurity AS rls, obj_description(c.oid, 'pg_class') AS note
-       FROM pg_class c WHERE c.relnamespace = 'public'::regnamespace AND c.relkind = 'r' AND c.relname = ANY($1)`,
+       FROM pg_class c WHERE c.relnamespace = '${SCHEMA}'::regnamespace AND c.relkind = 'r' AND c.relname = ANY($1)`,
     [tableNames],
   );
   const info = new Map(counts.rows.map((row) => [row.name, row]));
   const problems = [];
   console.log('\n  Bảng                      Dòng  RLS');
   for (const table of ordered) {
-    const remote = Number((await client.query(`SELECT count(*) AS n FROM public.${table.name}`)).rows[0].n);
+    const remote = Number((await client.query(`SELECT count(*) AS n FROM ${SCHEMA}.${table.name}`)).rows[0].n);
     const meta = info.get(table.name);
     if (!meta) problems.push(`thiếu bảng ${table.name}`);
     else if (remote !== table.rows.length) problems.push(`${table.name}: ${remote}/${table.rows.length} dòng`);
@@ -276,7 +296,7 @@ try {
   }
   if (problems.length) fail(`Dữ liệu trên Supabase chưa khớp: ${problems.join('; ')}`);
   console.log(`\nXONG: ${tables.length} bảng, ${totalRows} dòng đã lên Supabase và khớp với dữ liệu mẫu.`);
-  console.log('Xem trong Supabase: Table Editor (bảng và dữ liệu), Database → Schema Visualizer (sơ đồ quan hệ).');
+  console.log(`Xem trong Supabase: Table Editor hoặc Database → Schema Visualizer, chọn schema "${SCHEMA}" ở ô chọn schema (mặc định đang là public).`);
 } catch (error) {
   fail(explain(error));
 } finally {
