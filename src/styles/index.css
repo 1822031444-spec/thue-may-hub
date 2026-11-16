@@ -1,0 +1,10 @@
+/* Font được đóng gói trong public/fonts nên app desktop chạy offline vẫn đúng chữ. */
+@import url('/fonts/be-vietnam-pro.css');
+
+@import './tokens.css';
+@import './base.css';
+@import './components.css';
+@import './shell.css';
+@import './admin.css';
+@import './portal.css';
+@import './public.css';

@@ -1,0 +1,135 @@
+/* =========================================================================
+   Design tokens — Thuê Máy Console
+   Mọi màu, khoảng cách và bo góc trong app đều lấy từ đây.
+   Sáng là mặc định; tối được khai báo lại ở cuối file.
+   ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  --font-sans: 'Be Vietnam Pro', 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-num: 'Be Vietnam Pro', 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Cascadia Mono', 'JetBrains Mono', Consolas, ui-monospace, monospace;
+
+  /* Bề mặt */
+  --bg: #f1f4f8;
+  --surface: #ffffff;
+  --surface-2: #f7f9fc;
+  --surface-3: #eef2f7;
+  --surface-inset: #f4f6fa;
+  --scrim: rgba(13, 19, 33, .46);
+
+  /* Đường viền */
+  --border: #e3e8ef;
+  --border-soft: #edf0f5;
+  --border-strong: #cdd5e1;
+
+  /* Chữ */
+  --text: #0f1726;
+  --text-2: #4b5568;
+  --text-3: #7b8598;
+  --text-4: #a3abbb;
+  --on-accent: #ffffff;
+
+  /* Thương hiệu */
+  --accent: #3358f4;
+  --accent-hover: #2745cf;
+  --accent-press: #1f3bb4;
+  --accent-soft: #e9eeff;
+  --accent-soft-2: #dbe4ff;
+  --accent-text: #2745cf;
+  --accent-ring: rgba(51, 88, 244, .28);
+
+  /* Ngữ nghĩa */
+  --ok: #0d8f66;          --ok-soft: #e2f6ef;   --ok-border: #b9e6d7;
+  --warn: #b5730c;        --warn-soft: #fdf1dd; --warn-border: #f0dcb2;
+  --danger: #cf3a48;      --danger-soft: #fdecee; --danger-border: #f6cdd2;
+  --info: #0a8ba4;        --info-soft: #e0f4f8; --info-border: #b6e2ea;
+  --violet: #7350cf;      --violet-soft: #efeaff; --violet-border: #d9cdf7;
+  --neutral-soft: #eef1f6; --neutral-border: #dde3ec;
+
+  /* Màu dữ liệu (biểu đồ, dot phân loại) */
+  --data-1: #3358f4;
+  --data-2: #0a8ba4;
+  --data-3: #e07b39;
+  --data-4: #7350cf;
+  --data-5: #0d8f66;
+
+  /* Bo góc */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+  --r-2xl: 24px;
+  --r-pill: 999px;
+
+  /* Đổ bóng */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 38, .05);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 38, .06), 0 2px 6px rgba(15, 23, 38, .04);
+  --shadow-md: 0 4px 14px rgba(15, 23, 38, .07), 0 1px 3px rgba(15, 23, 38, .05);
+  --shadow-lg: 0 16px 44px rgba(15, 23, 38, .13);
+  --shadow-pop: 0 28px 70px rgba(15, 23, 38, .2);
+  --shadow-accent: 0 6px 18px rgba(51, 88, 244, .22);
+
+  /* Kích thước khung */
+  --titlebar-h: 38px;
+  --topbar-h: 54px;
+  --sidebar-w: 238px;
+  --sidebar-w-mini: 64px;
+  --content-max: 1480px;
+
+  /* Chuyển động */
+  --ease: cubic-bezier(.32, .72, .28, 1);
+  --fast: .14s var(--ease);
+  --base: .2s var(--ease);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #090b11;
+  --surface: #12161f;
+  --surface-2: #171c27;
+  --surface-3: #1d2331;
+  --surface-inset: #0e121a;
+  --scrim: rgba(3, 5, 10, .66);
+
+  --border: #242b3a;
+  --border-soft: #1c2230;
+  --border-strong: #36415a;
+
+  --text: #e8ebf3;
+  --text-2: #a8b1c4;
+  --text-3: #7d8699;
+  --text-4: #5e6779;
+  --on-accent: #ffffff;
+
+  --accent: #6486ff;
+  --accent-hover: #7e9aff;
+  --accent-press: #8fa8ff;
+  --accent-soft: #1a2342;
+  --accent-soft-2: #222e54;
+  --accent-text: #9db1ff;
+  --accent-ring: rgba(100, 134, 255, .35);
+
+  --ok: #3dd39c;          --ok-soft: #10261f;   --ok-border: #1d4438;
+  --warn: #e2a33f;        --warn-soft: #2a2010; --warn-border: #4a3a1a;
+  --danger: #f2707d;      --danger-soft: #2c1519; --danger-border: #50262d;
+  --info: #3fbcd6;        --info-soft: #0e262c; --info-border: #1c454f;
+  --violet: #a98cf5;      --violet-soft: #1f1a33; --violet-border: #362d57;
+  --neutral-soft: #1c2230; --neutral-border: #2c3546;
+
+  --data-1: #6486ff;
+  --data-2: #3fbcd6;
+  --data-3: #f0975c;
+  --data-4: #a98cf5;
+  --data-5: #3dd39c;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, .4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);
+  --shadow-lg: 0 16px 44px rgba(0, 0, 0, .55);
+  --shadow-pop: 0 28px 70px rgba(0, 0, 0, .65);
+  --shadow-accent: 0 6px 18px rgba(100, 134, 255, .28);
+}
