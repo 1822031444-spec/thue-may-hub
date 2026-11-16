@@ -1,0 +1,148 @@
+THUÊ MÁY HUB — HƯỚNG DẪN CHẠY BẢN DEMO ĐỂ KIỂM THỬ
+Nhóm 11 - CTIN · Môn SEP
+
+Ứng dụng quản lý cửa hàng cho thuê PC và boxphone, gồm 3 vai trò: chủ cửa hàng,
+nhân viên và khách hàng. Gói này chạy được ngay, không cần cài Node, npm hay database.
+
+
+1. CẦN GÌ
+---------
+- Máy Windows 10 hoặc 11 (64-bit).
+- Trình duyệt Chrome, Edge hoặc Cốc Cốc.
+
+
+2. CÁCH CHẠY
+------------
+1) Giải nén file zip: chuột phải → "Extract All…". Đừng mở thẳng bên trong file zip.
+2) Vào thư mục ThueMayHub-Demo-Tester, double-click CHAY-DEMO.bat.
+   Nếu Windows hiện "Windows protected your PC": bấm "More info" → "Run anyway".
+3) Một cửa sổ đen hiện ra, vài giây sau trình duyệt tự mở http://localhost:8790
+   (không tự mở thì gõ địa chỉ đó vào trình duyệt).
+4) GIỮ CỬA SỔ ĐEN MỞ trong suốt lúc test. Đóng cửa sổ đó là tắt ứng dụng.
+
+Lần chạy đầu ứng dụng tự tạo dữ liệu mẫu. Thao tác của bạn được lưu lại, tắt đi mở
+lại vẫn còn.
+
+
+3. TÀI KHOẢN (mật khẩu đều là demo123)
+--------------------------------------
+- Chủ cửa hàng, toàn quyền:   admin
+- Nhân viên, quyền hạn chế:   phat   (hoặc thanh, vinh, anh)
+- Khách hàng:                 minhanh@email.com   (hoặc số điện thoại 0902345678)
+- Tạo thêm khách: bấm "Đăng ký" ở màn đăng nhập.
+
+Mẹo: muốn đăng nhập hai vai trò cùng lúc (ví dụ admin duyệt yêu cầu khách vừa gửi),
+mở thêm một cửa sổ ẩn danh bằng Ctrl + Shift + N và đăng nhập vai trò thứ hai ở đó.
+
+
+4. DỮ LIỆU MẪU CÓ SẴN
+---------------------
+- 7 máy: PC-001 → PC-005, BP-008, BP-012.
+  Đang trống: PC-002, PC-004. BP-012 đang bảo trì, PC-005 đang hỏng.
+- 5 khách: KH-001 → KH-005. KH-005 (Đỗ Ngọc Linh) đang bị khoá.
+  Chỉ KH-001 (Nguyễn Minh Anh) có tài khoản đăng nhập cổng khách.
+- Đơn thuê TMH-1024 → TMH-1028 đủ các trạng thái: đang thuê, đặt trước, quá hạn, đã xong.
+- Việc đang chờ xử lý: yêu cầu thuê TMH-1023, yêu cầu gia hạn GH-1001,
+  yêu cầu hỗ trợ HT-1001.
+
+
+5. NÊN KIỂM TRA NHỮNG GÌ
+------------------------
+Mỗi dòng: thao tác → kết quả đúng phải thấy.
+
+A. Chủ cửa hàng (admin)
+ A1. Đăng nhập sai mật khẩu → báo lỗi, không vào được.
+ A2. Đơn thuê: duyệt yêu cầu TMH-1023 → có đơn mới, máy PC-004 không còn trống.
+     Từ chối một yêu cầu khác → máy vẫn trống.
+ A3. Tạo đơn thuê cho một máy đang trống → đơn hiện trong danh sách, máy chuyển trạng thái.
+     Máy đang có người thuê không có trong danh sách chọn. Khách bị khoá (KH-005)
+     không tạo đơn được.
+ A4. Thu tiền một đơn còn nợ → số đã thu tăng. Nhập số tiền lớn hơn số còn nợ → bị chặn.
+ A5. Gia hạn một đơn tại quầy; duyệt hoặc từ chối yêu cầu gia hạn GH-1001.
+ A6. Hoàn tiền một đơn đã thu → tiền vào ví khách; trang Thanh toán có phiếu hoàn (số âm).
+ A7. Ví khách: nạp tiền cho khách → số dư tăng; bấm Lịch sử thấy dòng vừa nạp.
+ A8. Máy: thêm, sửa, chuyển bảo trì / sẵn sàng, báo hỏng. Xoá máy vừa thêm → được;
+     xoá máy đang có người thuê → bị chặn.
+ A9. Khách hàng: thêm, sửa; nhập CCCD có chữ hoặc ít hơn 9 số → báo lỗi.
+     Khoá một khách có tài khoản → khách đó không đăng nhập được nữa.
+ A10. Sửa chữa: tạo phiếu, lắp linh kiện (số tồn trong kho giảm), đóng phiếu
+      hoặc đánh dấu không sửa được.
+ A11. Linh kiện: thêm, nhập kho, xem lịch sử nhập xuất.
+ A12. Nhân viên: thêm tài khoản; tên đăng nhập bị trùng → báo lỗi; đổi vai trò,
+      khoá, đặt lại mật khẩu (đăng nhập lại bằng mật khẩu mới để kiểm tra).
+ A13. Hỗ trợ khách: trả lời HT-1001, đổi trạng thái yêu cầu.
+      Mở thêm khách ở cửa sổ ẩn danh rồi nhắn qua lại: bên nào đang mở hội thoại thì
+      tin của bên kia tự hiện sau vài giây, không phải đóng rồi mở lại. Bên nào không
+      mở hội thoại thì góc dưới bên phải hiện thông báo "... vừa nhắn HT-1001".
+ A14. Cài đặt: sửa thông tin cửa hàng; xem Nhật ký thao tác (các việc vừa làm phải có).
+ A15. Menu tài khoản góc trên: đổi mật khẩu, đăng xuất.
+ A16. Cài đặt → Nhận chuyển khoản: bật, chọn ngân hàng, nhập số tài khoản và tên chủ
+      tài khoản (gõ có dấu cũng được, hệ thống tự viết hoa bỏ dấu) → Lưu → Xem mã QR mẫu.
+      Bật mà thiếu số tài khoản → báo lỗi. Muốn quét thử bằng app ngân hàng thì dùng số
+      tài khoản của chính bạn; ĐỪNG chuyển tiền thật vào tài khoản không phải của mình.
+ A17. Đơn thuê: yêu cầu khách gửi phải hiện số Zalo/điện thoại và cách nhận máy
+      (ví dụ "Zalo 0987654321 · UltraViewer") ngay dưới tên khách, và trong hộp Duyệt.
+ A18. Ví khách → Yêu cầu nạp qua chuyển khoản: khi khách bấm "Tôi đã chuyển khoản" thì
+      trong vài giây góc dưới hiện thông báo "... báo đã chuyển ...". Bấm "Đã nhận tiền"
+      → số dư khách tăng; bấm "Không thấy tiền" → ví không đổi, khách thấy lý do.
+
+B. Nhân viên (phat)
+ B1. Menu không có Ví khách, Linh kiện, Nhân viên, Báo cáo, Cài đặt.
+     Dashboard không hiện số tiền doanh thu.
+ B2. Vẫn làm được việc ở quầy: tạo đơn, thu tiền, sửa chữa, trả lời hỗ trợ khách.
+ B3. Không có nút hoàn tiền và nạp ví.
+
+C. Khách hàng (minhanh@email.com)
+ C1. Xem máy trống, lọc PC / Boxphone, gửi yêu cầu thuê → admin thấy yêu cầu này
+     trong trang Đơn thuê. Ô "Số điện thoại / Zalo liên hệ" điền sẵn số trong hồ sơ;
+     đổi sang số khác, chọn "Liên hệ qua" và "Cách nhận máy" → admin thấy đúng các
+     thông tin đó. Nhập số sai (chữ, quá ngắn) → bị chặn.
+ C2. Huỷ một yêu cầu đang chờ duyệt.
+ C3. Trả tiền đơn bằng ví → số dư giảm đúng số tiền trả. Trả nhiều hơn số dư → bị chặn.
+ C4. Xin gia hạn đơn đang thuê → admin thấy để duyệt.
+ C5. Gửi yêu cầu hỗ trợ, nhắn qua lại với cửa hàng. Khi cửa hàng trả lời: đang mở
+     hội thoại thì tin tự hiện; không mở thì trong khoảng 5 giây có thông báo
+     "Cửa hàng vừa trả lời ..." và chuông thông báo tăng số.
+ C6. Sửa hồ sơ; đổi mật khẩu rồi đăng nhập lại bằng mật khẩu mới.
+ C7. Đăng ký một tài khoản khách mới ở màn đăng nhập rồi đăng nhập bằng tài khoản đó.
+ C8. Nạp ví bằng mã QR (làm A16 trước): Ví tiền → chọn số tiền → "Tạo mã QR chuyển
+     khoản" → hiện mã QR, ngân hàng, số tài khoản, số tiền, nội dung dạng NAP XXXXXX.
+     Bấm "Tôi đã chuyển khoản" (bản demo KHÔNG cần chuyển thật) → trạng thái "Chờ cửa
+     hàng xác nhận". Admin xác nhận (A18) → trong vài giây có thông báo và số dư tăng.
+     Đang có một yêu cầu chờ thì không tạo được yêu cầu thứ hai; "Huỷ yêu cầu" để tạo lại.
+
+
+6. GHI LẠI LỖI
+--------------
+Gặp chỗ sai thì ghi lại:
+- Mã mục kiểm tra (ví dụ A4) hoặc tên chức năng.
+- Tài khoản đang dùng.
+- Các bước đã làm, dữ liệu đã nhập.
+- Kết quả mong đợi và kết quả thực tế.
+- Ảnh chụp màn hình (Windows + Shift + S).
+Ghi vào file Defect Report nhóm gửi kèm, hoặc gửi thẳng cho nhóm.
+
+
+7. LÀM LẠI TỪ ĐẦU
+-----------------
+Muốn đưa dữ liệu về như lúc mới mở: đóng cửa sổ đen, chạy LAM-MOI-DU-LIEU.bat, bấm Y.
+Mọi thao tác đã làm sẽ mất.
+
+
+8. LƯU Ý
+--------
+- Dữ liệu trong gói là dữ liệu mẫu, không phải dữ liệu thật của khách.
+- Khoá mạng (Cài đặt): đừng nhập lệnh thật của máy bạn. Muốn thử thì dùng lệnh vô hại,
+  ví dụ:  echo khoa {ip}
+- Telegram cần mã bot riêng của cửa hàng, có thể bỏ qua.
+- File sao lưu nằm trong thư mục data\backups của gói này.
+- Ứng dụng chỉ mở được trên chính máy đang chạy; máy khác hay điện thoại không vào được.
+
+
+9. GẶP SỰ CỐ
+------------
+- Cửa sổ đen báo EADDRINUSE: ứng dụng đang chạy ở một cửa sổ khác. Đóng cửa sổ đó
+  rồi chạy lại CHAY-DEMO.bat.
+- Trình duyệt báo "This site can't be reached" hoặc ERR_CONNECTION_REFUSED: cửa sổ đen
+  đã bị đóng. Chạy lại CHAY-DEMO.bat.
+- Lỗi khác: chụp màn hình cửa sổ đen và trình duyệt, gửi cho nhóm.
