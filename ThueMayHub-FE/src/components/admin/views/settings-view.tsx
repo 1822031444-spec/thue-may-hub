@@ -13,8 +13,10 @@ const TABS = [
   ["audit", "Nhật ký thao tác"],
 ] as const;
 
-export function SettingsView({ onAction }: { onAction: (type: ModalType, context?: string) => void }) {
-  const [tab, setTab] = useState<(typeof TABS)[number][0]>("shop");
+type Tab = (typeof TABS)[number][0];
+
+export function SettingsView({ onAction, initialTab }: { onAction: (type: ModalType, context?: string) => void; initialTab?: string }) {
+  const [tab, setTab] = useState<Tab>(TABS.some(([key]) => key === initialTab) ? (initialTab as Tab) : "shop");
 
   return (
     <div className="max-w-4xl space-y-6">

@@ -306,6 +306,8 @@ type State = {
   notices: Notice[];
   /** Yêu cầu nạp ví qua chuyển khoản — chỉ chủ cửa hàng tải (quyền nạp ví). */
   topups: Topup[];
+  /** Đã khai báo và bật tài khoản nhận chuyển khoản chưa — chưa thì khách không thấy mã QR. */
+  topupBankReady: boolean;
   shop: Shop;
   toast: string;
   /** Ticket đang mở hội thoại: tin mới của ticket này hiện thẳng trong hội thoại, không bật thông báo. */
@@ -376,7 +378,7 @@ type State = {
 const SHOP_EMPTY: Shop = { name: "Thuê Máy Hub", address: "", hotline: "", email: "", hours: "" };
 const empty = {
   account: null, devices: [], customers: [], orders: [], payments: [], repairs: [], staff: [], parts: [],
-  extensions: [], tickets: [], notices: [], topups: [],
+  extensions: [], tickets: [], notices: [], topups: [], topupBankReady: false,
 };
 
 const deviceBody = (input: DeviceFields) => ({
@@ -491,10 +493,10 @@ export const useHub = create<State>()((set, get) => {
       }
       const [tickets, topups] = await Promise.all([
         api<Row[]>("/service-desk/tickets?limit=500"),
-        account.role === "Admin" ? api<{ rows: Row[] }>("/topups") : Promise.resolve(null),
+        account.role === "Admin" ? api<{ rows: Row[]; bankReady: boolean }>("/topups") : Promise.resolve(null),
       ]);
       if (get().account?.id !== account.id) return;
-      set({ tickets: takeTickets(tickets), ...(topups ? { topups: takeTopups(topups.rows) } : {}) });
+      set({ tickets: takeTickets(tickets), ...(topups ? { topups: takeTopups(topups.rows), topupBankReady: topups.bankReady } : {}) });
     },
 
     init: async () => {
@@ -555,7 +557,7 @@ export const useHub = create<State>()((set, get) => {
         admin ? api<Row[]>("/admins") : Promise.resolve([] as Row[]),
         api<Row[]>("/parts"),
         api<Shop>("/hub/shop"),
-        admin ? api<{ rows: Row[] }>("/topups") : Promise.resolve({ rows: [] as Row[] }),
+        admin ? api<{ rows: Row[]; bankReady: boolean }>("/topups") : Promise.resolve({ rows: [] as Row[], bankReady: false }),
       ]);
       const pending = desk.bookings.rows.filter((b) => b.status === "PENDING").map(toBooking).filter(isOrder);
       set({
@@ -569,6 +571,7 @@ export const useHub = create<State>()((set, get) => {
         extensions: desk.extensions.rows.map(toExtension),
         tickets: takeTickets(desk.tickets.rows),
         topups: takeTopups(topups.rows),
+        topupBankReady: topups.bankReady,
         shop,
       });
     },

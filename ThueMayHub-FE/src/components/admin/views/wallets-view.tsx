@@ -11,10 +11,12 @@ export function WalletsView({
   query,
   setQuery,
   onAction,
+  onOpenBankSettings,
 }: {
   query: string;
   setQuery: (v: string) => void;
   onAction: (type: ModalType, context?: string) => void;
+  onOpenBankSettings: () => void;
 }) {
   const store = useHub();
   const [detail, setDetail] = useState<string | null>(null);
@@ -56,6 +58,14 @@ export function WalletsView({
             tiền chỉ vào ví khách khi bạn xác nhận.
           </p>
         </div>
+        {!store.topupBankReady && (
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-200 bg-amber-50 px-5 py-3">
+            <p className="text-sm text-amber-900">
+              <strong>Khách chưa thấy mã QR để chuyển khoản</strong> vì cửa hàng chưa khai báo hoặc chưa bật tài khoản ngân hàng nhận tiền.
+            </p>
+            <button className={rowBtn.primary} onClick={onOpenBankSettings}>Khai báo tài khoản nhận</button>
+          </div>
+        )}
         {waiting.length === 0 ? (
           <p className="px-5 py-4 text-sm text-muted">Không có yêu cầu nạp nào đang chờ.</p>
         ) : (

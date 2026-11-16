@@ -81,6 +81,8 @@ export function AdminLayout({ account }: { account: Account }) {
   const store = useHub();
   const [page, setPage] = useState<Page>("overview");
   const [query, setQuery] = useState("");
+  // Tab mở sẵn khi chuyển sang trang Cài đặt (ví dụ bấm "Khai báo tài khoản nhận" ở trang Ví khách).
+  const [settingsTab, setSettingsTab] = useState<string | undefined>(undefined);
   const [modal, setModal] = useState<null | { type: ModalType; context?: string }>(null);
   const openModal = (type: ModalType, context?: string) => setModal({ type, context });
 
@@ -96,6 +98,7 @@ export function AdminLayout({ account }: { account: Account }) {
   const [menu, setMenu] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   const go = (next: Page) => {
+    if (next !== "settings") setSettingsTab(undefined);
     setPage(next);
     setQuery("");
     setMenu(false);
@@ -319,11 +322,21 @@ export function AdminLayout({ account }: { account: Account }) {
           {visiblePage === "payments" && <PaymentsView query={query} setQuery={setQuery} />}
           {visiblePage === "repairs" && <RepairsView query={query} setQuery={setQuery} onAction={openModal} />}
           {visiblePage === "support" && <SupportView query={query} setQuery={setQuery} />}
-          {visiblePage === "wallets" && role === "Admin" && <WalletsView query={query} setQuery={setQuery} onAction={openModal} />}
+          {visiblePage === "wallets" && role === "Admin" && (
+            <WalletsView
+              query={query}
+              setQuery={setQuery}
+              onAction={openModal}
+              onOpenBankSettings={() => {
+                setSettingsTab("bank");
+                go("settings");
+              }}
+            />
+          )}
           {visiblePage === "staff" && role === "Admin" && <StaffView query={query} setQuery={setQuery} onAction={openModal} />}
           {visiblePage === "reports" && role === "Admin" && <ReportsView />}
           {visiblePage === "parts" && role === "Admin" && <PartsView onAction={openModal} />}
-          {visiblePage === "settings" && role === "Admin" && <SettingsView onAction={openModal} />}
+          {visiblePage === "settings" && role === "Admin" && <SettingsView key={settingsTab ?? "shop"} initialTab={settingsTab} onAction={openModal} />}
         </div>
       </main>
 

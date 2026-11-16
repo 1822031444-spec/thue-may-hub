@@ -76,7 +76,9 @@ A. Chủ cửa hàng (admin)
       mở hội thoại thì góc dưới bên phải hiện thông báo "... vừa nhắn HT-1001".
  A14. Cài đặt: sửa thông tin cửa hàng; xem Nhật ký thao tác (các việc vừa làm phải có).
  A15. Menu tài khoản góc trên: đổi mật khẩu, đăng xuất.
- A16. Cài đặt → Nhận chuyển khoản: bật, chọn ngân hàng, nhập số tài khoản và tên chủ
+ A16. Chưa làm bước này thì khách KHÔNG thấy mã QR (chỉ thấy "Cửa hàng chưa bật nạp ví
+      bằng mã QR"), và trang Ví khách hiện nút "Khai báo tài khoản nhận".
+      Cài đặt → Nhận chuyển khoản: bật, chọn ngân hàng, nhập số tài khoản và tên chủ
       tài khoản (gõ có dấu cũng được, hệ thống tự viết hoa bỏ dấu) → Lưu → Xem mã QR mẫu.
       Bật mà thiếu số tài khoản → báo lỗi. Muốn quét thử bằng app ngân hàng thì dùng số
       tài khoản của chính bạn; ĐỪNG chuyển tiền thật vào tài khoản không phải của mình.

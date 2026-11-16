@@ -138,8 +138,8 @@ function TopupCard({ customerCode, phone }: { customerCode: string; phone: strin
       <article className="rounded-2xl border border-line bg-surface p-6">
         <h3 className="text-base font-extrabold">Nạp tiền vào ví</h3>
         <p className="mt-2 text-sm text-muted">
-          Liên hệ quầy thu ngân{hotline ? ` hoặc hotline ${hotline}` : ""} để nạp tiền; nhân viên
-          ghi nhận xong là số dư cập nhật ngay tại đây.
+          Cửa hàng chưa bật nạp ví bằng mã QR. Trong lúc chờ, bạn liên hệ quầy thu ngân{hotline ? ` hoặc hotline ${hotline}` : ""} để
+          nạp tiền; nhân viên ghi nhận xong là số dư cập nhật ngay tại đây.
         </p>
         <div className="mt-6 rounded-lg bg-slate-50 p-4 text-xs text-muted">
           Mã khách hàng: <strong className="text-fg">{customerCode}</strong> · Số điện thoại: <strong className="text-fg">{phone}</strong>

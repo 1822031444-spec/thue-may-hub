@@ -261,9 +261,20 @@ const shot = (page, file) => page.screenshot({ path: `${OUT}/${file}.png`, fullP
     .catch(() => problems.push('[qr-admin] đơn thuê không hiện số Zalo và cách nhận máy khách để lại'));
   await shot(a.page, '23-admin-lien-he-giao-may');
 
-  await nav(a.page, 'Cài đặt');
-  await a.page.getByRole('button', { name: 'Nhận chuyển khoản', exact: true }).click();
-  await a.page.getByText('Nhận chuyển khoản (VietQR)').waitFor();
+  // Chưa khai báo tài khoản nhận: khách được báo là chưa bật, chủ được nhắc ở trang Ví khách.
+  const c = await session('qr-customer');
+  await login(c.page, '0902345678');
+  await c.page.getByText(/Xin chào/).waitFor();
+  await c.page.getByRole('button', { name: 'Ví tiền' }).click();
+  await c.page.getByText('Cửa hàng chưa bật nạp ví bằng mã QR').waitFor({ timeout: 8000 })
+    .catch(() => problems.push('[qr-customer] chưa khai báo tài khoản nhận mà khách không được báo'));
+  await nav(a.page, 'Ví khách');
+  await a.page.getByText('Khách chưa thấy mã QR để chuyển khoản').waitFor({ timeout: 8000 })
+    .catch(() => problems.push('[qr-admin] trang Ví khách không nhắc khai báo tài khoản nhận'));
+  await shot(a.page, '28-admin-nhac-khai-bao');
+  await a.page.getByRole('button', { name: 'Khai báo tài khoản nhận' }).click();
+  await a.page.getByText('Nhận chuyển khoản (VietQR)').waitFor({ timeout: 8000 })
+    .catch(() => problems.push('[qr-admin] nút "Khai báo tài khoản nhận" không mở đúng mục cài đặt'));
   await a.page.getByLabel('Cho khách nạp ví bằng chuyển khoản qua mã QR').check();
   await a.page.getByRole('combobox', { name: /^Ngân hàng/ }).selectOption('970436');
   await a.page.getByLabel('Số tài khoản').fill('0123456789');
@@ -275,9 +286,8 @@ const shot = (page, file) => page.screenshot({ path: `${OUT}/${file}.png`, fullP
     .catch(() => problems.push('[qr-admin] không hiện mã QR mẫu'));
   await shot(a.page, '24-admin-nhan-chuyen-khoan');
 
-  const c = await session('qr-customer');
-  await login(c.page, '0902345678');
-  await c.page.getByText(/Xin chào/).waitFor();
+  // Mở lại tab Ví tiền: lúc này khách phải thấy phần tạo mã QR.
+  await c.page.getByRole('button', { name: 'Hồ sơ' }).click();
   await c.page.getByRole('button', { name: 'Ví tiền' }).click();
   const balance = c.page.locator('article', { hasText: 'Số dư ví khả dụng' }).locator('p').nth(1);
   await balance.waitFor();
