@@ -1,0 +1,168 @@
+﻿"Issue ID","Issue Type","Summary","Description","Priority","Story Points","Sprint","Assignee","Status","Parent ID","Labels","Labels","Labels"
+"1","Task","T.01 [UI] US.01 · Thiết kế prototype màn hình đăng nhập & khung giao diện quản trị","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.01: Là người dùng, tôi muốn đăng nhập/đăng xuất bằng email để sử dụng hệ thống — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* src/styles/tokens.css
+* src/styles/base.css
+* src/styles/shell.css
+* src/styles/index.css
+* src/components/AppLayout.tsx
+* public/fonts/","High","5","Sprint 1","","Done","","Phu","US.01","TT-Done"
+"2","Task","T.04 [UI] US.02 · Thiết kế giao diện danh sách & form hồ sơ khách hàng","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.02: Là Chủ hệ thống, tôi muốn xem/tìm/thêm/sửa hồ sơ khách hàng — nhóm chức năng Quản lý khách hàng.
+
+File mã nguồn:
+* src/styles/components.css
+* src/components/UI.tsx","High","8","Sprint 1","","Done","","Phu","US.02","TT-Done"
+"3","Task","T.06 [BE] US.03 · Hiện thực khoá khách hàng và cắt phiên đăng nhập của khách bị khoá","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.03: Là Chủ hệ thống, tôi muốn khoá khách hàng vi phạm để họ không thuê tiếp được — nhóm chức năng Quản lý khách hàng.
+
+File mã nguồn:
+* server/index.ts
+* server/customer.ts","Medium","5","Sprint 1","","Done","","Phu","US.03","TT-Done"
+"4","Task","T.16 [PM] Viết Retrospective Sprint 1","Người thực hiện: Phạm Văn Đức Phú (Quản lý dự án).
+Việc chung của Sprint 1.","Medium","5","Sprint 1","","Done","","Phu","QuanLyDuAn","TT-Done"
+"5","Task","T.25 [UI] US.04 · Thiết kế giao diện kho thiết bị (thẻ/bảng) và form tạo đơn thuê","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.04: Là Chủ hệ thống, tôi muốn quản lý kho máy PC/Boxphone (xem/tìm/thêm/sửa) — nhóm chức năng Quản lý thiết bị.
+
+File mã nguồn:
+* src/styles/admin.css","High","8","Sprint 1","","Done","","Phu","US.04","TT-Done"
+"6","Task","T.33 [UI] US.11 · Thiết kế form chi phí và thẻ số liệu trang Tài chính","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.11: Là Chủ hệ thống, tôi muốn ghi nhận chi phí vận hành (điện, mạng, mặt bằng) — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* src/styles/admin.css","Medium","3","Sprint 2","","Done","","Phu","US.11","TT-Done"
+"7","Task","T.35 [BE] US.12 · API phiếu sửa: tạo, cập nhật, đổi trạng thái, ghi tiền công khi đóng phiếu","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.12: Là Nhân viên, tôi muốn lập phiếu sửa chữa khi máy hỏng — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* GET /api/repairs
+* POST /api/repairs
+* PATCH /api/repairs/:id
+* PATCH /api/repairs/:id/status","High","8","Sprint 2","","Done","","Phu","US.12","TT-Done"
+"8","Task","T.39 [BE] US.13 · Nhập kho, lắp linh kiện vào phiếu sửa, trả linh kiện về kho bằng bút toán RETURN","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.13: Là Nhân viên, tôi muốn quản lý kho linh kiện và lắp linh kiện vào máy — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* POST /api/parts/:id/movements
+* POST /api/repairs/:id/parts
+* DELETE /api/repairs/:id/parts/:movementId","High","8","Sprint 2","","Done","","Phu","US.13","TT-Done"
+"9","Task","T.42 [BE] US.14 · API cổng khách: đăng ký/đăng nhập, danh mục máy, gửi và huỷ yêu cầu thuê","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.14: Là Khách hàng, tôi muốn xem danh mục máy và gửi yêu cầu thuê từ xa — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* server/customer.ts
+
+Endpoint:
+* POST /api/customer/auth/register
+* POST /api/customer/auth/login
+* GET /api/customer/catalog
+* POST /api/customer/bookings
+* PATCH /api/customer/bookings/:id/cancel","High","8","Sprint 2","","Done","","Phu","US.14","TT-Done"
+"10","Task","T.43 [UI] US.14 · Dựng khung cổng khách hàng, trang giới thiệu tiệm, cài như ứng dụng trên điện thoại (PWA)","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.14: Là Khách hàng, tôi muốn xem danh mục máy và gửi yêu cầu thuê từ xa — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* src/customer/CustomerLayout.tsx
+* src/customer/CustomerAccessPage.tsx
+* src/customer/CustomerHomePage.tsx
+* src/pages/LandingPage.tsx
+* src/styles/portal.css
+* src/styles/public.css
+* public/manifest.webmanifest
+* public/sw.js","High","13","Sprint 2","","Done","","Phu","US.14","TT-Done"
+"11","Task","T.45 [BE] US.15 · API khách trả đơn bằng ví và gửi yêu cầu gia hạn","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.15: Là Khách hàng, tôi muốn thanh toán đơn bằng ví và xin gia hạn trực tuyến — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* server/customer.ts
+
+Endpoint:
+* GET /api/customer/rentals
+* POST /api/customer/rentals/:id/pay-with-wallet
+* POST /api/customer/rentals/:id/extensions","High","5","Sprint 2","","Done","","Phu","US.15","TT-Done"
+"12","Task","T.47 [FE] US.15 · Dựng trang Đơn thuê của khách: trả bằng ví, xin gia hạn","Người thực hiện: Phạm Văn Đức Phú (Frontend).
+User story US.15: Là Khách hàng, tôi muốn thanh toán đơn bằng ví và xin gia hạn trực tuyến — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* src/customer/CustomerRentalsPage.tsx","High","5","Sprint 2","","Done","","Phu","US.15","TT-Done"
+"13","Task","T.50 [BE] US.16 · API ticket hỗ trợ và thông báo cho khách","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.16: Là Khách hàng, tôi muốn gửi ticket hỗ trợ và theo dõi phản hồi — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* server/customer.ts
+
+Endpoint:
+* GET /api/customer/tickets
+* POST /api/customer/tickets
+* POST /api/customer/tickets/:id/messages
+* GET /api/customer/notifications","Medium","5","Sprint 2","","Done","","Phu","US.16","TT-Done"
+"14","Task","T.54 [UI] US.17 · Bảng lệnh nhanh (Ctrl+K) và huy hiệu số việc chờ trên menu","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.17: Là Chủ hệ thống, tôi muốn duyệt yêu cầu thuê và báo giá gia hạn cho khách — nhóm chức năng Yêu cầu & hỗ trợ.
+
+File mã nguồn:
+* src/components/AppChrome.tsx
+* src/lib/commandBus.ts
+* src/lib/pendingAction.ts","High","5","Sprint 2","","Done","","Phu","US.17","TT-Done"
+"15","Task","T.59 [BE] US.18 · Dựng lệnh khoá/mở an toàn (chỉ thay IP và mã máy, sai khuôn thì từ chối) và bộ quét mỗi phút","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.18: Là Chủ hệ thống, tôi muốn máy tự bị khoá mạng khi khách hết hạn thuê — nhóm chức năng Khoá mạng khi hết hạn.
+
+File mã nguồn:
+* server/network-lock.ts
+* server/index.ts
+
+Endpoint:
+* GET /api/network-lock
+* PUT /api/network-lock/settings
+* POST /api/network-lock/preview
+* POST /api/network-lock/devices/:id/:action
+* POST /api/network-lock/sweep","High","13","Sprint 3","","Done","","Phu","US.18","TT-Done"
+"16","Task","T.69 [BE] US.22 · API trang Tổng quan, bỏ các trường tiền khi là tài khoản nhân viên","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.22: Là Chủ hệ thống, tôi muốn xem trang Tổng quan: máy đang thuê, đơn sắp hết hạn, doanh thu tháng — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* GET /api/dashboard","Medium","5","Sprint 3","","Done","","Phu","US.22","TT-Done"
+"17","Task","T.71 [UI] US.22 · Chế độ sáng/tối và thông báo nổi (toast)","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.22: Là Chủ hệ thống, tôi muốn xem trang Tổng quan: máy đang thuê, đơn sắp hết hạn, doanh thu tháng — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* src/lib/theme.tsx
+* src/lib/toast.tsx","Medium","3","Sprint 3","","Done","","Phu","US.22","TT-Done"
+"18","Task","T.73 [BE] US.23 · Gửi bản tóm tắt đơn sắp hết hạn cho chủ tiệm qua Telegram","Người thực hiện: Phạm Văn Đức Phú (Backend).
+User story US.23: Là Chủ hệ thống, tôi muốn được nhắc các đơn sắp hết hạn trên màn hình và qua Telegram — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/telegram.ts
+* server/index.ts
+
+Endpoint:
+* GET /api/telegram
+* PUT /api/telegram/settings
+* POST /api/telegram/test
+* POST /api/telegram/discover","High","5","Sprint 3","","Done","","Phu","US.23","TT-Done"
+"19","Task","T.85 [UI] US.26 · Thanh tiêu đề riêng cho bản desktop và icon ứng dụng","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.26: Là Chủ hệ thống, tôi muốn cài phần mềm như một ứng dụng trên máy Windows — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* src/lib/desktop.ts
+* src/components/AppChrome.tsx
+* public/icon.svg
+* public/icon-256.png
+* scripts/make-icon.mjs","Medium","3","Sprint 3","","Done","","Phu","US.26","TT-Done"
+"20","Task","T.98 [UI] US.27 · Thiết kế giao diện mới trên Figma, chuyển màu và chữ sang Tailwind","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* design/figma/README.md
+* ThueMayHub-FE/src/styles.css
+* ThueMayHub-FE/public/","High","8","Sprint 3","","Done","","Phu","US.27","TT-Done"

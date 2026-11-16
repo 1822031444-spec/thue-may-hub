@@ -1,0 +1,397 @@
+﻿"Issue ID","Issue Type","Summary","Description","Priority","Story Points","Sprint","Assignee","Status","Parent ID","Labels","Labels","Labels"
+"1","Epic","Đăng nhập/Đăng xuất","Nhóm chức năng Đăng nhập/Đăng xuất của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống, Nhân viên, Khách hàng.
+
+Chức năng (theo Function List):
+* F.1.1 Đăng nhập/Đăng xuất quản trị — Chủ hệ thống và Nhân viên đăng nhập bằng email, phiên lưu bằng cookie HttpOnly
+* F.1.2 Đăng ký/Đăng nhập cổng khách hàng — Khách hàng tự đăng ký tài khoản bằng email và đăng nhập vào cổng khách hàng
+* F.1.3 Đổi mật khẩu — Người dùng đổi mật khẩu; đổi xong mọi phiên đăng nhập khác bị đăng xuất
+* F.1.4 Đăng nhập chung cho ba vai trò — Một màn đăng nhập bằng username, email hoặc số điện thoại; hệ thống tự nhận ra quản trị, nhân viên hay khách","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"2","Epic","Quản lý khách hàng","Nhóm chức năng Quản lý khách hàng của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống, Nhân viên.
+
+Chức năng (theo Function List):
+* F.2.1 Xem danh sách khách hàng — Xem danh sách khách hàng kèm số dư ví, tổng đã chi, số đơn đã thuê
+* F.2.2 Tìm kiếm & lọc khách hàng — Tìm theo tên/mã/điện thoại, lọc theo trạng thái Hoạt động/Hạn chế/Đã khoá
+* F.2.3 Thêm khách hàng — Tạo hồ sơ khách hàng mới, hệ thống tự sinh mã khách hàng
+* F.2.4 Sửa hồ sơ khách hàng — Chỉnh sửa thông tin liên hệ, hạn mức công nợ, ghi chú
+* F.2.5 Đổi trạng thái khách hàng — Khoá khách hàng; khách bị khoá không đăng nhập cổng được và bị cắt phiên
+* F.2.6 Nạp tiền vào ví khách hàng — Chủ hệ thống nạp tiền vào ví, sinh bút toán trong sổ giao dịch","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"3","Epic","Quản lý thiết bị","Nhóm chức năng Quản lý thiết bị của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống, Nhân viên.
+
+Chức năng (theo Function List):
+* F.3.1 Xem danh sách thiết bị — Xem kho máy dạng thẻ hoặc dạng bảng, kèm doanh thu và tiền sửa của từng máy
+* F.3.2 Tìm kiếm & lọc thiết bị — Tìm theo tên/mã, lọc theo loại PC hoặc Boxphone
+* F.3.3 Thêm thiết bị — Nhập máy mới: tên, loại, cấu hình, địa chỉ IP, giá thuê giờ/tháng, giá mua
+* F.3.4 Sửa thiết bị — Chỉnh sửa thông tin và giá thuê của máy
+* F.3.5 Đổi trạng thái thiết bị — Sẵn sàng / Đang thuê / Bảo trì / Ngừng dùng
+* F.3.6 Xem lịch sử sửa chữa của máy — Xem các phiếu sửa và tổng tiền đã chi cho riêng máy đó","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"4","Epic","Quản lý đơn thuê","Nhóm chức năng Quản lý đơn thuê của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống, Nhân viên.
+
+Chức năng (theo Function List):
+* F.4.1 Xem danh sách đơn thuê — Xem đơn kèm tiến độ thanh toán, lọc theo Đang mở/Quá hạn/Hoàn tất
+* F.4.2 Tạo đơn thuê — Chọn khách, chọn máy còn trống, chọn thời hạn; hệ thống tự tính thành tiền
+* F.4.3 Thu tiền đơn thuê — Thu tiền mặt/chuyển khoản hoặc trừ ví khách, không cho thu vượt số còn nợ
+* F.4.4 Kích hoạt & hoàn tất đơn — Chuyển đơn Giữ chỗ sang Đang thuê và Đang thuê sang Hoàn tất
+* F.4.5 Hoàn tiền đơn thuê — Hoàn tiền về ví hoặc tiền mặt, không hoàn quá số đã thu
+* F.4.6 Huỷ đơn thuê — Huỷ đơn chưa thu tiền, trả máy về trạng thái Sẵn sàng
+* F.4.7 Nhắc đơn sắp hết hạn — Liệt kê đơn sắp hết hạn, soạn sẵn tin nhắn nhắc khách, gửi bản tóm tắt cho chủ qua Telegram
+* F.4.8 Gia hạn đơn tại quầy — Gia hạn đơn đang thuê; mỗi lần gia hạn lưu thành một kỳ thuê riêng","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"5","Epic","Tài chính","Nhóm chức năng Tài chính của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống.
+
+Chức năng (theo Function List):
+* F.5.1 Xem sổ giao dịch — Xem toàn bộ bút toán tiền thực thu, biến động ví và doanh thu
+* F.5.2 Ghi nhận chi phí — Ghi các khoản chi: điện, Internet, mặt bằng, nhân sự, linh kiện…
+* F.5.3 Lọc sổ tiền theo kỳ — Xem số liệu theo Tháng này / Tháng trước / Năm nay / Khoảng ngày tuỳ chọn
+* F.5.4 Xuất sổ tiền ra CSV — Xuất dữ liệu đang xem ra file CSV để đối chiếu sổ sách bằng Excel
+* F.5.5 Xem trang Tổng quan — Máy đang thuê, đơn sắp hết hạn, doanh thu tháng; nhân viên không thấy các số tiền","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"6","Epic","Sửa chữa & kho linh kiện","Nhóm chức năng Sửa chữa & kho linh kiện của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống, Nhân viên.
+
+Chức năng (theo Function List):
+* F.6.1 Tạo phiếu sửa chữa — Ghi nhận máy hỏng; máy tự chuyển trạng thái Bảo trì
+* F.6.2 Xử lý & đóng phiếu sửa — Báo hỏng → Đang sửa → Đã sửa xong / Không sửa được
+* F.6.3 Nhập kho linh kiện — Nhập mua linh kiện, hệ thống tính giá vốn bình quân và sinh khoản chi
+* F.6.4 Lắp linh kiện vào máy — Trừ tồn kho và quy chi phí linh kiện về đúng thiết bị
+* F.6.5 Trả linh kiện về kho — Gỡ linh kiện khỏi phiếu sửa, hoàn lại tồn kho
+* F.6.6 Cảnh báo tồn kho tối thiểu — Cảnh báo khi số lượng linh kiện xuống dưới mức tồn tối thiểu","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"7","Epic","Yêu cầu & hỗ trợ","Nhóm chức năng Yêu cầu & hỗ trợ của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống, Nhân viên.
+
+Chức năng (theo Function List):
+* F.7.1 Duyệt yêu cầu thuê máy — Duyệt hoặc từ chối yêu cầu khách gửi; duyệt thì sinh đơn giữ chỗ
+* F.7.2 Báo giá & duyệt gia hạn — Báo giá phần gia hạn và duyệt yêu cầu gia hạn của khách
+* F.7.3 Trả lời ticket hỗ trợ — Trao đổi với khách trong ticket, đánh dấu ticket đã xử lý","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"8","Epic","Cổng khách hàng","Nhóm chức năng Cổng khách hàng của hệ thống Thuê Máy Hub. Người dùng: Khách hàng.
+
+Chức năng (theo Function List):
+* F.8.1 Xem danh mục máy cho thuê — Khách xem các máy đang sẵn sàng kèm giá thuê giờ/tháng
+* F.8.2 Gửi yêu cầu thuê máy — Khách chọn máy và thời gian mong muốn, hệ thống tính tạm tính
+* F.8.3 Theo dõi & huỷ yêu cầu — Khách xem trạng thái duyệt và huỷ yêu cầu chưa được duyệt
+* F.8.4 Thanh toán đơn bằng ví — Khách tự trả tiền đơn thuê bằng số dư ví
+* F.8.5 Gửi yêu cầu gia hạn — Khách xin gia hạn thời gian thuê, chờ tiệm báo giá
+* F.8.6 Gửi & theo dõi ticket hỗ trợ — Khách gửi yêu cầu hỗ trợ và trao đổi với tiệm
+* F.8.7 Nhận thông báo — Khách nhận thông báo đơn sắp hết hạn, yêu cầu được duyệt, bảo mật","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"9","Epic","Khoá mạng khi hết hạn","Nhóm chức năng Khoá mạng khi hết hạn của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống.
+
+Chức năng (theo Function List):
+* F.9.1 Cấu hình lệnh khoá/mở mạng — Chủ khai báo câu lệnh; hệ thống chỉ thay ""ip"" và ""code"" vào lệnh
+* F.9.2 Tự động khoá khi quá hạn — Mỗi phút quét một lần, khoá máy của đơn quá hạn quá thời gian ân hạn
+* F.9.3 Khoá/Mở mạng thủ công — Chủ tự bấm khoá hoặc mở mạng cho một máy cụ thể
+* F.9.4 Nhật ký chạy lệnh khoá mạng — Ghi lại đúng câu lệnh đã chạy và kết quả trả về","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"10","Epic","Cài đặt & phân quyền","Nhóm chức năng Cài đặt & phân quyền của hệ thống Thuê Máy Hub. Người dùng: Chủ hệ thống.
+
+Chức năng (theo Function List):
+* F.10.1 Quản lý tài khoản nhân viên — Tạo, sửa, khoá tài khoản và đặt lại mật khẩu cho nhân viên
+* F.10.2 Phân quyền theo vai trò — Nhân viên không xem được trang Tài chính, không nạp ví, không hoàn tiền
+* F.10.3 Xem nhật ký thao tác — Xem audit log các thao tác quản trị đã thực hiện
+* F.10.4 Đổi thư mục dữ liệu — Trỏ database sang thư mục khác, ví dụ USB, để mang sang máy khác
+* F.10.5 Sao lưu dữ liệu tự động — Chụp bản sao nhất quán của database theo lịch, giữ số bản gần nhất do chủ chọn
+* F.10.6 Ứng dụng desktop Windows — Cài phần mềm như ứng dụng Windows, server chạy nội bộ trong máy","Medium","","","","Done","","ThueMayHub","","TT-Done"
+"11","Story","US.01 — Là người dùng, tôi muốn đăng nhập/đăng xuất bằng email để sử dụng hệ thống","Mã trong Product Backlog: US.01 · 5 story point · nhóm chức năng Đăng nhập/Đăng xuất.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.01 [UI] Phạm Văn Đức Phú — Thiết kế prototype màn hình đăng nhập & khung giao diện quản trị
+* T.02 [BE] Đỗ Tuấn Thành — Hiện thực API đăng nhập/đăng xuất, băm mật khẩu bằng scrypt
+* T.03 [QA] Hồ Sỹ Vinh — Viết & thực thi test case đăng nhập
+* T.18 [FE] Đào Việt Anh — Khởi tạo khung React + Vite + TypeScript, định tuyến và trang Đăng nhập","High","","Sprint 1","","Done","1","ThueMayHub","US.01","TT-Done"
+"12","Story","US.02 — Là Chủ hệ thống, tôi muốn xem/tìm/thêm/sửa hồ sơ khách hàng","Mã trong Product Backlog: US.02 · 13 story point · nhóm chức năng Quản lý khách hàng.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.04 [UI] Phạm Văn Đức Phú — Thiết kế giao diện danh sách & form hồ sơ khách hàng
+* T.05 [BE] Đỗ Tuấn Thành — Hiện thực API xem/tìm/thêm/sửa khách hàng
+* T.19 [FE] Đào Việt Anh — Dựng trang Khách hàng: danh sách, tìm kiếm, form thêm/sửa
+* T.23 [DB] Nguyễn Minh Phát — Khởi tạo database (khoá ngoại, WAL) và bảng admins, sessions, customers","High","","Sprint 1","","Done","2","ThueMayHub","US.02","TT-Done"
+"13","Story","US.03 — Là Chủ hệ thống, tôi muốn khoá khách hàng vi phạm để họ không thuê tiếp được","Mã trong Product Backlog: US.03 · 5 story point · nhóm chức năng Quản lý khách hàng.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.06 [BE] Phạm Văn Đức Phú — Hiện thực khoá khách hàng và cắt phiên đăng nhập của khách bị khoá","Medium","","Sprint 1","","Done","2","ThueMayHub","US.03","TT-Done"
+"14","Story","US.04 — Là Chủ hệ thống, tôi muốn quản lý kho máy PC/Boxphone (xem/tìm/thêm/sửa)","Mã trong Product Backlog: US.04 · 13 story point · nhóm chức năng Quản lý thiết bị.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.07 [DB] Nguyễn Minh Phát — Thiết kế bảng devices và hiện thực CRUD thiết bị
+* T.14 [QA] Hồ Sỹ Vinh — Viết & thực thi test case Quản lý thiết bị
+* T.20 [FE] Đào Việt Anh — Dựng trang Thiết bị: dạng thẻ/dạng bảng, lọc theo loại
+* T.25 [UI] Phạm Văn Đức Phú — Thiết kế giao diện kho thiết bị (thẻ/bảng) và form tạo đơn thuê","High","","Sprint 1","","Done","3","ThueMayHub","US.04","TT-Done"
+"15","Story","US.05 — Là Chủ hệ thống, tôi muốn biết mỗi máy đã thu về bao nhiêu và tốn bao nhiêu tiền sửa","Mã trong Product Backlog: US.05 · 8 story point · nhóm chức năng Quản lý thiết bị.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.08 [DB] Nguyễn Minh Phát — Tính doanh thu và tiền sửa quy về từng thiết bị, sắp tên máy theo số tự nhiên","High","","Sprint 1","","Done","3","ThueMayHub","US.05","TT-Done"
+"16","Story","US.06 — Là Nhân viên, tôi muốn tạo đơn thuê cho khách và hệ thống tự tính thành tiền","Mã trong Product Backlog: US.06 · 21 story point · nhóm chức năng Quản lý đơn thuê.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.09 [BE] Đỗ Tuấn Thành — Hiện thực API tạo đơn thuê, tự tính thành tiền theo giờ/tháng
+* T.10 [QA] Hồ Sỹ Vinh — Viết & thực thi test case Tạo đơn thuê
+* T.21 [FE] Đào Việt Anh — Dựng form Tạo đơn thuê và hộp thoại Thu tiền
+* T.24 [DB] Nguyễn Minh Phát — Thiết kế bảng rentals, financial_transactions (3 giá trị tiền) và khoá ngoại","High","","Sprint 1","","Done","4","ThueMayHub","US.06","TT-Done"
+"17","Story","US.07 — Là Nhân viên, tôi muốn thu tiền đơn thuê bằng tiền mặt, chuyển khoản hoặc trừ ví","Mã trong Product Backlog: US.07 · 13 story point · nhóm chức năng Quản lý đơn thuê.
+Kế hoạch: Sprint 1.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.11 [BE] Đỗ Tuấn Thành — Hiện thực API thu tiền đơn, chặn thu vượt số còn nợ
+* T.12 [QA] Hồ Sỹ Vinh — Viết & thực thi test case Thu tiền đơn, bắn 8 yêu cầu song song","High","","Sprint 1","","Done","4","ThueMayHub","US.07","TT-Done"
+"18","Story","US.08 — Là Nhân viên, tôi muốn kích hoạt và hoàn tất đơn thuê theo đúng vòng đời","Mã trong Product Backlog: US.08 · 8 story point · nhóm chức năng Quản lý đơn thuê.
+Kế hoạch: Sprint 1. Chuyển sang Sprint 2 vì còn việc dở.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.13 [FE] Đào Việt Anh — Dựng thao tác Kích hoạt / Hoàn tất / Huỷ đơn trên trang Đơn thuê
+* T.22 [BE] Đỗ Tuấn Thành — API đổi trạng thái đơn theo vòng đời, trả máy về Sẵn sàng khi hoàn tất/huỷ","High","","Sprint 2","","Done","4","ThueMayHub","US.08","TT-Done"
+"19","Story","US.09 — Là Chủ hệ thống, tôi muốn nạp tiền vào ví khách và hoàn tiền khi cần","Mã trong Product Backlog: US.09 · 13 story point · nhóm chức năng Tài chính.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.26 [BE] Đỗ Tuấn Thành — API nạp tiền vào ví và hoàn tiền đơn (bút toán đối ứng, không hoàn quá số đã thu)
+* T.27 [FE] Đào Việt Anh — Hộp thoại Nạp ví (trang Khách hàng) và Hoàn tiền (trang Đơn thuê)
+* T.28 [QA] Hồ Sỹ Vinh — Test luồng ví: nạp, trừ ví, hoàn tiền, ví không bao giờ âm","High","","Sprint 2","","Done","5","ThueMayHub","US.09","TT-Done"
+"20","Story","US.10 — Là Chủ hệ thống, tôi muốn xem sổ giao dịch và sổ chi phí theo từng kỳ","Mã trong Product Backlog: US.10 · 13 story point · nhóm chức năng Tài chính.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.29 [DB] Nguyễn Minh Phát — Truy vấn sổ giao dịch & sổ chi phí theo kỳ, chỉ mục theo thời gian
+* T.30 [FE] Nguyễn Minh Phát — Dựng trang Tài chính: sổ giao dịch, sổ chi phí, bộ lọc kỳ
+* T.31 [QA] Hồ Sỹ Vinh — Test lọc sổ tiền theo kỳ (tháng này, tháng trước, khoảng ngày)","High","","Sprint 2","","Done","5","ThueMayHub","US.10","TT-Done"
+"21","Story","US.11 — Là Chủ hệ thống, tôi muốn ghi nhận chi phí vận hành (điện, mạng, mặt bằng)","Mã trong Product Backlog: US.11 · 8 story point · nhóm chức năng Tài chính.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.32 [BE] Đỗ Tuấn Thành — API ghi nhận chi phí vận hành
+* T.33 [UI] Phạm Văn Đức Phú — Thiết kế form chi phí và thẻ số liệu trang Tài chính","Medium","","Sprint 2","","Done","5","ThueMayHub","US.11","TT-Done"
+"22","Story","US.12 — Là Nhân viên, tôi muốn lập phiếu sửa chữa khi máy hỏng","Mã trong Product Backlog: US.12 · 13 story point · nhóm chức năng Sửa chữa & kho linh kiện.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.34 [DB] Nguyễn Minh Phát — Thiết kế bảng repairs; máy có phiếu mở tự chuyển Bảo trì
+* T.35 [BE] Phạm Văn Đức Phú — API phiếu sửa: tạo, cập nhật, đổi trạng thái, ghi tiền công khi đóng phiếu
+* T.36 [FE] Đào Việt Anh — Dựng trang Sửa chữa: danh sách phiếu, chi tiết phiếu, đổi trạng thái
+* T.37 [QA] Hồ Sỹ Vinh — Test phiếu sửa: vòng đời phiếu và trạng thái máy","High","","Sprint 2","","Done","6","ThueMayHub","US.12","TT-Done"
+"23","Story","US.13 — Là Nhân viên, tôi muốn quản lý kho linh kiện và lắp linh kiện vào máy","Mã trong Product Backlog: US.13 · 21 story point · nhóm chức năng Sửa chữa & kho linh kiện.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.38 [DB] Nguyễn Minh Phát — Thiết kế bảng parts, part_movements; tồn kho và giá vốn tính từ lịch sử nhập xuất
+* T.39 [BE] Phạm Văn Đức Phú — Nhập kho, lắp linh kiện vào phiếu sửa, trả linh kiện về kho bằng bút toán RETURN
+* T.40 [FE] Đào Việt Anh — Dựng tab Kho linh kiện và cảnh báo tồn kho tối thiểu","High","","Sprint 2","","Done","6","ThueMayHub","US.13","TT-Done"
+"24","Story","US.14 — Là Khách hàng, tôi muốn xem danh mục máy và gửi yêu cầu thuê từ xa","Mã trong Product Backlog: US.14 · 13 story point · nhóm chức năng Cổng khách hàng.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.41 [DB] Nguyễn Minh Phát — Thiết kế bảng customer_accounts, customer_sessions, booking_requests
+* T.42 [BE] Phạm Văn Đức Phú — API cổng khách: đăng ký/đăng nhập, danh mục máy, gửi và huỷ yêu cầu thuê
+* T.43 [UI] Phạm Văn Đức Phú — Dựng khung cổng khách hàng, trang giới thiệu tiệm, cài như ứng dụng trên điện thoại (PWA)
+* T.44 [FE] Đào Việt Anh — Dựng trang Danh mục máy và Yêu cầu thuê của khách","High","","Sprint 2","","Done","8","ThueMayHub","US.14","TT-Done"
+"25","Story","US.15 — Là Khách hàng, tôi muốn thanh toán đơn bằng ví và xin gia hạn trực tuyến","Mã trong Product Backlog: US.15 · 13 story point · nhóm chức năng Cổng khách hàng.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.45 [BE] Phạm Văn Đức Phú — API khách trả đơn bằng ví và gửi yêu cầu gia hạn
+* T.46 [DB] Nguyễn Minh Phát — Thiết kế bảng extension_requests
+* T.47 [FE] Phạm Văn Đức Phú — Dựng trang Đơn thuê của khách: trả bằng ví, xin gia hạn
+* T.48 [QA] Hồ Sỹ Vinh — Test cổng khách: khách chỉ xem và trả được đơn của chính mình","High","","Sprint 2","","Done","8","ThueMayHub","US.15","TT-Done"
+"26","Story","US.16 — Là Khách hàng, tôi muốn gửi ticket hỗ trợ và theo dõi phản hồi","Mã trong Product Backlog: US.16 · 8 story point · nhóm chức năng Cổng khách hàng.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.49 [DB] Nguyễn Minh Phát — Thiết kế bảng support_tickets, ticket_messages, customer_notifications
+* T.50 [BE] Phạm Văn Đức Phú — API ticket hỗ trợ và thông báo cho khách
+* T.51 [FE] Nguyễn Minh Phát — Dựng trang Hỗ trợ của khách: gửi ticket, hội thoại, thông báo","Medium","","Sprint 2","","Done","8","ThueMayHub","US.16","TT-Done"
+"27","Story","US.17 — Là Chủ hệ thống, tôi muốn duyệt yêu cầu thuê và báo giá gia hạn cho khách","Mã trong Product Backlog: US.17 · 13 story point · nhóm chức năng Yêu cầu & hỗ trợ.
+Kế hoạch: Sprint 2.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.52 [BE] Đỗ Tuấn Thành — API duyệt/từ chối yêu cầu thuê (sinh đơn giữ chỗ) và duyệt gia hạn kèm phí
+* T.53 [FE] Đào Việt Anh — Dựng trang Yêu cầu & hỗ trợ cho quản trị
+* T.54 [UI] Phạm Văn Đức Phú — Bảng lệnh nhanh (Ctrl+K) và huy hiệu số việc chờ trên menu","High","","Sprint 2","","Done","7","ThueMayHub","US.17","TT-Done"
+"28","Story","US.18 — Là Chủ hệ thống, tôi muốn máy tự bị khoá mạng khi khách hết hạn thuê","Mã trong Product Backlog: US.18 · 21 story point · nhóm chức năng Khoá mạng khi hết hạn.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.58 [DB] Nguyễn Minh Phát — Thiết kế bảng app_settings, network_lock_events và cột devices.network_status
+* T.59 [BE] Phạm Văn Đức Phú — Dựng lệnh khoá/mở an toàn (chỉ thay IP và mã máy, sai khuôn thì từ chối) và bộ quét mỗi phút
+* T.60 [FE] Đào Việt Anh — Panel cấu hình khoá mạng, xem trước lệnh và nhật ký chạy lệnh
+* T.61 [QA] Hồ Sỹ Vinh — Test khoá mạng: giá trị sai khuôn bị từ chối, đơn quá hạn thì khoá","High","","Sprint 3","","Done","9","ThueMayHub","US.18","TT-Done"
+"29","Story","US.19 — Là Chủ hệ thống, tôi muốn tạo tài khoản cho nhân viên và giới hạn quyền của họ","Mã trong Product Backlog: US.19 · 13 story point · nhóm chức năng Cài đặt & phân quyền.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.62 [BE] Đỗ Tuấn Thành — Bảng quyền OWNER/STAFF, middleware requirePermission, quản lý tài khoản nhân viên
+* T.63 [FE] Nguyễn Minh Phát — Trang Cài đặt, panel tài khoản nhân viên, ẩn menu và nút theo quyền
+* T.64 [QA] Hồ Sỹ Vinh — Test phân quyền: nhân viên gọi API tiền bị chặn, luôn còn ít nhất một Chủ","High","","Sprint 3","","Done","10","ThueMayHub","US.19","TT-Done"
+"30","Story","US.20 — Là Chủ hệ thống, tôi muốn xem nhật ký thao tác để biết ai đã làm gì","Mã trong Product Backlog: US.20 · 8 story point · nhóm chức năng Cài đặt & phân quyền.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.65 [DB] Nguyễn Minh Phát — Bảng audit_logs và truy vấn nhật ký có phân trang
+* T.66 [FE] Đào Việt Anh — Màn hình nhật ký thao tác trong Cài đặt","Medium","","Sprint 3","","Done","10","ThueMayHub","US.20","TT-Done"
+"31","Story","US.21 — Là Chủ hệ thống, tôi muốn xuất sổ tiền ra CSV để đối chiếu sổ sách","Mã trong Product Backlog: US.21 · 5 story point · nhóm chức năng Tài chính.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.67 [FE] Nguyễn Minh Phát — Xuất sổ tiền đang xem ra CSV, mở bằng Excel không lỗi tiếng Việt
+* T.68 [QA] Hồ Sỹ Vinh — Test xuất CSV: dấu phẩy, ngoặc kép, tiếng Việt","Medium","","Sprint 3","","Done","5","ThueMayHub","US.21","TT-Done"
+"32","Story","US.22 — Là Chủ hệ thống, tôi muốn xem trang Tổng quan: máy đang thuê, đơn sắp hết hạn, doanh thu tháng","Mã trong Product Backlog: US.22 · 8 story point · nhóm chức năng Tài chính.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.69 [BE] Phạm Văn Đức Phú — API trang Tổng quan, bỏ các trường tiền khi là tài khoản nhân viên
+* T.70 [FE] Đào Việt Anh — Dựng trang Tổng quan
+* T.71 [UI] Phạm Văn Đức Phú — Chế độ sáng/tối và thông báo nổi (toast)","Medium","","Sprint 3","","Done","5","ThueMayHub","US.22","TT-Done"
+"33","Story","US.23 — Là Chủ hệ thống, tôi muốn được nhắc các đơn sắp hết hạn trên màn hình và qua Telegram","Mã trong Product Backlog: US.23 · 13 story point · nhóm chức năng Quản lý đơn thuê.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.72 [DB] Nguyễn Minh Phát — Truy vấn dùng chung danh sách đơn sắp hết hạn
+* T.73 [BE] Phạm Văn Đức Phú — Gửi bản tóm tắt đơn sắp hết hạn cho chủ tiệm qua Telegram
+* T.74 [FE] Nguyễn Minh Phát — Panel đơn sắp hết hạn, mẫu tin nhắn nhắc khách, cài đặt Telegram
+* T.75 [QA] Hồ Sỹ Vinh — Test nhắc hạn và gửi Telegram","High","","Sprint 3","","Done","4","ThueMayHub","US.23","TT-Done"
+"34","Story","US.24 — Là Nhân viên, tôi muốn gia hạn đơn ngay tại quầy và xem lịch sử các kỳ thuê","Mã trong Product Backlog: US.24 · 8 story point · nhóm chức năng Quản lý đơn thuê.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.76 [DB] Nguyễn Minh Phát — Thiết kế bảng rental_periods: mỗi lần gia hạn là một kỳ thuê
+* T.77 [BE] Đỗ Tuấn Thành — API gia hạn đơn tại quầy, cộng tháng không tràn ngày
+* T.78 [FE] Đào Việt Anh — Hộp thoại gia hạn và lịch sử kỳ thuê trên trang Đơn thuê
+* T.79 [QA] Hồ Sỹ Vinh — Test gia hạn: 31/01 cộng 1 tháng phải ra 28/02","High","","Sprint 3","","Done","4","ThueMayHub","US.24","TT-Done"
+"35","Story","US.25 — Là Chủ hệ thống, tôi muốn dữ liệu được sao lưu tự động và đổi được thư mục dữ liệu","Mã trong Product Backlog: US.25 · 8 story point · nhóm chức năng Cài đặt & phân quyền.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.80 [DB] Nguyễn Minh Phát — Sao lưu tự động bằng VACUUM INTO và diễn tập phục hồi
+* T.81 [QA] Hồ Sỹ Vinh — Script nạp dữ liệu test: dữ liệu mẫu, khách đang thuê, thêm máy hàng loạt
+* T.82 [FE] Đào Việt Anh — Panel sao lưu trong Cài đặt
+* T.83 [QA] Hồ Sỹ Vinh — Test sao lưu và phân trang danh sách dài","High","","Sprint 3","","Done","10","ThueMayHub","US.25","TT-Done"
+"36","Story","US.26 — Là Chủ hệ thống, tôi muốn cài phần mềm như một ứng dụng trên máy Windows","Mã trong Product Backlog: US.26 · 13 story point · nhóm chức năng Cài đặt & phân quyền.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.84 [FE] Nguyễn Minh Phát — Đóng gói bản desktop Windows bằng Electron: cửa sổ app, bộ cài, đổi thư mục dữ liệu
+* T.85 [UI] Phạm Văn Đức Phú — Thanh tiêu đề riêng cho bản desktop và icon ứng dụng
+* T.86 [QA] Hồ Sỹ Vinh — Kiểm thử hồi quy toàn bộ trước khi đóng gói bản cài","Medium","","Sprint 3","","Done","10","ThueMayHub","US.26","TT-Done"
+"37","Story","US.27 — Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò","Mã trong Product Backlog: US.27 · 13 story point · nhóm chức năng Đăng nhập/Đăng xuất.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.93 [FE] Đào Việt Anh — Giao diện mới theo Figma: khung quản trị, Dashboard, Máy, Khách hàng, Đơn thuê, Thanh toán, Sửa chữa
+* T.94 [FE] Nguyễn Minh Phát — Giao diện mới theo Figma: đăng nhập chung, hồ sơ khách, cổng khách, Ví khách, Linh kiện, Nhân viên, Báo cáo, Cài đặt
+* T.95 [FE] Đào Việt Anh — Nối giao diện mới với API thật: kho dữ liệu, chuyển tiếp /api, lệnh chạy chung một cổng
+* T.96 [BE] Đỗ Tuấn Thành — API cho giao diện mới: đăng nhập chung ba vai trò, đăng ký, hồ sơ khách, danh sách phiếu thu
+* T.97 [QA] Hồ Sỹ Vinh — Kiểm thử giao diện mới: 40 bước API và chạy thử bốn vai trò trên trình duyệt
+* T.98 [UI] Phạm Văn Đức Phú — Thiết kế giao diện mới trên Figma, chuyển màu và chữ sang Tailwind","High","","Sprint 3","","Done","1","ThueMayHub","US.27","TT-Done"
+"38","Task","T.02 [BE] US.01 · Hiện thực API đăng nhập/đăng xuất, băm mật khẩu bằng scrypt","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.01: Là người dùng, tôi muốn đăng nhập/đăng xuất bằng email để sử dụng hệ thống — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* POST /api/auth/login
+* POST /api/auth/logout
+* GET /api/auth/me
+* POST /api/auth/change-password","High","8","Sprint 1","","Done","","Thanh","US.01","TT-Done"
+"39","Task","T.05 [BE] US.02 · Hiện thực API xem/tìm/thêm/sửa khách hàng","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.02: Là Chủ hệ thống, tôi muốn xem/tìm/thêm/sửa hồ sơ khách hàng — nhóm chức năng Quản lý khách hàng.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* GET /api/customers
+* POST /api/customers
+* PATCH /api/customers/:id","High","13","Sprint 1","","Done","","Thanh","US.02","TT-Done"
+"40","Task","T.09 [BE] US.06 · Hiện thực API tạo đơn thuê, tự tính thành tiền theo giờ/tháng","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.06: Là Nhân viên, tôi muốn tạo đơn thuê cho khách và hệ thống tự tính thành tiền — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/index.ts
+* server/rental-period.ts
+
+Endpoint:
+* GET /api/rentals
+* POST /api/rentals","High","21","Sprint 1","","Done","","Thanh","US.06","TT-Done"
+"41","Task","T.11 [BE] US.07 · Hiện thực API thu tiền đơn, chặn thu vượt số còn nợ","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.07: Là Nhân viên, tôi muốn thu tiền đơn thuê bằng tiền mặt, chuyển khoản hoặc trừ ví — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* POST /api/rentals/:id/payment","High","13","Sprint 1","","Done","","Thanh","US.07","TT-Done"
+"42","Task","T.17 [PM] Cập nhật Traceability Matrix Sprint 1","Người thực hiện: Đỗ Tuấn Thành (Quản lý dự án).
+Việc chung của Sprint 1.","Medium","5","Sprint 1","","Done","","Thanh","QuanLyDuAn","TT-Done"
+"43","Task","T.22 [BE] US.08 · API đổi trạng thái đơn theo vòng đời, trả máy về Sẵn sàng khi hoàn tất/huỷ","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.08: Là Nhân viên, tôi muốn kích hoạt và hoàn tất đơn thuê theo đúng vòng đời — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* PATCH /api/rentals/:id/status","High","5","Sprint 1","","Done","","Thanh","US.08","TT-Done"
+"44","Task","T.26 [BE] US.09 · API nạp tiền vào ví và hoàn tiền đơn (bút toán đối ứng, không hoàn quá số đã thu)","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.09: Là Chủ hệ thống, tôi muốn nạp tiền vào ví khách và hoàn tiền khi cần — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* POST /api/customers/:id/deposit
+* POST /api/rentals/:id/refund","High","8","Sprint 2","","Done","","Thanh","US.09","TT-Done"
+"45","Task","T.32 [BE] US.11 · API ghi nhận chi phí vận hành","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.11: Là Chủ hệ thống, tôi muốn ghi nhận chi phí vận hành (điện, mạng, mặt bằng) — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* server/index.ts
+
+Endpoint:
+* POST /api/finance/expenses","Medium","5","Sprint 2","","Done","","Thanh","US.11","TT-Done"
+"46","Task","T.52 [BE] US.17 · API duyệt/từ chối yêu cầu thuê (sinh đơn giữ chỗ) và duyệt gia hạn kèm phí","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.17: Là Chủ hệ thống, tôi muốn duyệt yêu cầu thuê và báo giá gia hạn cho khách — nhóm chức năng Yêu cầu & hỗ trợ.
+
+File mã nguồn:
+* server/customer.ts
+
+Endpoint:
+* GET /api/service-desk/overview
+* POST /api/service-desk/bookings/:id/approve
+* POST /api/service-desk/extensions/:id/approve
+* PATCH /api/service-desk/tickets/:id/status","High","8","Sprint 2","","Done","","Thanh","US.17","TT-Done"
+"47","Task","T.56 [PM] Viết Retrospective Sprint 2","Người thực hiện: Đỗ Tuấn Thành (Quản lý dự án).
+Việc chung của Sprint 2.","Medium","5","Sprint 2","","Done","","Thanh","QuanLyDuAn","TT-Done"
+"48","Task","T.62 [BE] US.19 · Bảng quyền OWNER/STAFF, middleware requirePermission, quản lý tài khoản nhân viên","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.19: Là Chủ hệ thống, tôi muốn tạo tài khoản cho nhân viên và giới hạn quyền của họ — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* server/permissions.ts
+* server/index.ts
+
+Endpoint:
+* GET /api/admins
+* POST /api/admins
+* PATCH /api/admins/:id
+* POST /api/admins/:id/password","High","8","Sprint 3","","Done","","Thanh","US.19","TT-Done"
+"49","Task","T.77 [BE] US.24 · API gia hạn đơn tại quầy, cộng tháng không tràn ngày","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.24: Là Nhân viên, tôi muốn gia hạn đơn ngay tại quầy và xem lịch sử các kỳ thuê — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/index.ts
+* server/rental-period.ts
+
+Endpoint:
+* POST /api/rentals/:id/renew
+* GET /api/rentals/:id/periods","High","5","Sprint 3","","Done","","Thanh","US.24","TT-Done"
+"50","Task","T.88 [PM] Viết Retrospective Sprint 3","Người thực hiện: Đỗ Tuấn Thành (Quản lý dự án).
+Việc chung của Sprint 3.","Medium","5","Sprint 3","","In Progress","","Thanh","QuanLyDuAn","TT-InProgress"
+"51","Task","T.89 [PM] Demo nghiệm thu với khách hàng (UAT) và chốt Traceability Matrix","Người thực hiện: Đỗ Tuấn Thành (Quản lý dự án).
+Việc chung của Sprint 3.","Medium","5","Sprint 3","","In Progress","","Thanh","QuanLyDuAn","TT-InProgress"
+"52","Task","T.96 [BE] US.27 · API cho giao diện mới: đăng nhập chung ba vai trò, đăng ký, hồ sơ khách, danh sách phiếu thu","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* server/hub.ts
+
+Endpoint:
+* POST /api/hub/login
+* GET /api/hub/me
+* POST /api/hub/register
+* PATCH /api/hub/profile
+* GET /api/hub/payments","High","8","Sprint 3","","Done","","Thanh","US.27","TT-Done"

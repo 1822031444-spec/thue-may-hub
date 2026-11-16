@@ -1,0 +1,74 @@
+﻿"Issue ID","Issue Type","Summary","Description","Priority","Story Points","Sprint","Assignee","Status","Parent ID","Labels","Labels","Labels"
+"1","Story","US.27 — Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò","Mã trong Product Backlog: US.27 · 13 story point · nhóm chức năng Đăng nhập/Đăng xuất.
+Kế hoạch: Sprint 3.
+
+Việc thực hiện (mỗi thành viên nhập việc của mình, lọc theo nhãn này để xem đủ):
+* T.93 [FE] Đào Việt Anh — Giao diện mới theo Figma: khung quản trị, Dashboard, Máy, Khách hàng, Đơn thuê, Thanh toán, Sửa chữa
+* T.94 [FE] Nguyễn Minh Phát — Giao diện mới theo Figma: đăng nhập chung, hồ sơ khách, cổng khách, Ví khách, Linh kiện, Nhân viên, Báo cáo, Cài đặt
+* T.95 [FE] Đào Việt Anh — Nối giao diện mới với API thật: kho dữ liệu, chuyển tiếp /api, lệnh chạy chung một cổng
+* T.96 [BE] Đỗ Tuấn Thành — API cho giao diện mới: đăng nhập chung ba vai trò, đăng ký, hồ sơ khách, danh sách phiếu thu
+* T.97 [QA] Hồ Sỹ Vinh — Kiểm thử giao diện mới: 40 bước API và chạy thử bốn vai trò trên trình duyệt
+* T.98 [UI] Phạm Văn Đức Phú — Thiết kế giao diện mới trên Figma, chuyển màu và chữ sang Tailwind","High","","Sprint 3","","Done","","ThueMayHub","US.27","TT-Done"
+"2","Task","T.93 [FE] US.27 · Giao diện mới theo Figma: khung quản trị, Dashboard, Máy, Khách hàng, Đơn thuê, Thanh toán, Sửa chữa","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* ThueMayHub-FE/src/components/admin/admin-layout.tsx
+* ThueMayHub-FE/src/components/admin/modals/action-modal.tsx
+* ThueMayHub-FE/src/components/admin/views/overview-view.tsx
+* ThueMayHub-FE/src/components/admin/views/devices-view.tsx
+* ThueMayHub-FE/src/components/admin/views/customers-view.tsx
+* ThueMayHub-FE/src/components/admin/views/orders-view.tsx
+* ThueMayHub-FE/src/components/admin/views/payments-view.tsx
+* ThueMayHub-FE/src/components/admin/views/repairs-view.tsx
+* ThueMayHub-FE/src/components/ui/","High","8","Sprint 3","","Done","","VietAnh","US.27","TT-Done"
+"3","Task","T.94 [FE] US.27 · Giao diện mới theo Figma: đăng nhập chung, hồ sơ khách, cổng khách, Ví khách, Linh kiện, Nhân viên, Báo cáo, Cài đặt","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* ThueMayHub-FE/src/components/auth/
+* ThueMayHub-FE/src/components/customer/customer-portal.tsx
+* ThueMayHub-FE/src/components/hub-app.tsx
+* ThueMayHub-FE/src/components/admin/views/wallets-view.tsx
+* ThueMayHub-FE/src/components/admin/views/parts-view.tsx
+* ThueMayHub-FE/src/components/admin/views/staff-view.tsx
+* ThueMayHub-FE/src/components/admin/views/reports-view.tsx
+* ThueMayHub-FE/src/components/admin/views/settings-view.tsx
+* ThueMayHub-FE/src/router.tsx
+* ThueMayHub-FE/src/routes/__root.tsx
+* ThueMayHub-FE/src/routes/index.tsx","High","8","Sprint 3","","Done","","Phat","US.27","TT-Done"
+"4","Task","T.95 [FE] US.27 · Nối giao diện mới với API thật: kho dữ liệu, chuyển tiếp /api, lệnh chạy chung một cổng","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* ThueMayHub-FE/src/lib/tmh-store.ts
+* ThueMayHub-FE/src/routes/api/$.ts
+* ThueMayHub-FE/vite.config.ts
+* ThueMayHub-FE/package.json
+* ThueMayHub-FE/tsconfig.json
+* scripts/hub.mjs","High","5","Sprint 3","","Done","","VietAnh","US.27","TT-Done"
+"5","Task","T.96 [BE] US.27 · API cho giao diện mới: đăng nhập chung ba vai trò, đăng ký, hồ sơ khách, danh sách phiếu thu","Người thực hiện: Đỗ Tuấn Thành (Backend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* server/hub.ts
+
+Endpoint:
+* POST /api/hub/login
+* GET /api/hub/me
+* POST /api/hub/register
+* PATCH /api/hub/profile
+* GET /api/hub/payments","High","8","Sprint 3","","Done","","Thanh","US.27","TT-Done"
+"6","Task","T.97 [QA] US.27 · Kiểm thử giao diện mới: 40 bước API và chạy thử bốn vai trò trên trình duyệt","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* scripts/hub-flow-test.mjs
+* scripts/hub-ui-test.mjs","High","8","Sprint 3","","Done","","Vinh","US.27","TT-Done"
+"7","Task","T.98 [UI] US.27 · Thiết kế giao diện mới trên Figma, chuyển màu và chữ sang Tailwind","Người thực hiện: Phạm Văn Đức Phú (UX/UI).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* design/figma/README.md
+* ThueMayHub-FE/src/styles.css
+* ThueMayHub-FE/public/","High","8","Sprint 3","","Done","","Phu","US.27","TT-Done"

@@ -1,0 +1,164 @@
+﻿"Issue ID","Issue Type","Summary","Description","Priority","Story Points","Sprint","Assignee","Status","Parent ID","Labels","Labels","Labels"
+"1","Task","T.07 [DB] US.04 · Thiết kế bảng devices và hiện thực CRUD thiết bị","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.04: Là Chủ hệ thống, tôi muốn quản lý kho máy PC/Boxphone (xem/tìm/thêm/sửa) — nhóm chức năng Quản lý thiết bị.
+
+File mã nguồn:
+* server/database.ts
+* server/index.ts
+
+Endpoint:
+* GET /api/devices
+* POST /api/devices
+* PATCH /api/devices/:id
+* DELETE /api/devices/:id","High","13","Sprint 1","","Done","","Phat","US.04","TT-Done"
+"2","Task","T.08 [DB] US.05 · Tính doanh thu và tiền sửa quy về từng thiết bị, sắp tên máy theo số tự nhiên","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.05: Là Chủ hệ thống, tôi muốn biết mỗi máy đã thu về bao nhiêu và tốn bao nhiêu tiền sửa — nhóm chức năng Quản lý thiết bị.
+
+File mã nguồn:
+* server/index.ts
+* server/sort.ts","High","8","Sprint 1","","Done","","Phat","US.05","TT-Done"
+"3","Task","T.23 [DB] US.02 · Khởi tạo database (khoá ngoại, WAL) và bảng admins, sessions, customers","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.02: Là Chủ hệ thống, tôi muốn xem/tìm/thêm/sửa hồ sơ khách hàng — nhóm chức năng Quản lý khách hàng.
+
+File mã nguồn:
+* server/database.ts","High","5","Sprint 1","","Done","","Phat","US.02","TT-Done"
+"4","Task","T.24 [DB] US.06 · Thiết kế bảng rentals, financial_transactions (3 giá trị tiền) và khoá ngoại","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.06: Là Nhân viên, tôi muốn tạo đơn thuê cho khách và hệ thống tự tính thành tiền — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/database.ts","High","8","Sprint 1","","Done","","Phat","US.06","TT-Done"
+"5","Task","T.29 [DB] US.10 · Truy vấn sổ giao dịch & sổ chi phí theo kỳ, chỉ mục theo thời gian","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.10: Là Chủ hệ thống, tôi muốn xem sổ giao dịch và sổ chi phí theo từng kỳ — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* server/index.ts
+* server/database.ts
+
+Endpoint:
+* GET /api/finance/transactions
+* GET /api/finance/expenses","High","8","Sprint 2","","Done","","Phat","US.10","TT-Done"
+"6","Task","T.30 [FE] US.10 · Dựng trang Tài chính: sổ giao dịch, sổ chi phí, bộ lọc kỳ","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.10: Là Chủ hệ thống, tôi muốn xem sổ giao dịch và sổ chi phí theo từng kỳ — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* src/pages/FinancePage.tsx","High","13","Sprint 2","","Done","","Phat","US.10","TT-Done"
+"7","Task","T.34 [DB] US.12 · Thiết kế bảng repairs; máy có phiếu mở tự chuyển Bảo trì","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.12: Là Nhân viên, tôi muốn lập phiếu sửa chữa khi máy hỏng — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* server/database.ts","High","5","Sprint 2","","Done","","Phat","US.12","TT-Done"
+"8","Task","T.38 [DB] US.13 · Thiết kế bảng parts, part_movements; tồn kho và giá vốn tính từ lịch sử nhập xuất","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.13: Là Nhân viên, tôi muốn quản lý kho linh kiện và lắp linh kiện vào máy — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* server/database.ts
+* server/index.ts
+
+Endpoint:
+* GET /api/parts
+* POST /api/parts
+* PATCH /api/parts/:id
+* GET /api/parts/:id/movements","High","8","Sprint 2","","Done","","Phat","US.13","TT-Done"
+"9","Task","T.41 [DB] US.14 · Thiết kế bảng customer_accounts, customer_sessions, booking_requests","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.14: Là Khách hàng, tôi muốn xem danh mục máy và gửi yêu cầu thuê từ xa — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* server/database.ts","High","5","Sprint 2","","Done","","Phat","US.14","TT-Done"
+"10","Task","T.46 [DB] US.15 · Thiết kế bảng extension_requests","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.15: Là Khách hàng, tôi muốn thanh toán đơn bằng ví và xin gia hạn trực tuyến — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* server/database.ts","High","3","Sprint 2","","Done","","Phat","US.15","TT-Done"
+"11","Task","T.49 [DB] US.16 · Thiết kế bảng support_tickets, ticket_messages, customer_notifications","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.16: Là Khách hàng, tôi muốn gửi ticket hỗ trợ và theo dõi phản hồi — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* server/database.ts","Medium","3","Sprint 2","","Done","","Phat","US.16","TT-Done"
+"12","Task","T.51 [FE] US.16 · Dựng trang Hỗ trợ của khách: gửi ticket, hội thoại, thông báo","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.16: Là Khách hàng, tôi muốn gửi ticket hỗ trợ và theo dõi phản hồi — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* src/customer/CustomerSupportPage.tsx","Medium","5","Sprint 2","","Done","","Phat","US.16","TT-Done"
+"13","Task","T.58 [DB] US.18 · Thiết kế bảng app_settings, network_lock_events và cột devices.network_status","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.18: Là Chủ hệ thống, tôi muốn máy tự bị khoá mạng khi khách hết hạn thuê — nhóm chức năng Khoá mạng khi hết hạn.
+
+File mã nguồn:
+* server/database.ts","High","3","Sprint 3","","Done","","Phat","US.18","TT-Done"
+"14","Task","T.63 [FE] US.19 · Trang Cài đặt, panel tài khoản nhân viên, ẩn menu và nút theo quyền","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.19: Là Chủ hệ thống, tôi muốn tạo tài khoản cho nhân viên và giới hạn quyền của họ — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* src/pages/SettingsPage.tsx
+* src/components/AccountsPanel.tsx
+* src/lib/permissions.ts","High","5","Sprint 3","","Done","","Phat","US.19","TT-Done"
+"15","Task","T.65 [DB] US.20 · Bảng audit_logs và truy vấn nhật ký có phân trang","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.20: Là Chủ hệ thống, tôi muốn xem nhật ký thao tác để biết ai đã làm gì — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* server/database.ts
+* server/index.ts
+
+Endpoint:
+* GET /api/audit-logs","Medium","3","Sprint 3","","Done","","Phat","US.20","TT-Done"
+"16","Task","T.67 [FE] US.21 · Xuất sổ tiền đang xem ra CSV, mở bằng Excel không lỗi tiếng Việt","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.21: Là Chủ hệ thống, tôi muốn xuất sổ tiền ra CSV để đối chiếu sổ sách — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* src/lib/csv.ts
+* src/pages/FinancePage.tsx","Medium","3","Sprint 3","","Done","","Phat","US.21","TT-Done"
+"17","Task","T.72 [DB] US.23 · Truy vấn dùng chung danh sách đơn sắp hết hạn","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.23: Là Chủ hệ thống, tôi muốn được nhắc các đơn sắp hết hạn trên màn hình và qua Telegram — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/expiring.ts
+
+Endpoint:
+* GET /api/rentals/expiring","High","3","Sprint 3","","Done","","Phat","US.23","TT-Done"
+"18","Task","T.74 [FE] US.23 · Panel đơn sắp hết hạn, mẫu tin nhắn nhắc khách, cài đặt Telegram","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.23: Là Chủ hệ thống, tôi muốn được nhắc các đơn sắp hết hạn trên màn hình và qua Telegram — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* src/components/ExpiringPanel.tsx
+* src/components/NotifyPanel.tsx
+* src/lib/message-template.ts","High","8","Sprint 3","","Done","","Phat","US.23","TT-Done"
+"19","Task","T.76 [DB] US.24 · Thiết kế bảng rental_periods: mỗi lần gia hạn là một kỳ thuê","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.24: Là Nhân viên, tôi muốn gia hạn đơn ngay tại quầy và xem lịch sử các kỳ thuê — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* server/database.ts","High","3","Sprint 3","","Done","","Phat","US.24","TT-Done"
+"20","Task","T.80 [DB] US.25 · Sao lưu tự động bằng VACUUM INTO và diễn tập phục hồi","Người thực hiện: Nguyễn Minh Phát (Database).
+User story US.25: Là Chủ hệ thống, tôi muốn dữ liệu được sao lưu tự động và đổi được thư mục dữ liệu — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* server/backup.ts
+* server/index.ts
+* scripts/dien-tap-phuc-hoi.mjs
+
+Endpoint:
+* GET /api/backups
+* POST /api/backups
+* PUT /api/backups/settings","High","5","Sprint 3","","Done","","Phat","US.25","TT-Done"
+"21","Task","T.84 [FE] US.26 · Đóng gói bản desktop Windows bằng Electron: cửa sổ app, bộ cài, đổi thư mục dữ liệu","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.26: Là Chủ hệ thống, tôi muốn cài phần mềm như một ứng dụng trên máy Windows — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* electron/main.ts
+* electron/preload.ts
+* tsconfig.electron.json
+* scripts/build-electron.mjs
+* scripts/dev-electron.mjs","Medium","8","Sprint 3","","Done","","Phat","US.26","TT-Done"
+"22","Task","T.94 [FE] US.27 · Giao diện mới theo Figma: đăng nhập chung, hồ sơ khách, cổng khách, Ví khách, Linh kiện, Nhân viên, Báo cáo, Cài đặt","Người thực hiện: Nguyễn Minh Phát (Frontend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* ThueMayHub-FE/src/components/auth/
+* ThueMayHub-FE/src/components/customer/customer-portal.tsx
+* ThueMayHub-FE/src/components/hub-app.tsx
+* ThueMayHub-FE/src/components/admin/views/wallets-view.tsx
+* ThueMayHub-FE/src/components/admin/views/parts-view.tsx
+* ThueMayHub-FE/src/components/admin/views/staff-view.tsx
+* ThueMayHub-FE/src/components/admin/views/reports-view.tsx
+* ThueMayHub-FE/src/components/admin/views/settings-view.tsx
+* ThueMayHub-FE/src/router.tsx
+* ThueMayHub-FE/src/routes/__root.tsx
+* ThueMayHub-FE/src/routes/index.tsx","High","8","Sprint 3","","Done","","Phat","US.27","TT-Done"

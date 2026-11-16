@@ -1,0 +1,99 @@
+﻿"Issue ID","Issue Type","Summary","Description","Priority","Story Points","Sprint","Assignee","Status","Parent ID","Labels","Labels","Labels"
+"1","Task","T.03 [QA] US.01 · Viết & thực thi test case đăng nhập","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.01: Là người dùng, tôi muốn đăng nhập/đăng xuất bằng email để sử dụng hệ thống — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* scripts/smoke-test.ps1","High","5","Sprint 1","","Done","","Vinh","US.01","TT-Done"
+"2","Task","T.10 [QA] US.06 · Viết & thực thi test case Tạo đơn thuê","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.06: Là Nhân viên, tôi muốn tạo đơn thuê cho khách và hệ thống tự tính thành tiền — nhóm chức năng Quản lý đơn thuê.","High","13","Sprint 1","","Done","","Vinh","US.06","TT-Done"
+"3","Task","T.12 [QA] US.07 · Viết & thực thi test case Thu tiền đơn, bắn 8 yêu cầu song song","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.07: Là Nhân viên, tôi muốn thu tiền đơn thuê bằng tiền mặt, chuyển khoản hoặc trừ ví — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* scripts/race-test.mjs","High","8","Sprint 1","","Done","","Vinh","US.07","TT-Done"
+"4","Task","T.14 [QA] US.04 · Viết & thực thi test case Quản lý thiết bị","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.04: Là Chủ hệ thống, tôi muốn quản lý kho máy PC/Boxphone (xem/tìm/thêm/sửa) — nhóm chức năng Quản lý thiết bị.
+
+File mã nguồn:
+* scripts/device-test.mjs
+* scripts/sort-test.mjs","High","8","Sprint 1","","Done","","Vinh","US.04","TT-Done"
+"5","Task","T.15 [QA] Viết Test Report Sprint 1","Người thực hiện: Hồ Sỹ Vinh (Tester).
+Việc chung của Sprint 1.","Medium","5","Sprint 1","","Done","","Vinh","QuanLyDuAn","TT-Done"
+"6","Task","T.90 [QA] Cập nhật Defect Report Sprint 1 (DF.01–DF.03)","Người thực hiện: Hồ Sỹ Vinh (Tester).
+Việc chung của Sprint 1.","Medium","5","Sprint 1","","Done","","Vinh","QuanLyDuAn","TT-Done"
+"7","Task","T.28 [QA] US.09 · Test luồng ví: nạp, trừ ví, hoàn tiền, ví không bao giờ âm","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.09: Là Chủ hệ thống, tôi muốn nạp tiền vào ví khách và hoàn tiền khi cần — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* scripts/race-test.mjs","High","5","Sprint 2","","Done","","Vinh","US.09","TT-Done"
+"8","Task","T.31 [QA] US.10 · Test lọc sổ tiền theo kỳ (tháng này, tháng trước, khoảng ngày)","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.10: Là Chủ hệ thống, tôi muốn xem sổ giao dịch và sổ chi phí theo từng kỳ — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* scripts/finance-period-test.mjs","High","5","Sprint 2","","Done","","Vinh","US.10","TT-Done"
+"9","Task","T.37 [QA] US.12 · Test phiếu sửa: vòng đời phiếu và trạng thái máy","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.12: Là Nhân viên, tôi muốn lập phiếu sửa chữa khi máy hỏng — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* scripts/repair-smoke-test.ps1","High","5","Sprint 2","","Done","","Vinh","US.12","TT-Done"
+"10","Task","T.48 [QA] US.15 · Test cổng khách: khách chỉ xem và trả được đơn của chính mình","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.15: Là Khách hàng, tôi muốn thanh toán đơn bằng ví và xin gia hạn trực tuyến — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* scripts/portal-smoke-test.ps1","High","5","Sprint 2","","Done","","Vinh","US.15","TT-Done"
+"11","Task","T.55 [QA] Viết Test Report Sprint 2","Người thực hiện: Hồ Sỹ Vinh (Tester).
+Việc chung của Sprint 2.","Medium","5","Sprint 2","","Done","","Vinh","QuanLyDuAn","TT-Done"
+"12","Task","T.91 [QA] Cập nhật Defect Report Sprint 2","Người thực hiện: Hồ Sỹ Vinh (Tester).
+Việc chung của Sprint 2.","Medium","5","Sprint 2","","Done","","Vinh","QuanLyDuAn","TT-Done"
+"13","Task","T.61 [QA] US.18 · Test khoá mạng: giá trị sai khuôn bị từ chối, đơn quá hạn thì khoá","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.18: Là Chủ hệ thống, tôi muốn máy tự bị khoá mạng khi khách hết hạn thuê — nhóm chức năng Khoá mạng khi hết hạn.
+
+File mã nguồn:
+* scripts/network-lock-smoke-test.ps1","High","5","Sprint 3","","Done","","Vinh","US.18","TT-Done"
+"14","Task","T.64 [QA] US.19 · Test phân quyền: nhân viên gọi API tiền bị chặn, luôn còn ít nhất một Chủ","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.19: Là Chủ hệ thống, tôi muốn tạo tài khoản cho nhân viên và giới hạn quyền của họ — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* scripts/permission-smoke-test.ps1","High","5","Sprint 3","","Done","","Vinh","US.19","TT-Done"
+"15","Task","T.68 [QA] US.21 · Test xuất CSV: dấu phẩy, ngoặc kép, tiếng Việt","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.21: Là Chủ hệ thống, tôi muốn xuất sổ tiền ra CSV để đối chiếu sổ sách — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* scripts/csv-test.mjs","Medium","2","Sprint 3","","Done","","Vinh","US.21","TT-Done"
+"16","Task","T.75 [QA] US.23 · Test nhắc hạn và gửi Telegram","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.23: Là Chủ hệ thống, tôi muốn được nhắc các đơn sắp hết hạn trên màn hình và qua Telegram — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* scripts/expiring-test.mjs
+* scripts/notify-test.mjs","High","3","Sprint 3","","Done","","Vinh","US.23","TT-Done"
+"17","Task","T.79 [QA] US.24 · Test gia hạn: 31/01 cộng 1 tháng phải ra 28/02","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.24: Là Nhân viên, tôi muốn gia hạn đơn ngay tại quầy và xem lịch sử các kỳ thuê — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* scripts/renew-test.mjs","High","3","Sprint 3","","Done","","Vinh","US.24","TT-Done"
+"18","Task","T.81 [QA] US.25 · Script nạp dữ liệu test: dữ liệu mẫu, khách đang thuê, thêm máy hàng loạt","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.25: Là Chủ hệ thống, tôi muốn dữ liệu được sao lưu tự động và đổi được thư mục dữ liệu — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* server/seed-demo.ts
+* server/seed-hub.ts
+* scripts/nhap-khach-ban-dau.mjs
+* scripts/them-may-hang-loat.mjs","High","3","Sprint 3","","Done","","Vinh","US.25","TT-Done"
+"19","Task","T.83 [QA] US.25 · Test sao lưu và phân trang danh sách dài","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.25: Là Chủ hệ thống, tôi muốn dữ liệu được sao lưu tự động và đổi được thư mục dữ liệu — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* scripts/backup-test.mjs
+* scripts/paging-test.mjs","High","3","Sprint 3","","Done","","Vinh","US.25","TT-Done"
+"20","Task","T.86 [QA] US.26 · Kiểm thử hồi quy toàn bộ trước khi đóng gói bản cài","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.26: Là Chủ hệ thống, tôi muốn cài phần mềm như một ứng dụng trên máy Windows — nhóm chức năng Cài đặt & phân quyền.","Medium","5","Sprint 3","","Done","","Vinh","US.26","TT-Done"
+"21","Task","T.87 [QA] Viết Test Report Sprint 3","Người thực hiện: Hồ Sỹ Vinh (Tester).
+Việc chung của Sprint 3.","Medium","5","Sprint 3","","Done","","Vinh","QuanLyDuAn","TT-Done"
+"22","Task","T.92 [QA] Cập nhật Defect Report Sprint 3","Người thực hiện: Hồ Sỹ Vinh (Tester).
+Việc chung của Sprint 3.","Medium","5","Sprint 3","","Done","","Vinh","QuanLyDuAn","TT-Done"
+"23","Task","T.97 [QA] US.27 · Kiểm thử giao diện mới: 40 bước API và chạy thử bốn vai trò trên trình duyệt","Người thực hiện: Hồ Sỹ Vinh (Tester).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* scripts/hub-flow-test.mjs
+* scripts/hub-ui-test.mjs","High","8","Sprint 3","","Done","","Vinh","US.27","TT-Done"

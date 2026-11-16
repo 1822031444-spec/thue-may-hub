@@ -1,0 +1,117 @@
+﻿"Issue ID","Issue Type","Summary","Description","Priority","Story Points","Sprint","Assignee","Status","Parent ID","Labels","Labels","Labels"
+"1","Task","T.18 [FE] US.01 · Khởi tạo khung React + Vite + TypeScript, định tuyến và trang Đăng nhập","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.01: Là người dùng, tôi muốn đăng nhập/đăng xuất bằng email để sử dụng hệ thống — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* index.html
+* package.json
+* vite.config.ts
+* tsconfig.json
+* tsconfig.app.json
+* tsconfig.node.json
+* src/main.tsx
+* src/App.tsx
+* src/api.ts
+* src/vite-env.d.ts
+* src/pages/LoginPage.tsx","High","8","Sprint 1","","Done","","VietAnh","US.01","TT-Done"
+"2","Task","T.19 [FE] US.02 · Dựng trang Khách hàng: danh sách, tìm kiếm, form thêm/sửa","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.02: Là Chủ hệ thống, tôi muốn xem/tìm/thêm/sửa hồ sơ khách hàng — nhóm chức năng Quản lý khách hàng.
+
+File mã nguồn:
+* src/pages/CustomersPage.tsx
+* src/types.ts","High","8","Sprint 1","","Done","","VietAnh","US.02","TT-Done"
+"3","Task","T.20 [FE] US.04 · Dựng trang Thiết bị: dạng thẻ/dạng bảng, lọc theo loại","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.04: Là Chủ hệ thống, tôi muốn quản lý kho máy PC/Boxphone (xem/tìm/thêm/sửa) — nhóm chức năng Quản lý thiết bị.
+
+File mã nguồn:
+* src/pages/DevicesPage.tsx","High","8","Sprint 1","","Done","","VietAnh","US.04","TT-Done"
+"4","Task","T.21 [FE] US.06 · Dựng form Tạo đơn thuê và hộp thoại Thu tiền","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.06: Là Nhân viên, tôi muốn tạo đơn thuê cho khách và hệ thống tự tính thành tiền — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* src/pages/RentalsPage.tsx","High","13","Sprint 1","","Done","","VietAnh","US.06","TT-Done"
+"5","Task","T.13 [FE] US.08 · Dựng thao tác Kích hoạt / Hoàn tất / Huỷ đơn trên trang Đơn thuê","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.08: Là Nhân viên, tôi muốn kích hoạt và hoàn tất đơn thuê theo đúng vòng đời — nhóm chức năng Quản lý đơn thuê.
+Chưa xong trong Sprint 1 nên chuyển sang Sprint 2.
+
+File mã nguồn:
+* src/pages/RentalsPage.tsx","High","8","Sprint 2","","Done","","VietAnh","US.08","TT-Done"
+"6","Task","T.27 [FE] US.09 · Hộp thoại Nạp ví (trang Khách hàng) và Hoàn tiền (trang Đơn thuê)","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.09: Là Chủ hệ thống, tôi muốn nạp tiền vào ví khách và hoàn tiền khi cần — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* src/pages/CustomersPage.tsx
+* src/pages/RentalsPage.tsx","High","5","Sprint 2","","Done","","VietAnh","US.09","TT-Done"
+"7","Task","T.36 [FE] US.12 · Dựng trang Sửa chữa: danh sách phiếu, chi tiết phiếu, đổi trạng thái","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.12: Là Nhân viên, tôi muốn lập phiếu sửa chữa khi máy hỏng — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* src/pages/RepairsPage.tsx","High","13","Sprint 2","","Done","","VietAnh","US.12","TT-Done"
+"8","Task","T.40 [FE] US.13 · Dựng tab Kho linh kiện và cảnh báo tồn kho tối thiểu","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.13: Là Nhân viên, tôi muốn quản lý kho linh kiện và lắp linh kiện vào máy — nhóm chức năng Sửa chữa & kho linh kiện.
+
+File mã nguồn:
+* src/pages/RepairsPage.tsx","High","8","Sprint 2","","Done","","VietAnh","US.13","TT-Done"
+"9","Task","T.44 [FE] US.14 · Dựng trang Danh mục máy và Yêu cầu thuê của khách","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.14: Là Khách hàng, tôi muốn xem danh mục máy và gửi yêu cầu thuê từ xa — nhóm chức năng Cổng khách hàng.
+
+File mã nguồn:
+* src/customer/CatalogPage.tsx
+* src/customer/CustomerBookingsPage.tsx
+* src/customer/CustomerAuth.tsx","High","8","Sprint 2","","Done","","VietAnh","US.14","TT-Done"
+"10","Task","T.53 [FE] US.17 · Dựng trang Yêu cầu & hỗ trợ cho quản trị","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.17: Là Chủ hệ thống, tôi muốn duyệt yêu cầu thuê và báo giá gia hạn cho khách — nhóm chức năng Yêu cầu & hỗ trợ.
+
+File mã nguồn:
+* src/pages/ServiceDeskPage.tsx","High","8","Sprint 2","","Done","","VietAnh","US.17","TT-Done"
+"11","Task","T.57 [PM] Cập nhật Product Backlog (thêm US.22–US.26) và Traceability Matrix","Người thực hiện: Đào Việt Anh (Quản lý dự án).
+Việc chung của Sprint 2.","Medium","5","Sprint 2","","Done","","VietAnh","QuanLyDuAn","TT-Done"
+"12","Task","T.60 [FE] US.18 · Panel cấu hình khoá mạng, xem trước lệnh và nhật ký chạy lệnh","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.18: Là Chủ hệ thống, tôi muốn máy tự bị khoá mạng khi khách hết hạn thuê — nhóm chức năng Khoá mạng khi hết hạn.
+
+File mã nguồn:
+* src/components/NetworkLockPanel.tsx","High","8","Sprint 3","","Done","","VietAnh","US.18","TT-Done"
+"13","Task","T.66 [FE] US.20 · Màn hình nhật ký thao tác trong Cài đặt","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.20: Là Chủ hệ thống, tôi muốn xem nhật ký thao tác để biết ai đã làm gì — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* src/pages/SettingsPage.tsx","Medium","3","Sprint 3","","Done","","VietAnh","US.20","TT-Done"
+"14","Task","T.70 [FE] US.22 · Dựng trang Tổng quan","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.22: Là Chủ hệ thống, tôi muốn xem trang Tổng quan: máy đang thuê, đơn sắp hết hạn, doanh thu tháng — nhóm chức năng Tài chính.
+
+File mã nguồn:
+* src/pages/DashboardPage.tsx","Medium","5","Sprint 3","","Done","","VietAnh","US.22","TT-Done"
+"15","Task","T.78 [FE] US.24 · Hộp thoại gia hạn và lịch sử kỳ thuê trên trang Đơn thuê","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.24: Là Nhân viên, tôi muốn gia hạn đơn ngay tại quầy và xem lịch sử các kỳ thuê — nhóm chức năng Quản lý đơn thuê.
+
+File mã nguồn:
+* src/pages/RentalsPage.tsx
+* src/lib/rental-period.ts","High","3","Sprint 3","","Done","","VietAnh","US.24","TT-Done"
+"16","Task","T.82 [FE] US.25 · Panel sao lưu trong Cài đặt","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.25: Là Chủ hệ thống, tôi muốn dữ liệu được sao lưu tự động và đổi được thư mục dữ liệu — nhóm chức năng Cài đặt & phân quyền.
+
+File mã nguồn:
+* src/components/BackupPanel.tsx","High","5","Sprint 3","","Done","","VietAnh","US.25","TT-Done"
+"17","Task","T.93 [FE] US.27 · Giao diện mới theo Figma: khung quản trị, Dashboard, Máy, Khách hàng, Đơn thuê, Thanh toán, Sửa chữa","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* ThueMayHub-FE/src/components/admin/admin-layout.tsx
+* ThueMayHub-FE/src/components/admin/modals/action-modal.tsx
+* ThueMayHub-FE/src/components/admin/views/overview-view.tsx
+* ThueMayHub-FE/src/components/admin/views/devices-view.tsx
+* ThueMayHub-FE/src/components/admin/views/customers-view.tsx
+* ThueMayHub-FE/src/components/admin/views/orders-view.tsx
+* ThueMayHub-FE/src/components/admin/views/payments-view.tsx
+* ThueMayHub-FE/src/components/admin/views/repairs-view.tsx
+* ThueMayHub-FE/src/components/ui/","High","8","Sprint 3","","Done","","VietAnh","US.27","TT-Done"
+"18","Task","T.95 [FE] US.27 · Nối giao diện mới với API thật: kho dữ liệu, chuyển tiếp /api, lệnh chạy chung một cổng","Người thực hiện: Đào Việt Anh (Frontend).
+User story US.27: Là người dùng, tôi muốn dùng giao diện mới theo thiết kế Figma và đăng nhập một màn hình chung cho cả ba vai trò — nhóm chức năng Đăng nhập/Đăng xuất.
+
+File mã nguồn:
+* ThueMayHub-FE/src/lib/tmh-store.ts
+* ThueMayHub-FE/src/routes/api/$.ts
+* ThueMayHub-FE/vite.config.ts
+* ThueMayHub-FE/package.json
+* ThueMayHub-FE/tsconfig.json
+* scripts/hub.mjs","High","5","Sprint 3","","Done","","VietAnh","US.27","TT-Done"
