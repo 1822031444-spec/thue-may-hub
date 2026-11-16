@@ -1,0 +1,37 @@
+# ---- Dữ liệu: KHÔNG BAO GIỜ đưa lên --------------------------------------
+# Thư mục data/ có database đang chạy, bản sao lưu và bản sao dữ liệu thật của tiệm.
+# App tự tạo lại data/ và dữ liệu mẫu ở lần chạy đầu.
+data/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+
+# ---- Bí mật -----------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ---- Thư viện và file sinh ra (chạy lệnh là có lại) -----------------------
+node_modules/
+dist/
+build/
+release/
+*.tsbuildinfo
+ThueMayHub-FE/.output/
+ThueMayHub-FE/.tanstack/
+ThueMayHub-FE/test-results/
+
+# ---- File nén, file khoá tạm của Word/Excel, log --------------------------
+*.rar
+*.zip
+~$*
+*.log
+
+# ---- Chỉ để trên máy -------------------------------------------------------
+# Ghi chú nội bộ về bản đang kinh doanh và script nhập khách thật của tiệm.
+DOC-TRUOC-KHI-DUNG.md
+scripts/nhap-khach-ban-dau.mjs
+# Tài liệu mẫu của nhóm khác, chỉ dùng tham khảo cách trình bày.
+SEP_NoiDung_Mau_PhongKhamChucTu/

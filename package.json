@@ -1,0 +1,132 @@
+{
+  "name": "thue-may-hub-thu",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Ứng dụng vận hành dịch vụ cho thuê PC và boxphone",
+  "author": "Thuê Máy Hub",
+  "type": "module",
+  "main": "build/electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB -c cyan,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:web": "vite",
+    "build": "tsc -b && vite build",
+    "start": "tsx server/index.ts",
+    "seed:demo": "tsx server/seed-demo.ts",
+    "hub": "node scripts/hub.mjs",
+    "hub:start": "node scripts/hub.mjs start",
+    "hub:build": "npm --prefix ThueMayHub-FE run build",
+    "hub:seed": "tsx server/seed-hub.ts",
+    "hub:reset": "tsx server/seed-hub.ts --reset",
+    "hub:pack": "node scripts/pack-tester.mjs",
+    "test:hub": "node scripts/hub-flow-test.mjs",
+    "test:hub-ui": "node scripts/hub-ui-test.mjs",
+    "test:smoke": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\smoke-test.ps1",
+    "test:portal": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\portal-smoke-test.ps1",
+    "test:repair": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\repair-smoke-test.ps1",
+    "test:lock": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\network-lock-smoke-test.ps1",
+    "test:perm": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\permission-smoke-test.ps1",
+    "test:race": "node scripts/race-test.mjs",
+    "test:finance": "node scripts/finance-period-test.mjs",
+    "test:csv": "tsx scripts/csv-test.mjs",
+    "test:backup": "node scripts/backup-test.mjs",
+    "test:paging": "node scripts/paging-test.mjs",
+    "test:renew": "tsx scripts/renew-test.mjs",
+    "test:expiring": "node scripts/expiring-test.mjs",
+    "test:sort": "tsx scripts/sort-test.mjs",
+    "test:device": "node scripts/device-test.mjs",
+    "test:notify": "node scripts/notify-test.mjs",
+    "sep": "node scripts/sep/build.mjs",
+    "sep:phancong": "node scripts/sep/gen-phancong.mjs",
+    "sep:jira": "node scripts/sep/gen-jira.mjs",
+    "sep:uml": "node scripts/sep/gen-uml.mjs",
+    "sep:baocao": "node scripts/sep/build-baocao.mjs",
+    "sep:pdf": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\sep\\to-pdf.ps1",
+    "typecheck": "tsc -b --pretty false",
+    "icon": "node scripts/make-icon.mjs",
+    "desktop:dev": "concurrently -k -n API,WEB,APP -c cyan,magenta,yellow \"npm:dev:server\" \"npm:dev:web\" \"node scripts/dev-electron.mjs\"",
+    "desktop:build": "npm run build && node scripts/build-electron.mjs",
+    "desktop:start": "npm run desktop:build && electron .",
+    "desktop:package": "npm run desktop:build && npm run icon && electron-builder --win"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "lucide-react": "^0.468.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.0.3",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "docx": "^9.7.1",
+    "electron": "^37.10.3",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.24.2",
+    "exceljs": "^4.4.0",
+    "tsx": "^4.19.2",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.5"
+  },
+  "build": {
+    "appId": "vn.thuemay.hub.thu",
+    "productName": "Thue May Hub Thu",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "build/electron/main.cjs",
+      "build/electron/preload.cjs",
+      "package.json",
+      "!node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "dist",
+        "to": "renderer"
+      },
+      {
+        "from": "build/electron/server.cjs",
+        "to": "server/server.cjs"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Thuê Máy Hub",
+      "artifactName": "ThueMayHub-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "ThueMayHub-Portable-${version}.${ext}"
+    }
+  }
+}
